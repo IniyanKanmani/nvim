@@ -968,7 +968,8 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
-  {
+
+  { -- Auto Save
     'okuuva/auto-save.nvim',
     cmd = 'ASToggle', -- optional for lazy loading on command
     event = { 'InsertLeave', 'TextChanged' }, -- optional for lazy loading on trigger events
@@ -976,6 +977,17 @@ require('lazy').setup({
       -- your config goes here
       -- or just leave it empty :)
     },
+  },
+
+  { -- Harpoon
+    'theprimeagen/harpoon',
+    config = function()
+      local mark = require 'harpoon.mark'
+      local ui = require 'harpoon.ui'
+
+      vim.keymap.set('n', '<leader>a', mark.toggle_file, {})
+      vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu, {})
+    end,
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
