@@ -110,6 +110,8 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = true
 
+vim.o.fixendofline = true
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -160,8 +162,8 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Exit insert mode custom keymap
-vim.keymap.set('i', 'kj', '<Esc>', { desc = 'Exit insert mode' })
+-- Exit to normal mode custom keymap
+vim.keymap.set({ 'n', 'i', 'v', 'c' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -910,6 +912,15 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+  {
+    'okuuva/auto-save.nvim',
+    cmd = 'ASToggle', -- optional for lazy loading on command
+    event = { 'InsertLeave', 'TextChanged' }, -- optional for lazy loading on trigger events
+    opts = {
+      -- your config goes here
+      -- or just leave it empty :)
+    },
+  },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -925,7 +936,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
