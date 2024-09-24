@@ -226,6 +226,11 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', {})
 
 vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+vim.keymap.set('n', '<leader>|', '<cmd>vsplit<CR>', {})
+vim.keymap.set('n', '<leader>-', '<cmd>split<CR>', {})
+
+vim.keymap.set('n', '<leader>kj', '<cmd>q<CR>', {})
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
