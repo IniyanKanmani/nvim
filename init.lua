@@ -110,6 +110,7 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = true
 
+vim.o.fixeol = true
 vim.o.fixendofline = true
 
 -- Sync clipboard between OS and Neovim.
@@ -173,12 +174,13 @@ vim.opt.termguicolors = true
 --  See `:help vim.keymap.set()`
 
 -- Exit to normal mode custom keymap
-vim.keymap.set({ 'n', 'i', 'v', 'c' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
+vim.keymap.set({ 'i', 'v', 'c' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
+
+vim.keymap.set('n', '<leader>kj', '<cmd>q<CR>', { desc = 'Send Command :q' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', 'kj', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Turn Search Highlight Off' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -206,30 +208,32 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, {})
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Open Netrw Explorer' })
 
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", {})
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", {})
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move Selection Up' })
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection Down' })
 
-vim.keymap.set('n', '<C-d>', '<C-d>zz', {})
-vim.keymap.set('n', '<C-u>', '<C-u>zz', {})
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Center cursor when <C-u>' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Center cursor when <C-d>' })
 
-vim.keymap.set('n', 'n', 'nzzzv', {})
-vim.keymap.set('n', 'N', 'Nzzzv', {})
+vim.keymap.set('n', '<C-b>', '<C-b>zz', { desc = 'Center cursor when <C-b>' })
+vim.keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'Center cursor when <C-f>' })
 
-vim.keymap.set('n', '<leader>p', '"_dP', {})
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Center cursor when showing prev search result' })
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Center cursor when showing next search result' })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', {})
-vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', {})
+vim.keymap.set('n', '<leader>p', '"_dP', { desc = 'Paste on selection without losing the copied text' })
+vim.keymap.set({ 'n', 'v' }, '<leader>c', '"_c', { desc = 'Change into void register' })
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete into void register' })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', {})
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Copy selection into system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', { desc = 'Copy Line into system clipboard' })
 
-vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('n', '<leader>sar', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Search and replace current word' })
 
-vim.keymap.set('n', '<leader>|', '<cmd>vsplit<CR>', {})
-vim.keymap.set('n', '<leader>-', '<cmd>split<CR>', {})
-
-vim.keymap.set('n', '<leader>kj', '<cmd>q<CR>', {})
+vim.keymap.set('n', '<leader>w', '<cmd>set wrap!<CR>', { desc = 'Toggle line wrap' })
+vim.keymap.set('n', '<leader>|', '<cmd>vsplit<CR>', { desc = 'Vertically split Neovim' })
+vim.keymap.set('n', '<leader>-', '<cmd>split<CR>', { desc = 'Horizontally split Neovim' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -622,8 +626,8 @@ require('lazy').setup({
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      Capabilities = vim.lsp.protocol.make_client_capabilities()
+      Capabilities = vim.tbl_deep_extend('force', Capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -647,14 +651,14 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
 
-        dartls = {
-          capabilities = capabilities,
-          cmd = { 'dart', 'language-server', '--protocol=lsp' },
-          filetypes = { 'dart' },
-        },
+        -- dartls = {
+        --   capabilities = capabilities,
+        --   cmd = { 'dart', 'language-server', '--protocol=lsp' },
+        --   filetypes = { 'dart' },
+        -- },
 
         yamlls = {
-          capabilities = capabilities,
+          capabilities = Capabilities,
         },
 
         lua_ls = {
@@ -685,12 +689,12 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
 
-      for i = 1, #ensure_installed, 1 do
-        if ensure_installed[i] == 'dartls' then
-          table.remove(ensure_installed, i)
-          break
-        end
-      end
+      -- for i = 1, #ensure_installed, 1 do
+      --   if ensure_installed[i] == 'dartls' then
+      --     table.remove(ensure_installed, i)
+      --     break
+      --   end
+      -- end
 
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
@@ -700,19 +704,111 @@ require('lazy').setup({
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
-            if server_name == 'dartls' then
-              return
-            end
+            -- if server_name == 'dartls' then
+            --   return
+            -- end
 
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.Capabilities = vim.tbl_deep_extend('force', {}, Capabilities, server.Capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
         },
       }
+    end,
+  },
+
+  { -- Flutter Tools
+    'akinsho/flutter-tools.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = function()
+      vim.keymap.set('n', '<leader>FS', ':FlutterRun <CR>', { desc = 'Flutter run' })
+      vim.keymap.set('n', '<leader>FQ', ':FlutterQuit <CR>', { desc = 'Flutter Quit' })
+      vim.keymap.set('n', '<leader>FR', ':FlutterRestart <CR>', { desc = 'Flutter restart' })
+      vim.keymap.set('n', '<leader>LR', ':FlutterLspRestart <CR>', { desc = 'Flutter lsp restart' })
+      vim.keymap.set('n', '<leader>FD', ':FlutterDevTools <CR>', { desc = 'Flutter open dev tools' })
+
+      require('flutter-tools').setup {
+        ui = {
+          border = 'rounded',
+        },
+        decorations = {
+          statusline = {
+            app_version = false,
+            device = true,
+            project_config = true,
+          },
+        },
+        debugger = {
+          enabled = true,
+        },
+        widget_guides = {
+          enabled = true,
+        },
+        dev_tools = {
+          autostart = true, -- autostart devtools server if not detected
+          auto_open_browser = true, -- Automatically opens devtools in the browser
+        },
+        outline = {
+          auto_open = false,
+        },
+        lsp = { -- dart lsp is auto set by this plugin
+          color = { -- show the derived colours for dart variables
+            enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+          },
+          capabilities = Capabilities,
+        },
+      }
+    end,
+  },
+
+  { -- Debug Adapter Protocol
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio',
+    },
+    config = function()
+      local dap = require 'dap'
+      local dapui = require 'dapui'
+
+      require('dapui').setup()
+
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+
+      vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Toggle breakpoint on current line' })
+      vim.keymap.set('n', '<leader>gb', dap.run_to_cursor, { desc = 'Run to Cursor Breakpoint' })
+      vim.keymap.set('n', '<leader>?', function()
+        require('dapui').eval(nil, {
+          context = 'repl', -- or 'watch', 'hover'
+          width = 50,
+          height = 20,
+          enter = true,
+        })
+      end, { desc = 'Display current value of variable in Debug mode' })
+
+      vim.keymap.set('n', '<F1>', dap.continue, { desc = 'Debug continue' })
+      vim.keymap.set('n', '<F2>', dap.step_into, { desc = 'Debug step into' })
+      vim.keymap.set('n', '<F3>', dap.step_over, { desc = 'Debug step over' })
+      vim.keymap.set('n', '<F4>', dap.step_out, { desc = 'Debug step out' })
+      vim.keymap.set('n', '<F5>', dap.step_back, { desc = 'Debug step back' })
+      vim.keymap.set('n', '<F12>', dap.restart, { desc = 'Debug Restart' })
     end,
   },
 
@@ -750,6 +846,8 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        dart = { 'dart' },
+
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -757,38 +855,6 @@ require('lazy').setup({
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
-  },
-  {
-    'akinsho/flutter-tools.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'stevearc/dressing.nvim', -- optional for vim.ui.select
-    },
-    config = function()
-      vim.keymap.set('n', '<leader>FS', ':FlutterRun <CR>', {})
-      vim.keymap.set('n', '<leader>FQ', ':FlutterQuit <CR>', {})
-      vim.keymap.set('n', '<leader>FR', ':FlutterRestart <CR>', {})
-      vim.keymap.set('n', '<leader>LR', ':FlutterLspRestart <CR>', {})
-      vim.keymap.set('n', '<leader>FD', ':FlutterDevTools <CR>', {})
-
-      require('flutter-tools').setup {
-        decorations = {
-          statusline = {
-            app_version = true,
-            device = true,
-          },
-        },
-        dev_tools = {
-          autostart = true, -- autostart devtools server if not detected
-          auto_open_browser = true, -- Automatically opens devtools in the browser
-        },
-        lsp = {
-          color = { -- show the derived colours for dart variables
-            enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
-          },
-        },
-      }
-    end,
   },
 
   { -- Autocompletion
@@ -811,12 +877,12 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -839,6 +905,10 @@ require('lazy').setup({
             luasnip.lsp_expand(args.body)
           end,
         },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
         completion = { completeopt = 'menu,menuone,noinsert' },
 
         -- For an understanding of why these mappings were
@@ -859,6 +929,7 @@ require('lazy').setup({
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<C-e>'] = cmp.mapping.abort(),
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
@@ -1010,48 +1081,41 @@ require('lazy').setup({
       local mark = require 'harpoon.mark'
       local ui = require 'harpoon.ui'
 
-      vim.keymap.set('n', '<leader>a', mark.toggle_file, {})
-      vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu, {})
+      vim.keymap.set('n', '<leader>a', mark.toggle_file, { desc = 'Harpoon toggle file' })
+      vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu, { desc = 'Harpoon toggle menu' })
     end,
   },
 
   { -- Undo Tree
     'mbbill/undotree',
     config = function()
-      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {})
+      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle undo tree' })
     end,
   },
-
-  -- { -- Git Wrapper
-  --   'tpope/vim-fugitive',
-  --   config = function()
-  --     vim.keymap.set('n', '<leader>gs', vim.cmd.Git, {})
-  --   end,
-  -- },
 
   { -- Status Line
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       local colors = {
-        vertsplit      = '#181A1F',
-        special_grey   = '#3B4048',
-        menu_grey      = '#3E4452',
-        cursor_grey    = '#2C323C',
+        vertsplit = '#181A1F',
+        special_grey = '#3B4048',
+        menu_grey = '#3E4452',
+        cursor_grey = '#2C323C',
         gutter_fg_grey = '#4B5263',
-        blue           = '#82B1FF',
-        dark_red       = '#BE5046',
-        white          = '#BFC7D5',
-        green          = '#C3E88D',
-        purple         = '#D183E8',
-        yellow         = '#FFCB6B',
-        light_red      = '#FF869A',
-        red            = '#FF5189',
-        dark_yellow    = '#F78C6C',
-        cyan           = '#89DDFF',
-        comment_grey   = '#697098',
-        black          = '#292D3E',
-        dark_black     = '#080808',
+        blue = '#82B1FF',
+        dark_red = '#BE5046',
+        white = '#BFC7D5',
+        green = '#C3E88D',
+        purple = '#D183E8',
+        yellow = '#FFCB6B',
+        light_red = '#FF869A',
+        red = '#FF5189',
+        dark_yellow = '#F78C6C',
+        cyan = '#89DDFF',
+        comment_grey = '#697098',
+        black = '#292D3E',
+        dark_black = '#080808',
       }
 
       local bubbles_theme = {
@@ -1125,7 +1189,7 @@ require('lazy').setup({
       '3rd/image.nvim', -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     config = function()
-      vim.keymap.set('n', '<leader>n', '<cmd>Neotree toggle=true<CR>', {})
+      vim.keymap.set('n', '<leader>n', '<cmd>Neotree toggle=true<CR>', { desc = 'Toggle file tree' })
     end,
   },
 
@@ -1188,17 +1252,17 @@ require('lazy').setup({
           gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'reset git hunk' })
         -- normal mode
-        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
-        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
-        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
-        map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
-        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
-        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
-        map('n', '<leader>hb', gitsigns.blame_line, { desc = 'git [b]lame line' })
-        map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git [s]tage hunk' })
+        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'Git [r]eset hunk' })
+        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'Git [S]tage buffer' })
+        map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Git [u]ndo stage hunk' })
+        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'Git [R]eset buffer' })
+        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Git [p]review hunk' })
+        map('n', '<leader>hb', gitsigns.blame_line, { desc = 'Git [b]lame line' })
+        map('n', '<leader>hd', gitsigns.diffthis, { desc = 'Git [d]iff against index' })
         map('n', '<leader>hD', function()
           gitsigns.diffthis '@'
-        end, { desc = 'git [D]iff against last commit' })
+        end, { desc = 'Git [D]iff against last commit' })
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
         map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
