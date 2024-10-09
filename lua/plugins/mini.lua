@@ -4,7 +4,7 @@ return { -- Mini Plugins
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       mappings = {
@@ -21,7 +21,7 @@ return { -- Mini Plugins
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       mappings = {
@@ -43,7 +43,7 @@ return { -- Mini Plugins
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       exchange = {
@@ -57,7 +57,7 @@ return { -- Mini Plugins
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       mappings = {

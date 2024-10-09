@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   { -- Vim Sleuth: Detect and modify tabstop and shiftwidth automatically
@@ -12,7 +12,7 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   { -- Vim Speeddating: Fix increment and decrement on dates
@@ -20,7 +20,7 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   { -- Vim Surround: Intelligent surround over text-objects
@@ -28,6 +28,6 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
   },
 }

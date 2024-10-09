@@ -8,7 +8,7 @@ return {
 
     lazy = true,
 
-    cmd = { 'LazyGit' },
+    cmd = 'LazyGit',
 
     keys = {
       { '<leader>lg', '<CMD>LazyGit<CR>', mode = 'n', desc = 'LazyGit' },

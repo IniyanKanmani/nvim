@@ -4,10 +4,12 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       default_mapping = true,
+      cyclic = true,
+      refresh_interval = 2000,
     },
   },
 }

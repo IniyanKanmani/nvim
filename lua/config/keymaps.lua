@@ -65,3 +65,5 @@ vim.keymap.set('n', '<leader>tw', '<CMD>set wrap!<CR>', { desc = 'Toggle line wr
 
 vim.keymap.set('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Vertically split Neovim' })
 vim.keymap.set('n', '<leader>-', '<CMD>split<CR>', { desc = 'Horizontally split Neovim' })
+
+vim.keymap.set('n', '<leader>ln', '<CMD>Lazy<CR>', { desc = 'Toggle Lazynvim' })

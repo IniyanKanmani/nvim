@@ -8,7 +8,9 @@ return {
       'stevearc/dressing.nvim',
     },
 
-    cmd = { 'FlutterRun' },
+    lazy = true,
+
+    cmd = 'FlutterRun',
 
     keys = {
       { '<leader>fs', '<CMD>FlutterRun<CR>', mode = 'n', desc = 'Flutter run' },

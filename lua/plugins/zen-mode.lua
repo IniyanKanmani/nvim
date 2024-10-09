@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    cmd = { 'ZenMode' },
+    cmd = 'ZenMode',
 
     keys = {
       { '<leader>z', '<CMD>ZenMode<CR>', mode = 'n', desc = 'Toggle zenmode' },

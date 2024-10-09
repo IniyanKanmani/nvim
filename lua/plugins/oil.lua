@@ -8,7 +8,7 @@ return {
 
     event = 'VimEnter',
 
-    cmd = { 'Oil' },
+    cmd = 'Oil',
 
     ---@module 'oil'
     ---@type oil.SetupOpts

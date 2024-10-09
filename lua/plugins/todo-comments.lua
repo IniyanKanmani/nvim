@@ -8,10 +8,17 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       signs = false,
     },
+
+    config = function(_, opts)
+      local todo_comments = require 'todo-comments'
+      todo_comments.setup(opts)
+
+      vim.keymap.set('n', '<leader>st', '<CMD>TodoTelescope<CR>', { desc = '[S]earch [T]odos' })
+    end,
   },
 }

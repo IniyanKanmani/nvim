@@ -10,7 +10,7 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       provider_selector = function(_, _, _, _)

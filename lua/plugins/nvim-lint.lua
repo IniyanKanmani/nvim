@@ -2,25 +2,18 @@ return {
   { -- Nvim Lint: Linter
     'mfussenegger/nvim-lint',
 
+    dependencies = {
+      'williamboman/mason.nvim',
+    },
+
     lazy = true,
 
     event = { 'BufReadPre', 'BufNewFile' },
 
-    keys = {
-      {
-        '<leader>l',
-        function()
-          require('lint').try_lint()
-        end,
-        mode = 'n',
-        desc = '[L]int buffer',
-      },
-    },
-
     opts = {
       linters_by_ft = {
         javascript = { 'eslint_d' },
-        markdown = { 'markdownlint' },
+        markdown = { 'vale' },
         python = { 'pylint' },
         text = { 'vale' },
       },
@@ -28,8 +21,12 @@ return {
 
     config = function()
       local lint = require 'lint'
-      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 
+      vim.keymap.set('n', '<leader>l', function()
+        lint.try_lint()
+      end, { desc = '[L]int buffer' })
+
+      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
       vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
         group = lint_augroup,
         callback = function()

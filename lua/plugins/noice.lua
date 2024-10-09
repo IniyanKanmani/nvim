@@ -7,7 +7,7 @@ return {
       'rcarriga/nvim-notify',
     },
 
-    event = 'CmdlineEnter',
+    event = 'VimEnter',
 
     opts = {
       routes = {

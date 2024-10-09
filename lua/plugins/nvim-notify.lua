@@ -22,6 +22,8 @@ return {
       local notify = require 'notify'
       notify.setup(opts)
 
+      vim.keymap.set('n', '<leader>sn', '<CMD>Telescope notify<CR>', { desc = '[S]earch [N]otifications' })
+
       vim.keymap.set('n', '<leader>dn', function()
         notify.dismiss { silent = true, pending = true }
       end, { desc = 'Dismiss All Notifications' })

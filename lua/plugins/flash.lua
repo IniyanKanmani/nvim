@@ -2,6 +2,8 @@ return {
   { -- Flash: Faster way to move
     'folke/flash.nvim',
 
+    lazy = true,
+
     event = 'VeryLazy',
 
     opts = {},

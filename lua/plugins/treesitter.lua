@@ -4,15 +4,16 @@ return {
 
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'windwp/nvim-ts-autotag',
     },
 
     lazy = true,
 
     build = ':TSUpdate',
 
-    event = { 'BufReadPre', 'BufNewFile' },
-
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+
+    event = { 'BufReadPre', 'BufNewFile' },
 
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
@@ -35,6 +36,9 @@ return {
         enable = true,
       },
       indent = {
+        enable = true,
+      },
+      autotag = {
         enable = true,
       },
       incremental_selection = {

@@ -6,7 +6,7 @@ return {
 
     lazy = true,
 
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {},
   },

@@ -2,7 +2,13 @@ return {
   { -- Conform: Formatter
     'stevearc/conform.nvim',
 
-    cmd = { 'ConformInfo' },
+    dependencies = {
+      'williamboman/mason.nvim',
+    },
+
+    lazy = true,
+
+    cmd = 'ConformInfo',
 
     event = { 'BufReadPre', 'BufNewFile' },
 
@@ -18,6 +24,7 @@ return {
         javascript = { 'prettierd' },
         lua = { 'stylua' },
         python = { 'isort', 'black' },
+        yaml = { 'prettierd' },
       },
     },
 
