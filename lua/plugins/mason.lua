@@ -33,6 +33,7 @@ return {
       ensure_installed = {
         -- LSP
         'lua-language-server',
+        'marksman',
         'pyright',
         'typescript-language-server',
         'yaml-language-server',
@@ -41,6 +42,7 @@ return {
 
         -- nvim-lint
         'eslint_d',
+        'markdownlint',
         'pylint',
         'vale',
 

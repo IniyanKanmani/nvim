@@ -97,12 +97,11 @@ return {
           end,
         },
         window = {
-
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
         completion = {
-          completeopt = 'menu,menuone,noinsert,noselect,preview',
+          completeopt = 'menu,menuone,noinsert,preview',
         },
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`

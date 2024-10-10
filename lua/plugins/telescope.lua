@@ -15,7 +15,7 @@ return {
 
     opts = {
       defaults = {
-        path_display = { 'smart' },
+        -- path_display = { 'smart' },
         mappings = {
           n = {
             ['<C-q'] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
@@ -31,7 +31,7 @@ return {
       },
       extensions = {
         ['ui-select'] = {
-          require('telescope.themes').get_dropdown,
+          require('telescope.themes').get_dropdown(),
         },
       },
     },

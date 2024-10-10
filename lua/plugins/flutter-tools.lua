@@ -4,6 +4,7 @@ return {
 
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'mfussenegger/nvim-dap',
       'hrsh7th/cmp-nvim-lsp',
       'stevearc/dressing.nvim',
     },
@@ -11,6 +12,8 @@ return {
     lazy = true,
 
     cmd = 'FlutterRun',
+
+    ft = 'dart',
 
     keys = {
       { '<leader>fs', '<CMD>FlutterRun<CR>', mode = 'n', desc = 'Flutter run' },
@@ -24,14 +27,21 @@ return {
         statusline = {
           app_version = false,
           device = true,
-          project_config = true,
+          project_config = false,
         },
       },
       debugger = {
         enabled = true,
+        evaluate_to_string_in_debug_views = true,
       },
       widget_guides = {
+        enabled = false,
+      },
+      closing_tags = {
         enabled = true,
+      },
+      dev_log = {
+        enabled = false,
       },
       dev_tools = {
         autostart = true,
@@ -42,12 +52,20 @@ return {
       },
       lsp = {
         color = {
-          enabled = true,
+          enabled = false,
         },
-        capabilities = function()
-          local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-          cmp_nvim_lsp.default_capabilities()
-        end,
+        -- capabilities = function(_)
+        --   local cmp_nvim_lsp = require 'cmp_nvim_lsp'
+        --   return cmp_nvim_lsp.default_capabilities()
+        -- end,
+        settings = {
+          showTodos = true,
+          completeFunctionCalls = true,
+          -- analysisExcludedFolders = { '~/development/flutter/' },
+          renameFilesWithClasses = 'prompt', -- "always"
+          enableSnippets = true,
+          updateImportsOnRename = true,
+        },
       },
     },
 
@@ -55,12 +73,22 @@ return {
       local flutter_tools = require 'flutter-tools'
       flutter_tools.setup(opts)
 
-      vim.keymap.set('n', '<leader>fs', '<CMD>FlutterRun<CR>', { desc = 'Flutter run' })
-      vim.keymap.set('n', '<leader>fq', '<CMD>FlutterQuit<CR>', { desc = 'Flutter quit' })
-      vim.keymap.set('n', '<leader>fl', '<CMD>FlutterReload<CR>', { desc = 'Flutter reload' })
-      vim.keymap.set('n', '<leader>fr', '<CMD>FlutterRestart<CR>', { desc = 'Flutter restart' })
-      vim.keymap.set('n', '<leader>flr', '<CMD>FlutterLspRestart<CR>', { desc = 'Flutter lsp restart' })
-      vim.keymap.set('n', '<leader>fd', '<CMD>FlutterDevTools<CR>', { desc = 'Flutter open dev tools' })
+      vim.keymap.set('n', '<leader>fs', '<CMD>FlutterRun<CR>', { desc = '[F]lutter [R]un' })
+      vim.keymap.set('n', '<leader>fq', '<CMD>FlutterQuit<CR>', { desc = '[F]lutter [Q]uit' })
+
+      vim.keymap.set('n', '<leader>fd', '<CMD>FlutterDevices<CR>', { desc = '[F]lutter [D]evices' })
+      vim.keymap.set('n', '<leader>fe', '<CMD>FlutterEmulators<CR>', { desc = '[F]lutter [E]mulators' })
+
+      vim.keymap.set('n', '<leader>frl', '<CMD>FlutterReload<CR>', { desc = '[F]lutter [R]e[L]oad' })
+      vim.keymap.set('n', '<leader>frs', '<CMD>FlutterRestart<CR>', { desc = '[F]lutter [R]e[S]tart' })
+
+      vim.keymap.set('n', '<leader>fcu', '<CMD>FlutterCopyProfilerUrl<CR>', { desc = '[F]lutter [C]opy Profiler [U]rl' })
+      vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDevTools<CR>', { desc = '[F]lutter [D]ev [T]ools' })
+
+      vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDetach<CR>', { desc = '[F]lutter [D]e[T]ach' })
+      vim.keymap.set('n', '<leader>flr', '<CMD>FlutterLspRestart<CR>', { desc = '[F]lutter [L]sp [R]estart' })
+
+      vim.keymap.set('n', '<leader>sfc', '<CMD>Telescope flutter commands<CR>', { desc = '[S]earch [F]lutter [C]ommands' })
     end,
   },
 }

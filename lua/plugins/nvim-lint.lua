@@ -13,7 +13,7 @@ return {
     opts = {
       linters_by_ft = {
         javascript = { 'eslint_d' },
-        markdown = { 'vale' },
+        markdown = { 'markdownlint' },
         python = { 'pylint' },
         text = { 'vale' },
       },

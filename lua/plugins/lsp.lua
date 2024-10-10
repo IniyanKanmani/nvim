@@ -115,6 +115,13 @@ return { -- LSP
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
       end
 
+      lspconfig['dartls'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        -- cmd = { 'dart', 'language-server', '--protocol=lsp' },
+        filetypes = { 'dart' },
+      }
+
       lspconfig['lua_ls'].setup {
         capabilities = capabilities,
         on_attach = on_attach,
@@ -128,6 +135,11 @@ return { -- LSP
             },
           },
         },
+      }
+
+      lspconfig['marksman'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
       }
 
       lspconfig['pyright'].setup {
@@ -145,5 +157,19 @@ return { -- LSP
         on_attach = on_attach,
       }
     end,
+  },
+
+  { -- Fidget Nvim: LSP loading animation
+    'j-hui/fidget.nvim',
+
+    lazy = true,
+
+    opts = {
+      notification = {
+        window = {
+          winblend = 0,
+        },
+      },
+    },
   },
 }

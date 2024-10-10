@@ -4,6 +4,7 @@ return {
 
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
       'windwp/nvim-ts-autotag',
     },
 
@@ -11,19 +12,17 @@ return {
 
     build = ':TSUpdate',
 
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    main = 'nvim-treesitter.configs',
 
     event = { 'BufReadPre', 'BufNewFile' },
 
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      auto_install = true,
-      -- Must always be installed
       ensure_installed = {
-        'bash',
         'c',
+        'dart',
         'diff',
-        'html',
+        'gitignore',
+        'javascript',
         'lua',
         'luadoc',
         'markdown',
@@ -31,9 +30,12 @@ return {
         'query',
         'vim',
         'vimdoc',
+        'yaml',
       },
+      auto_install = true,
       highlight = {
         enable = true,
+        additional_vim_regex_highlighting = false,
       },
       indent = {
         enable = true,
@@ -89,6 +91,11 @@ return {
             ['it'] = { query = '@comment.inner', desc = 'Select inner part of a comment' },
             ['at'] = { query = '@comment.outer', desc = 'Select outer part of a comment' },
           },
+          -- disabled because of processing time
+          disable = function(_, bufnr)
+            local ft = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+            return ft == 'dart'
+          end,
         },
 
         move = {
@@ -199,13 +206,14 @@ return {
     },
 
     config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
+      local ts = require 'nvim-treesitter.configs'
+      ts.setup(opts)
 
       local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
 
       -- Key mappings for repeating last move
-      vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat_move.repeat_last_move, { desc = 'Repeat last treesitter textobject move' })
-      vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_opposite, { desc = 'Repeat last treesitter textobject move opposite' })
+      vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat_move.repeat_last_move_next, { desc = 'Repeat last treesitter textobject move next' })
+      vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_previous, { desc = 'Repeat last treesitter textobject move previous' })
 
       -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
       vim.keymap.set({ 'n', 'x', 'o' }, 'f', ts_repeat_move.builtin_f_expr, { expr = true })
@@ -213,12 +221,24 @@ return {
       vim.keymap.set({ 'n', 'x', 'o' }, 't', ts_repeat_move.builtin_t_expr, { expr = true })
       vim.keymap.set({ 'n', 'x', 'o' }, 'T', ts_repeat_move.builtin_T_expr, { expr = true })
     end,
+  },
 
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  { -- Nvim Treesitter Context: Show context
+    'nvim-treesitter/nvim-treesitter-context',
+
+    lazy = true,
+
+    opts = {
+      enable = true,
+      multiline_threshold = 20,
+      mode = 'cursor',
+    },
+
+    config = function(_, opts)
+      local ts_context = require 'treesitter-context'
+      ts_context.setup(opts)
+
+      vim.keymap.set('n', '<leader>tc', '<CMD>TSContextToggle<CR>', { desc = 'Toggle treesitter context' })
+    end,
   },
 }
