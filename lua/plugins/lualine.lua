@@ -15,10 +15,10 @@ return {
       local colors = {
         transparent     = '#00000000',
         purple          = '#D183E8',
-        emerald         = '#43DDCA',
-        cyan            = '#00C6E2',
+        emerald         = '#3AE69C',
+        cyan            = '#00C9EB',
         red             = '#FF5189',
-        green           = '#C3E88D',
+        lavender        = '#7287FD';
         orange          = '#FF9E64',
         menu_grey       = '#3E4452',
         comment_grey    = '#697098',
@@ -43,8 +43,8 @@ return {
           c = { fg = colors.comment_grey, bg = colors.black },
         },
         replace = {
-          a = { fg = colors.dark_black, bg = colors.green, gui = 'bold' },
-          b = { fg = colors.green, bg = colors.menu_grey },
+          a = { fg = colors.dark_black, bg = colors.lavender, gui = 'bold' },
+          b = { fg = colors.lavender, bg = colors.menu_grey },
           c = { fg = colors.comment_grey, bg = colors.black },
         },
         command = {
@@ -76,8 +76,8 @@ return {
           c = { fg = colors.comment_grey, bg = colors.transparent },
         },
         replace = {
-          a = { fg = colors.dark_black, bg = colors.green, gui = 'bold' },
-          b = { fg = colors.green, bg = colors.menu_grey },
+          a = { fg = colors.dark_black, bg = colors.lavender, gui = 'bold' },
+          b = { fg = colors.lavender, bg = colors.menu_grey },
           c = { fg = colors.comment_grey, bg = colors.transparent },
         },
         command = {

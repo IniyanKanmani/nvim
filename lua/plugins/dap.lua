@@ -34,14 +34,13 @@ return { -- Debug Adapter Protocol Plugins
       dap.listeners.before.event_terminated['dapui_config'] = dapui.close
       dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-      -- Basic debugging keymaps, feel free to change to your liking!
       vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
       vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
       vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
       -- vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
 
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
+      vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: Toggle Dap UI' })
       vim.keymap.set('n', '<F11>', dap.disconnect, { desc = 'Debug: Disconnect' })
       vim.keymap.set('n', '<F12>', dap.restart, { desc = 'Debug: Restart' })
       vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
@@ -57,7 +56,7 @@ return { -- Debug Adapter Protocol Plugins
           height = 20,
           enter = true,
         })
-      end, { desc = 'Debug: Display current value of variable in Debug mode' })
+      end, { desc = 'Debug: Display current value of variable' })
     end,
   },
 }

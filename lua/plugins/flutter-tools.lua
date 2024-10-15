@@ -31,7 +31,7 @@ return {
         },
       },
       debugger = {
-        enabled = true,
+        enabled = false,
         evaluate_to_string_in_debug_views = true,
       },
       widget_guides = {
@@ -41,7 +41,7 @@ return {
         enabled = true,
       },
       dev_log = {
-        enabled = false,
+        enabled = true,
       },
       dev_tools = {
         autostart = true,
@@ -73,6 +73,15 @@ return {
       local flutter_tools = require 'flutter-tools'
       flutter_tools.setup(opts)
 
+      local debugger_current_state = opts.debugger.enabled
+
+      vim.keymap.set('n', '<leader>ftd', function()
+        debugger_current_state = not debugger_current_state
+        opts.debugger.enabled = debugger_current_state
+
+        flutter_tools.setup(opts)
+      end, { desc = '[F]lutter [T]oggle [D]ebugger' })
+
       vim.keymap.set('n', '<leader>fs', '<CMD>FlutterRun<CR>', { desc = '[F]lutter [R]un' })
       vim.keymap.set('n', '<leader>fq', '<CMD>FlutterQuit<CR>', { desc = '[F]lutter [Q]uit' })
 
@@ -82,13 +91,11 @@ return {
       vim.keymap.set('n', '<leader>frl', '<CMD>FlutterReload<CR>', { desc = '[F]lutter [R]e[L]oad' })
       vim.keymap.set('n', '<leader>frs', '<CMD>FlutterRestart<CR>', { desc = '[F]lutter [R]e[S]tart' })
 
-      vim.keymap.set('n', '<leader>fcu', '<CMD>FlutterCopyProfilerUrl<CR>', { desc = '[F]lutter [C]opy Profiler [U]rl' })
-      vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDevTools<CR>', { desc = '[F]lutter [D]ev [T]ools' })
-
       vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDetach<CR>', { desc = '[F]lutter [D]e[T]ach' })
       vim.keymap.set('n', '<leader>flr', '<CMD>FlutterLspRestart<CR>', { desc = '[F]lutter [L]sp [R]estart' })
 
-      vim.keymap.set('n', '<leader>sfc', '<CMD>Telescope flutter commands<CR>', { desc = '[S]earch [F]lutter [C]ommands' })
+      vim.keymap.set('n', '<leader>fcu', '<CMD>FlutterCopyProfilerUrl<CR>', { desc = '[F]lutter [C]opy Profiler [U]rl' })
+      vim.keymap.set('n', '<leader>scf', '<CMD>Telescope flutter commands<CR>', { desc = '[S]earch [C]ommands [F]lutter' })
     end,
   },
 }

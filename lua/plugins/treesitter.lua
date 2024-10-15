@@ -230,7 +230,7 @@ return {
 
     opts = {
       enable = true,
-      multiline_threshold = 20,
+      multiline_threshold = 5,
       mode = 'cursor',
     },
 
