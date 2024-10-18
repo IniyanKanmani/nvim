@@ -42,13 +42,14 @@ return {
 
         -- nvim-lint
         'eslint_d',
-        'markdownlint',
+        'markdownlint-cli2',
         'pylint',
         'vale',
 
         -- conform
         'black',
         'isort',
+        'markdown-toc',
         'prettierd',
         'stylua',
       },

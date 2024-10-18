@@ -13,14 +13,15 @@ return {
     opts = {
       linters_by_ft = {
         javascript = { 'eslint_d' },
-        markdown = { 'markdownlint' },
+        markdown = { 'markdownlint-cli2' },
         python = { 'pylint' },
         text = { 'vale' },
       },
     },
 
-    config = function()
+    config = function(_, opts)
       local lint = require 'lint'
+      lint.linters_by_ft = opts.linters_by_ft
 
       vim.keymap.set('n', '<leader>l', function()
         lint.try_lint()

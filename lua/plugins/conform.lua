@@ -23,7 +23,7 @@ return {
         dart = { 'dart' },
         javascript = { 'prettierd' },
         lua = { 'stylua' },
-        markdown = { 'markdownlint' },
+        markdown = { 'markdownlint-cli2', 'markdown-toc' },
         python = { 'isort', 'black' },
         yaml = { 'prettierd' },
       },
