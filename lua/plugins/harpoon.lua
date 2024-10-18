@@ -6,6 +6,14 @@ return {
 
     keys = {
       {
+        '<leader>h',
+        function()
+          require('harpoon.ui').toggle_quick_menu()
+        end,
+        mode = 'n',
+        desc = 'Harpoon toggle menu',
+      },
+      {
         '<leader>ht',
         function()
           require('harpoon.mark').toggle_file()
@@ -13,17 +21,26 @@ return {
         mode = 'n',
         desc = 'Harpoon toggle file',
       },
+      {
+        '<leader>hc',
+        function()
+          require('harpoon.mark').clear_all()
+        end,
+        mode = 'n',
+        desc = 'Harpoon clear all',
+      },
     },
 
-    opts = {},
+    -- opts = {},
 
     config = function()
-      local mark = require 'harpoon.mark'
       local ui = require 'harpoon.ui'
 
-      -- vim.keymap.set('n', '<leader>ht', mark.toggle_file, { desc = 'Harpoon toggle file' })
-      vim.keymap.set('n', '<leader>hc', mark.clear_all, { desc = 'Harpoon clear all' })
-      vim.keymap.set('n', '<leader>hm', ui.toggle_quick_menu, { desc = 'Harpoon toggle menu' })
+      for i = 1, 9, 1 do
+        vim.keymap.set('n', '<leader>' .. tostring(i), function()
+          ui.nav_file(i)
+        end, { desc = 'Harpoon to file ' .. tostring(i) })
+      end
     end,
   },
 }

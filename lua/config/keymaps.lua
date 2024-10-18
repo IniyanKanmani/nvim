@@ -38,6 +38,13 @@ vim.keymap.set({ 'i', 'v', 'x', 's', 'o', 'c' }, 'kj', '<Esc>', { desc = 'Exit t
 vim.keymap.set('n', '<leader>kj', '<CMD>q<CR>', { desc = 'Send command :q' })
 vim.keymap.set('t', '<leader>kj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gh', '_', { desc = 'Goto start of current line' })
+vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gl', 'g_', { desc = 'Goto end of current line' })
+
+vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gn', '*', { desc = 'Goto next matching word' })
+vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gN', '#', { desc = 'Goto prev matching word' })
+vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'go', '%', { desc = 'Goto other end of the braket' })
+
 vim.keymap.set({ 'n', 'v' }, '<leader>c', '"_c', { desc = 'Change into void register' })
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete into void register' })
 vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'Paste on selection without losing the copied text' })

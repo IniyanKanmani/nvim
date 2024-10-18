@@ -9,10 +9,10 @@ return {
         '<C-f>',
         '<CMD>MaximizerToggle<CR>',
         mode = 'n',
-        desc = 'Toggle split size',
+        desc = 'Maximize split size',
       },
     },
 
-    opts = {},
+    -- opts = {},
   },
 }

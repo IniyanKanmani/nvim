@@ -45,7 +45,7 @@ return {
       },
       dev_tools = {
         autostart = true,
-        auto_open_browser = true,
+        auto_open_browser = false,
       },
       outline = {
         auto_open = false,
@@ -75,26 +75,32 @@ return {
 
       local debugger_current_state = opts.debugger.enabled
 
+      vim.keymap.set('n', '<leader>fr', '<CMD>FlutterRun<CR>', { desc = '[F]lutter [R]un' })
+      vim.keymap.set('n', '<leader>fq', '<CMD>FlutterQuit<CR><CMD>echo "Ending Flutter Session..."<CR>', { desc = '[F]lutter [Q]uit' })
+
+      vim.keymap.set('n', '<leader>fd', '<CMD>FlutterDevices<CR>', { desc = '[F]lutter [D]evices' })
+      vim.keymap.set('n', '<leader>fe', '<CMD>FlutterEmulators<CR>', { desc = '[F]lutter [E]mulators' })
+
+      vim.keymap.set('n', '<leader>fl', '<CMD>FlutterReload<CR><CMD>echo "Performing Reload..."<CR>', { desc = '[F]lutter Re[L]oad' })
+      vim.keymap.set('n', '<leader>fs', '<CMD>FlutterRestart<CR><CMD>echo "Performing Restart..."<CR>', { desc = '[F]lutter Re[S]tart' })
+
       vim.keymap.set('n', '<leader>ftd', function()
         debugger_current_state = not debugger_current_state
         opts.debugger.enabled = debugger_current_state
 
         flutter_tools.setup(opts)
+        vim.api.nvim_command('echo "Turned ' .. (debugger_current_state and 'on' or 'off') .. ' Flutter Debugger"')
       end, { desc = '[F]lutter [T]oggle [D]ebugger' })
-
-      vim.keymap.set('n', '<leader>fs', '<CMD>FlutterRun<CR>', { desc = '[F]lutter [R]un' })
-      vim.keymap.set('n', '<leader>fq', '<CMD>FlutterQuit<CR>', { desc = '[F]lutter [Q]uit' })
-
-      vim.keymap.set('n', '<leader>fd', '<CMD>FlutterDevices<CR>', { desc = '[F]lutter [D]evices' })
-      vim.keymap.set('n', '<leader>fe', '<CMD>FlutterEmulators<CR>', { desc = '[F]lutter [E]mulators' })
-
-      vim.keymap.set('n', '<leader>frl', '<CMD>FlutterReload<CR>', { desc = '[F]lutter [R]e[L]oad' })
-      vim.keymap.set('n', '<leader>frs', '<CMD>FlutterRestart<CR>', { desc = '[F]lutter [R]e[S]tart' })
 
       vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDetach<CR>', { desc = '[F]lutter [D]e[T]ach' })
       vim.keymap.set('n', '<leader>flr', '<CMD>FlutterLspRestart<CR>', { desc = '[F]lutter [L]sp [R]estart' })
 
-      vim.keymap.set('n', '<leader>fcu', '<CMD>FlutterCopyProfilerUrl<CR>', { desc = '[F]lutter [C]opy Profiler [U]rl' })
+      vim.keymap.set(
+        'n',
+        '<leader>fcu',
+        '<CMD>FlutterCopyProfilerUrl<CR><CMD>echo "Copied Flutter Profiler Url"<CR>',
+        { desc = '[F]lutter [C]opy Profiler [U]rl' }
+      )
       vim.keymap.set('n', '<leader>scf', '<CMD>Telescope flutter commands<CR>', { desc = '[S]earch [C]ommands [F]lutter' })
     end,
   },

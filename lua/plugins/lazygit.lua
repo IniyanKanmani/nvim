@@ -14,6 +14,6 @@ return {
       { '<leader>lg', '<CMD>LazyGit<CR>', mode = 'n', desc = 'LazyGit' },
     },
 
-    opts = {},
+    -- opts = {},
   },
 }
