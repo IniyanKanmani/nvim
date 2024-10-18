@@ -2,7 +2,12 @@ return {
   { -- Oil: File Explorer
     'stevearc/oil.nvim',
 
+    -- url = 'https://github.com/stevearc/oil.nvim/pull/467/head',
+    -- This PR fixes the error when fast switching preview
+    commit = '60fe23050f5b93550262f5c96ab00b5c51b60830',
+
     dependencies = {
+      'refractalize/oil-git-status.nvim',
       'nvim-tree/nvim-web-devicons',
     },
 
@@ -10,14 +15,13 @@ return {
 
     cmd = 'Oil',
 
-    ---@module 'oil'
-    ---@type oil.SetupOpts
     opts = {
       default_file_explorer = true,
       delete_to_trash = true,
       skip_confirm_for_simple_edits = true,
       win_options = {
         wrap = true,
+        signcolumn = 'yes:2',
       },
       watch_for_changes = true,
       keymaps = {
@@ -51,7 +55,29 @@ return {
       local oil = require 'oil'
       oil.setup(opts)
 
-      vim.keymap.set('n', '<leader>-', '<CMD>Oil --float<CR>', { desc = 'Open parent directory' })
+      vim.keymap.set('n', '<leader>-', function()
+        oil.open_float()
+        vim.defer_fn(function()
+          oil.open_preview()
+        end, 100)
+      end, { desc = 'Open parent directory' })
+    end,
+  },
+
+  { -- Oil Git Status Nvim: Git status for oil nvim
+    'refractalize/oil-git-status.nvim',
+
+    -- Don't modify this
+    lazy = false,
+
+    opts = {
+      show_ignored = true,
+    },
+
+    -- Don't modify this
+    config = function(_, opts)
+      local oil_git_status = require 'oil-git-status'
+      oil_git_status.setup(opts)
     end,
   },
 }
