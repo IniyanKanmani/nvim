@@ -10,9 +10,27 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = 'VeryLazy',
 
     opts = {
+      open_fold_hl_timeout = 200,
+      close_fold_kinds_for_ft = {
+        default = { 'imports', 'comment' },
+        json = { 'array' },
+      },
+      preview = {
+        win_config = {
+          border = 'rounded',
+          winhighlight = 'Normal:Folded',
+          winblend = 0,
+        },
+        mappings = {
+          scrollU = '<C-u>',
+          scrollD = '<C-d>',
+          jumpTop = '[',
+          jumpBot = ']',
+        },
+      },
       provider_selector = function(_, _, _, _)
         return { 'lsp', 'indent' }
       end,
