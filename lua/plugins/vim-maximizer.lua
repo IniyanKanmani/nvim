@@ -6,10 +6,10 @@ return {
 
     keys = {
       {
-        '<C-f>',
+        '<C-w>f',
         '<CMD>MaximizerToggle<CR>',
         mode = 'n',
-        desc = 'Maximize split size',
+        desc = 'Max/Min split size',
       },
     },
 

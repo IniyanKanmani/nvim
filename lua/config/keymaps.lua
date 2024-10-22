@@ -33,17 +33,18 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Custom keymaps
-vim.keymap.set({ 'i', 'v', 'x', 's', 'o', 'c' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
+-- vim.keymap.set({ 'i', 'v', 'x', 's', 'o', 'c' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
+vim.keymap.set({ 'o', 'x' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
 
 vim.keymap.set('n', '<leader>kj', '<CMD>q<CR>', { desc = 'Send command :q' })
 vim.keymap.set('t', '<leader>kj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gh', '_', { desc = 'Goto start of current line' })
-vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gl', 'g_', { desc = 'Goto end of current line' })
+vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gh', '_', { desc = 'Goto start of current line' })
+vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gl', 'g_', { desc = 'Goto end of current line' })
 
-vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gn', '*', { desc = 'Goto next matching word' })
-vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'gN', '#', { desc = 'Goto prev matching word' })
-vim.keymap.set({ 'n', 'i', 'v', 'x', 's', 'o', 'c', 't' }, 'go', '%', { desc = 'Goto other end of the braket' })
+vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gn', '*', { desc = 'Goto next matching word' })
+vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gN', '#', { desc = 'Goto prev matching word' })
+vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'go', '%', { desc = 'Goto other end of the braket' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>c', '"_c', { desc = 'Change into void register' })
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete into void register' })
