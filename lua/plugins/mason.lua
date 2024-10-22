@@ -39,6 +39,7 @@ return {
         'yaml-language-server',
 
         -- DAP
+        'js-debug-adapter',
 
         -- nvim-lint
         'eslint_d',

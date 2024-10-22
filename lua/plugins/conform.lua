@@ -25,6 +25,7 @@ return {
         lua = { 'stylua' },
         markdown = { 'markdownlint-cli2', 'markdown-toc' },
         python = { 'isort', 'black' },
+        typescript = { 'prettierd' },
         yaml = { 'prettierd' },
       },
     },
