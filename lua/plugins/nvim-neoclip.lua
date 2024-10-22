@@ -8,15 +8,6 @@ return {
 
     lazy = true,
 
-    keys = {
-      {
-        '<leader>sc',
-        '<CMD>Telescope neoclip<CR>',
-        mode = 'n',
-        desc = '[S]earch Neo[C]lip',
-      },
-    },
-
     opts = {},
   },
 }

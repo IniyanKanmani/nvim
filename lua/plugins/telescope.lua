@@ -6,10 +6,15 @@ return {
 
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+
       'nvim-telescope/telescope-fzf-native.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
+
       'nvim-telescope/telescope-frecency.nvim',
-      'nvim-tree/nvim-web-devicons',
+      'debugloop/telescope-undo.nvim',
+      'catgoose/telescope-helpgrep.nvim',
+      'AckslD/nvim-neoclip.lua',
     },
 
     event = 'VimEnter',
@@ -46,6 +51,13 @@ return {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        ['undo'] = {
+          -- side_by_side = true,
+          -- layout_strategy = 'vertical',
+          -- layout_config = {
+          --   preview_height = 0.8,
+          -- },
+        },
       },
     },
 
@@ -78,23 +90,25 @@ return {
       telescope.setup(opts)
 
       -- Set Telescope keymaps
-      vim.keymap.set('n', '<leader>sh', '<CMD>Telescope help_tags<CR>', { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', '<CMD>Telescope keymaps<CR>', { desc = '[S]earch [K]eymaps' })
+      vim.keymap.set('n', '<leader>sc', '<CMD>Telescope neoclip initial_mode=normal<CR>', { desc = '[S]earch [C]lipboard' })
+      vim.keymap.set('n', '<leader>sd', '<CMD>Telescope diagnostics initial_mode=normal<CR>', { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sf', '<CMD>Telescope find_files<CR>', { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>sff', '<CMD>Telescope frecency workspace=CWD<CR>', { desc = '[S]earch [F]recency [F]iles' })
-      vim.keymap.set('n', '<leader>shf', '<CMD>Telescope find_files hidden=true<CR>', { desc = '[S]earch [H]idden [F]iles' })
-      vim.keymap.set('n', '<leader>sgf', '<CMD>Telescope git_files<CR>', { desc = '[S]earch [G]it [F]iles' })
-      vim.keymap.set('n', '<leader>ss', '<CMD>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', '<CMD>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', '<CMD>Telescope live_grep<CR>', { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', '<CMD>Telescope diagnostics<CR>', { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>sgf', '<CMD>Telescope git_files<CR>', { desc = '[S]earch [G]it [F]iles' })
+      vim.keymap.set('n', '<leader>sh', '<CMD>Telescope help_tags<CR>', { desc = '[S]earch [H]elp' })
+      vim.keymap.set('n', '<leader>shf', '<CMD>Telescope find_files hidden=true<CR>', { desc = '[S]earch [H]idden [F]iles' })
+      vim.keymap.set('n', '<leader>shg', '<CMD>Telescope helpgrep<CR>', { desc = '[S]earch [H]elp [G]rep' })
+      vim.keymap.set('n', '<leader>sk', '<CMD>Telescope keymaps<CR>', { desc = '[S]earch [K]eymaps' })
+      vim.keymap.set('n', '<leader>ss', '<CMD>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sr', '<CMD>Telescope resume<CR>', { desc = '[S]earch [R]esume' })
+      vim.keymap.set('n', '<leader>su', '<CMD>Telescope undo initial_mode=normal<CR>', { desc = '[S]earch [U]ndo History' })
+      vim.keymap.set('n', '<leader>sw', '<CMD>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>s.', '<CMD>Telescope oldfiles<CR>', { desc = '[S]earch Recent Files "." for repeat' })
       vim.keymap.set('n', '<leader><leader>', '<CMD>Telescope buffers sort_mru=true sort_lastused=true<CR>', { desc = '[ ] Find existing buffers' })
 
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(themes.get_dropdown {
-          winblend = 10,
           previewer = false,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
@@ -112,8 +126,10 @@ return {
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
+      pcall(require('telescope').load_extension, 'frecency')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension 'frecency')
+      pcall(require('telescope').load_extension, 'undo')
+      pcall(require('telescope').load_extension, 'helpgrep')
     end,
   },
 
