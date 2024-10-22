@@ -12,5 +12,17 @@ return {
         rgb_fn = true,
       },
     },
+
+    config = function(_, opts)
+      local colorizer = require 'colorizer'
+      colorizer.setup(opts)
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'noice', 'notify', 'TelescopePrompt', 'TelescopeResults' },
+        callback = function()
+          colorizer.detach_from_buffer()
+        end,
+      })
+    end,
   },
 }

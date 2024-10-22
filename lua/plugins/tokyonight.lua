@@ -33,6 +33,10 @@ return {
           sidebars = 'normal',
           floats = 'normal',
         },
+        on_highlights = function(hl, _)
+          hl['@variable'] = { fg = '#209FB5' }
+          hl['@variable.parameter'] = { fg = '#FC6086' }
+        end,
         dim_inactive = false,
         lualine_bold = true,
         cache = true,
@@ -50,24 +54,41 @@ return {
           sidebars = 'transparent',
           floats = 'transparent',
         },
+        on_highlights = function(hl, _)
+          hl['@variable'] = { fg = '#209FB5' }
+          hl['@variable.parameter'] = { fg = '#FC6086' }
+        end,
         dim_inactive = false,
         lualine_bold = true,
         cache = true,
       }
 
-      local function set_transparency(transparancy)
-        tokyonight.setup(transparancy and TokyoNightTransparentThemeOpts or TokyoNightNormalThemeOpts)
-        lualine.setup(transparancy and LualineTransparentThemeOpts or LualineNormalThemeOpts)
+      local function set_transparency_mode()
+        local transparency = vim.g.is_transparent
+        tokyonight.setup(transparency and TokyoNightTransparentThemeOpts or TokyoNightNormalThemeOpts)
+        lualine.setup(transparency and LualineTransparentThemeOpts or LualineNormalThemeOpts)
 
         vim.cmd.colorscheme 'tokyonight-night'
       end
 
-      set_transparency(vim.g.is_transparent)
+      ReadTransparencyFile()
+      set_transparency_mode()
+
+      function ExecuteOnTransparencyFileChange(value)
+        SetIsTransparent(value)
+        set_transparency_mode()
+      end
+
+      vim.keymap.set('n', '<leader>bc', function()
+        ReadTransparencyFile()
+        set_transparency_mode()
+      end, { desc = 'Check Background Transparency' })
 
       vim.keymap.set('n', '<leader>bt', function()
         vim.g.is_transparent = not vim.g.is_transparent
-        set_transparency(vim.g.is_transparent)
-      end, { desc = 'Toggle transparancy' })
+
+        WriteTransparencyFile()
+      end, { desc = 'Toggle Background Transparency' })
     end,
   },
 }

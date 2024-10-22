@@ -88,4 +88,4 @@ vim.opt.guicursor = 'n-v-c:block,i:ver25,r-cr:hor20,o:hor50'
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
 
-vim.g.is_transparent = vim.g.is_transparent ~= true
+-- vim.g.is_transparent = vim.g.is_transparent ~= true
