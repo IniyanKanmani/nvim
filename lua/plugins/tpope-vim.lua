@@ -1,4 +1,12 @@
 return {
+  { -- Vim Abolish: Work with text cases
+    'tpope/vim-abolish',
+
+    lazy = true,
+
+    event = { 'BufReadPre', 'BufNewFile' },
+  },
+
   { -- Vim Repeat: Use . to repeat previous commands
     'tpope/vim-repeat',
 
@@ -25,6 +33,14 @@ return {
 
   { -- Vim Surround: Intelligent surround over text-objects
     'tpope/vim-surround',
+
+    lazy = true,
+
+    event = { 'BufReadPre', 'BufNewFile' },
+  },
+
+  { -- Vim Unimpaired: Intelligent mapping pairs
+    'tpope/vim-unimpaired',
 
     lazy = true,
 
