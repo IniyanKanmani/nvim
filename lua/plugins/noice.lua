@@ -19,6 +19,9 @@ return {
       presets = {
         lsp_doc_border = true,
       },
+      popupmenu = {
+        backend = 'cmp',
+      },
       lsp = {
         progress = {
           enabled = false,

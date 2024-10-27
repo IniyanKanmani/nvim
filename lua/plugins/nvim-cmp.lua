@@ -74,20 +74,20 @@ return {
 
       local cmdline_mappings = {
         -- Select the [n]ext item
-        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-n>'] = { c = cmp.mapping.select_next_item() },
         -- Select the [p]revious item
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-p>'] = { c = cmp.mapping.select_prev_item() },
 
         -- Accept ([y]es) the completion.
         --  This will auto-import if your LSP supports it.
         --  This will expand snippets if the LSP sent a snippet.
-        ['<C-y>'] = cmp.mapping.confirm { select = true },
-        ['<C-e>'] = cmp.mapping.abort(),
+        ['<C-y>'] = { c = cmp.mapping.confirm { select = true } },
+        ['<C-e>'] = { c = cmp.mapping.abort() },
 
         -- Manually trigger a completion from nvim-cmp.
         --  Generally you don't need this, because nvim-cmp will display
         --  completions whenever it has completion options available.
-        ['<C-space>'] = cmp.mapping.complete(),
+        ['<C-space>'] = { c = cmp.mapping.complete() },
       }
 
       cmp.setup {

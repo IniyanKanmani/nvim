@@ -18,7 +18,7 @@ return {
       local todo_comments = require 'todo-comments'
       todo_comments.setup(opts)
 
-      vim.keymap.set('n', '<leader>st', '<CMD>TodoTelescope<CR>', { desc = '[S]earch [T]odos' })
+      vim.keymap.set('n', '<leader>std', '<CMD>TodoTelescope<CR>', { desc = '[S]earch [T]o[D]os' })
     end,
   },
 }

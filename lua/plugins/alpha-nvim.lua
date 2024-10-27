@@ -21,17 +21,17 @@ return {
       local dashboard = require 'alpha.themes.dashboard'
 
       dashboard.section.buttons.val = {
-        dashboard.button('e', '  > New file', '<CMD>ene <BAR> startinsert <CR>'),
-        dashboard.button('SPC -', '  > Browse files'),
-        dashboard.button('SPC s f', '󰮗  > Find file'),
+        dashboard.button('e', '  > New File', '<CMD>ene <BAR> startinsert <CR>'),
+        dashboard.button('SPC =', '  > Browse Files'),
+        dashboard.button('SPC s f', '󰮗  > Find File'),
+        dashboard.button('SPC l g', '  > Git Status'),
         dashboard.button('SPC q l', '󰪻  > Recent CWD Session'),
         dashboard.button('SPC q r', '  > Recent Session'),
-        dashboard.button('s', '  > Settings', '<CMD>e $MYVIMRC<CR>'),
-        dashboard.button('q', '  > Quit NVIM', '<CMD>qa<CR>'),
+        dashboard.button('q', '  > Quit Nvim', '<CMD>qa<CR>'),
       }
 
       dashboard.config.layout = {
-        { type = 'padding', val = 15 },
+        { type = 'padding', val = 17 },
         dashboard.section.header,
         { type = 'padding', val = 3 },
         dashboard.section.buttons,

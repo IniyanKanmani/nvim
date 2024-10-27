@@ -2,8 +2,6 @@ return {
   { -- Telescope: Fuzzy finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
 
-    branch = '0.1.x',
-
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
@@ -30,7 +28,7 @@ return {
         mappings = {
           n = {
             ['d'] = require('telescope.actions').delete_buffer,
-            ['<C-q'] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
+            ['<C-q>'] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
             ['<leader>kj'] = require('telescope.actions').close,
           },
           i = {
@@ -99,26 +97,34 @@ return {
       vim.keymap.set('n', '<leader>sh', '<CMD>Telescope help_tags<CR>', { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>shf', '<CMD>Telescope find_files hidden=true<CR>', { desc = '[S]earch [H]idden [F]iles' })
       vim.keymap.set('n', '<leader>shg', '<CMD>Telescope helpgrep<CR>', { desc = '[S]earch [H]elp [G]rep' })
+      vim.keymap.set('n', '<leader>sj', '<CMD>Telescope jumplist initial_mode=normal<CR>', { desc = '[S]earch [J]umplist' })
       vim.keymap.set('n', '<leader>sk', '<CMD>Telescope keymaps<CR>', { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>ss', '<CMD>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>sm', '<CMD>Telescope marks<CR>', { desc = '[S]earch [M]arks' })
+      vim.keymap.set('n', '<leader>sn', '<CMD>Telescope notify initial_mode=normal<CR>', { desc = '[S]earch [N]otifications' })
+      vim.keymap.set('n', '<leader>so', '<CMD>Telescope vim_options<CR>', { desc = '[S]earch Vim-[O]ptions' })
       vim.keymap.set('n', '<leader>sr', '<CMD>Telescope resume<CR>', { desc = '[S]earch [R]esume' })
+      vim.keymap.set('n', '<leader>ss', '<CMD>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>ssp', '<CMD>Telescope spell_suggest initial_mode=normal<CR>', { desc = '[S]earch [S][P]ell Suggest' })
+      vim.keymap.set('n', '<leader>st', '<CMD>Telescope treesitter<CR>', { desc = '[S]earch [T]reesitter' })
       vim.keymap.set('n', '<leader>su', '<CMD>Telescope undo initial_mode=normal<CR>', { desc = '[S]earch [U]ndo History' })
       vim.keymap.set('n', '<leader>sw', '<CMD>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>s.', '<CMD>Telescope oldfiles<CR>', { desc = '[S]earch Recent Files "." for repeat' })
-      vim.keymap.set('n', '<leader><leader>', '<CMD>Telescope buffers sort_mru=true sort_lastused=true<CR>', { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>s.', '<CMD>Telescope oldfiles<CR>', { desc = '[S]earch Recent Files [.] for repeat' })
+      vim.keymap.set(
+        'n',
+        '<leader>s/',
+        '<CMD>Telescope live_grep prompt_title="Live Grep in Open Files" grep_open_files=true',
+        { desc = '[S]earch [/] in Open Files' }
+      )
+      vim.keymap.set(
+        'n',
+        '<leader><leader>',
+        '<CMD>Telescope buffers ignore_current_buffer=true sort_mru=true initial_mode=normal<CR>',
+        { desc = '[ ] Find existing buffers' }
+      )
 
       vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(themes.get_dropdown {
-          previewer = false,
-        })
+        builtin.current_buffer_fuzzy_find(themes.get_dropdown { previewer = false })
       end, { desc = '[/] Fuzzily search in current buffer' })
-
-      vim.keymap.set('n', '<leader>s/', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = '[S]earch [/] in Open Files' })
 
       vim.keymap.set('n', '<leader>snv', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }

@@ -18,7 +18,7 @@ return {
       colorizer.setup(opts)
 
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = { 'noice', 'notify', 'TelescopePrompt', 'TelescopeResults' },
+        pattern = { 'lazy', 'mason', 'noice', 'notify', 'TelescopePrompt', 'TelescopeResults' },
         callback = function()
           colorizer.detach_from_buffer()
         end,
