@@ -4,6 +4,9 @@ return {
 
     dependencies = {
       'nvim-lualine/lualine.nvim',
+      {
+        dir = '/Users/apple/workspace/neovim/plugins/term-transparency.nvim',
+      },
     },
 
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -18,8 +21,7 @@ return {
     opts = {},
 
     config = function()
-      local tokyonight = require 'tokyonight'
-      local lualine = require 'lualine'
+      local term_transparency = require 'term_transparency'
 
       TokyoNightNormalThemeOpts = {
         style = 'night',
@@ -34,8 +36,8 @@ return {
           floats = 'normal',
         },
         on_highlights = function(hl, _)
-          hl['@variable'] = { fg = '#209FB5' }
-          hl['@variable.parameter'] = { fg = '#FC6086' }
+          hl['@variable'] = { fg = '#FC6086' }
+          hl['@variable.parameter'] = { fg = '#209FB5' }
         end,
         dim_inactive = false,
         lualine_bold = true,
@@ -55,40 +57,15 @@ return {
           floats = 'transparent',
         },
         on_highlights = function(hl, _)
-          hl['@variable'] = { fg = '#209FB5' }
-          hl['@variable.parameter'] = { fg = '#FC6086' }
+          hl['@variable'] = { fg = '#FC6086' }
+          hl['@variable.parameter'] = { fg = '#209FB5' }
         end,
         dim_inactive = false,
         lualine_bold = true,
         cache = true,
       }
 
-      local function set_transparency_mode()
-        local transparency = vim.g.is_transparent
-        tokyonight.setup(transparency and TokyoNightTransparentThemeOpts or TokyoNightNormalThemeOpts)
-        lualine.setup(transparency and LualineTransparentThemeOpts or LualineNormalThemeOpts)
-
-        vim.cmd.colorscheme 'tokyonight-night'
-      end
-
-      ReadTransparencyFile()
-      set_transparency_mode()
-
-      function ExecuteOnTransparencyFileChange(value)
-        SetIsTransparent(value)
-        set_transparency_mode()
-      end
-
-      vim.keymap.set('n', '<leader>bc', function()
-        ReadTransparencyFile()
-        set_transparency_mode()
-      end, { desc = 'Check Background Transparency' })
-
-      vim.keymap.set('n', '<leader>bt', function()
-        vim.g.is_transparent = not vim.g.is_transparent
-
-        WriteTransparencyFile()
-      end, { desc = 'Toggle Background Transparency' })
+      term_transparency.opts.on_transparency_change()
     end,
   },
 }

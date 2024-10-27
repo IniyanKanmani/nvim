@@ -87,7 +87,6 @@ P.S. You can delete this when you're done too. It's your config now! :)
 require 'config.options'
 require 'config.keymaps'
 require 'config.autocmds'
-require 'config.transparency'
 require 'config.lazy'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
