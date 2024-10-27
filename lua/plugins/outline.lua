@@ -8,7 +8,7 @@ return {
 
     keys = {
       {
-        '<leader>o',
+        '<leader>ol',
         '<CMD>Outline<CR>',
         mode = 'n',
         desc = 'Toggle outline',

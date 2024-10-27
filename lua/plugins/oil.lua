@@ -16,7 +16,6 @@ return {
     cmd = 'Oil',
 
     opts = {
-      default_file_explorer = true,
       delete_to_trash = true,
       skip_confirm_for_simple_edits = true,
       win_options = {
@@ -55,7 +54,7 @@ return {
       local oil = require 'oil'
       oil.setup(opts)
 
-      vim.keymap.set('n', '<leader>-', function()
+      vim.keymap.set('n', '<leader>o', function()
         oil.open_float()
         vim.defer_fn(function()
           oil.open_preview()
