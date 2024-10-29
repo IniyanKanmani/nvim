@@ -3,7 +3,7 @@ return {
     'stevearc/conform.nvim',
 
     dependencies = {
-      'williamboman/mason.nvim',
+      'zapling/mason-conform.nvim',
     },
 
     lazy = true,

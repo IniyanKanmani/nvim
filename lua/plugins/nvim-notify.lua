@@ -2,10 +2,6 @@ return {
   { -- Nvim Notify: Better Notifications
     'rcarriga/nvim-notify',
 
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-    },
-
     lazy = true,
 
     opts = {

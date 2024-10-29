@@ -7,13 +7,24 @@ return {
     commit = '60fe23050f5b93550262f5c96ab00b5c51b60830',
 
     dependencies = {
-      'refractalize/oil-git-status.nvim',
       'nvim-tree/nvim-web-devicons',
     },
 
-    event = 'VimEnter',
-
     cmd = 'Oil',
+
+    keys = {
+      {
+        '<leader>o',
+        function()
+          vim.cmd 'Oil --float'
+          vim.defer_fn(function()
+            require('oil').open_preview()
+          end, 100)
+        end,
+        mode = 'n',
+        desc = 'Open parent directory',
+      },
+    },
 
     opts = {
       delete_to_trash = true,
@@ -49,31 +60,19 @@ return {
         update_on_cursor_moved = true,
       },
     },
-
-    config = function(_, opts)
-      local oil = require 'oil'
-      oil.setup(opts)
-
-      vim.keymap.set('n', '<leader>o', function()
-        oil.open_float()
-        vim.defer_fn(function()
-          oil.open_preview()
-        end, 100)
-      end, { desc = 'Open parent directory' })
-    end,
   },
 
   { -- Oil Git Status Nvim: Git status for oil nvim
     'refractalize/oil-git-status.nvim',
 
-    -- Don't modify this
-    lazy = false,
+    lazy = true,
+
+    ft = 'oil',
 
     opts = {
       show_ignored = true,
     },
 
-    -- Don't modify this
     config = function(_, opts)
       local oil_git_status = require 'oil-git-status'
       oil_git_status.setup(opts)

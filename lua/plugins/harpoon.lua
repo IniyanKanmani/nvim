@@ -2,7 +2,15 @@ return {
   { -- Harpoon: Faster way to switch between files
     'ThePrimeagen/harpoon',
 
+    -- branch = 'harpoon2',
+
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    },
+
     lazy = true,
+
+    event = { 'BufReadPre', 'BufNewFile' },
 
     keys = {
       {
@@ -31,7 +39,7 @@ return {
       },
     },
 
-    -- opts = {},
+    opts = {},
 
     config = function()
       local ui = require 'harpoon.ui'
@@ -41,6 +49,8 @@ return {
           ui.nav_file(i)
         end, { desc = 'Harpoon to file ' .. tostring(i) })
       end
+
+      pcall(require('telescope').load_extension, 'harpoon')
     end,
   },
 }

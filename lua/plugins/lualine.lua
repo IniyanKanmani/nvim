@@ -6,7 +6,7 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
 
-    event = 'VimEnter',
+    lazy = true,
 
     opts = {},
 

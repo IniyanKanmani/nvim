@@ -7,7 +7,7 @@ return { -- LSP
       'antosha417/nvim-lsp-file-operations',
       'j-hui/fidget.nvim',
 
-      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
     },
 
     lazy = true,
@@ -62,7 +62,9 @@ return { -- LSP
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        keymap({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action, 'LSP [C]ode [A]ction')
+        keymap({ 'n', 'x' }, '<leader>ca', function()
+          vim.lsp.buf.code_action()
+        end, 'LSP [C]ode [A]ction')
 
         -- Restart LSP
         keymap('n', '<leader>rs', '<CMD>LspRestart<CR>', 'LSP [R]e[s]tart')

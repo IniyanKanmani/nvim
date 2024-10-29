@@ -2,7 +2,7 @@ return {
   { -- Tokyonight: Colorscheme
     'folke/tokyonight.nvim',
 
-    event = 'VimEnter',
+    lazy = true,
 
     opts = {},
 
@@ -20,8 +20,9 @@ return {
           floats = 'normal',
         },
         on_highlights = function(hl, _)
-          hl['@variable'] = { fg = '#FC6086' }
-          hl['@variable.parameter'] = { fg = '#209FB5' }
+          hl['@variable.parameter'] = { fg = '#FC6086' }
+          -- hl['@variable'] = { fg = '#FC6086' }
+          -- hl['@variable.parameter'] = { fg = '#209FB5' }
         end,
         dim_inactive = false,
         lualine_bold = true,
@@ -41,8 +42,9 @@ return {
           floats = 'transparent',
         },
         on_highlights = function(hl, _)
-          hl['@variable'] = { fg = '#FC6086' }
-          hl['@variable.parameter'] = { fg = '#209FB5' }
+          hl['@variable.parameter'] = { fg = '#FC6086' }
+          -- hl['@variable'] = { fg = '#FC6086' }
+          -- hl['@variable.parameter'] = { fg = '#209FB5' }
         end,
         dim_inactive = false,
         lualine_bold = true,

@@ -8,6 +8,15 @@ return {
 
     lazy = true,
 
+    event = { 'BufReadPre', 'BufNewFile' },
+
     opts = {},
+
+    config = function(_, opts)
+      local neoclip = require 'neoclip'
+      neoclip.setup(opts)
+
+      pcall(require('telescope').load_extension, 'neoclip')
+    end,
   },
 }

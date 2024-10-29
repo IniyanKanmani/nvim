@@ -5,25 +5,19 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
-
-      'nvim-telescope/telescope-fzf-native.nvim',
-      'nvim-telescope/telescope-ui-select.nvim',
-
-      'nvim-telescope/telescope-frecency.nvim',
-      'debugloop/telescope-undo.nvim',
-      'catgoose/telescope-helpgrep.nvim',
-      'AckslD/nvim-neoclip.lua',
     },
+
+    lazy = true,
 
     event = 'VimEnter',
 
     opts = {
       defaults = {
-        -- path_display = {
-        --   filename_first = {
-        --     reverse_directories = true,
-        --   },
-        -- },
+        path_display = {
+          filename_first = {
+            reverse_directories = true,
+          },
+        },
         -- path_display = { 'smart' },
         mappings = {
           n = {
@@ -37,24 +31,6 @@ return {
             ['<C-q'] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
             ['<leader>kj'] = require('telescope.actions').close,
           },
-        },
-      },
-      extensions = {
-        ['frecency'] = {
-          show_scores = true,
-          show_filter_column = false,
-          db_safe_mode = false,
-          auto_validate = true,
-        },
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
-        },
-        ['undo'] = {
-          -- side_by_side = true,
-          -- layout_strategy = 'vertical',
-          -- layout_config = {
-          --   preview_height = 0.8,
-          -- },
         },
       },
     },
@@ -82,16 +58,16 @@ return {
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       local telescope = require 'telescope'
+      telescope.setup(opts)
+
       local builtin = require 'telescope.builtin'
       local themes = require 'telescope.themes'
-
-      telescope.setup(opts)
 
       -- Set Telescope keymaps
       vim.keymap.set('n', '<leader>sc', '<CMD>Telescope neoclip initial_mode=normal<CR>', { desc = '[S]earch [C]lipboard' })
       vim.keymap.set('n', '<leader>sd', '<CMD>Telescope diagnostics initial_mode=normal<CR>', { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sf', '<CMD>Telescope find_files<CR>', { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sff', '<CMD>Telescope frecency workspace=CWD<CR>', { desc = '[S]earch [F]recency [F]iles' })
+      vim.keymap.set('n', '<leader>sff', '<CMD>Telescope frecency prompt_title=frecency workspace=CWD<CR>', { desc = '[S]earch [F]recency [F]iles' })
       vim.keymap.set('n', '<leader>sg', '<CMD>Telescope live_grep<CR>', { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sgf', '<CMD>Telescope git_files<CR>', { desc = '[S]earch [G]it [F]iles' })
       vim.keymap.set('n', '<leader>sh', '<CMD>Telescope help_tags<CR>', { desc = '[S]earch [H]elp' })
@@ -102,7 +78,8 @@ return {
       vim.keymap.set('n', '<leader>sm', '<CMD>Telescope marks<CR>', { desc = '[S]earch [M]arks' })
       vim.keymap.set('n', '<leader>sn', '<CMD>Telescope notify initial_mode=normal<CR>', { desc = '[S]earch [N]otifications' })
       vim.keymap.set('n', '<leader>so', '<CMD>Telescope vim_options<CR>', { desc = '[S]earch Vim-[O]ptions' })
-      vim.keymap.set('n', '<leader>sr', '<CMD>Telescope resume<CR>', { desc = '[S]earch [R]esume' })
+      vim.keymap.set('n', '<leader>sr', '<CMD>Telescope registers initial_mode=normal<CR>', { desc = '[S]earch [R]egisters' })
+      vim.keymap.set('n', '<leader>srs', '<CMD>Telescope resume<CR>', { desc = '[S]earch [R]e[S]ume' })
       vim.keymap.set('n', '<leader>ss', '<CMD>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>ssp', '<CMD>Telescope spell_suggest initial_mode=normal<CR>', { desc = '[S]earch [S][P]ell Suggest' })
       vim.keymap.set('n', '<leader>st', '<CMD>Telescope treesitter<CR>', { desc = '[S]earch [T]reesitter' })
@@ -115,6 +92,7 @@ return {
         '<CMD>Telescope live_grep prompt_title="Live Grep in Open Files" grep_open_files=true',
         { desc = '[S]earch [/] in Open Files' }
       )
+
       vim.keymap.set(
         'n',
         '<leader><leader>',
@@ -130,12 +108,9 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eo[V]im files' })
 
-      -- Enable Telescope extensions if they are installed
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'frecency')
-      pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'undo')
-      pcall(require('telescope').load_extension, 'helpgrep')
+      -- Create Autocmd to load other plugins that depend on telescope
+      -- vim.api.nvim_exec_autocmds('User', { pattern = 'TelescopeLoaded' })
+      vim.cmd 'doautocmd User TelescopeLoaded'
     end,
   },
 
@@ -143,6 +118,8 @@ return {
     'nvim-telescope/telescope-fzf-native.nvim',
 
     lazy = true,
+
+    event = 'User TelescopeLoaded',
 
     --  If encountering errors, see telescope-fzf-native README for installation instructions
     -- `build` is used to run some command when the plugin is installed/updated.
@@ -153,6 +130,100 @@ return {
     -- installed and loaded.
     cond = function()
       return vim.fn.executable 'make' == 1
+    end,
+
+    opts = {},
+
+    config = function(_, opts)
+      local telescope = require 'telescope'
+      telescope.setup(opts)
+
+      pcall(require('telescope').load_extension, 'fzf')
+    end,
+  },
+
+  { -- Telescope Ui Select Nvim: Better UI for drop-down
+    'nvim-telescope/telescope-ui-select.nvim',
+
+    lazy = true,
+
+    event = { 'BufReadPre', 'BufNewFile' },
+    -- event = 'User TelescopeLoaded',
+
+    opts = {
+      extensions = {
+        ['ui-select'] = function()
+          require('telescope.themes').get_dropdown()
+        end,
+      },
+    },
+
+    config = function(_, opts)
+      local telescope = require 'telescope'
+      telescope.setup(opts)
+
+      pcall(telescope.load_extension, 'ui-select')
+    end,
+  },
+
+  { -- Telescope Frecency: Intelligent Prioritization when selecting files from your editing history
+    'nvim-telescope/telescope-frecency.nvim',
+
+    lazy = true,
+
+    event = 'User TelescopeLoaded',
+
+    opts = {
+      extensions = {
+        frecency = {
+          show_scores = true,
+          show_filter_column = false,
+          db_safe_mode = false,
+          auto_validate = true,
+        },
+      },
+    },
+
+    config = function(_, opts)
+      local telescope = require 'telescope'
+      telescope.setup(opts)
+
+      pcall(telescope.load_extension, 'frecency')
+    end,
+  },
+
+  { -- Telescope Help Grep: Grep through Help files
+    'catgoose/telescope-helpgrep.nvim',
+
+    lazy = true,
+
+    event = 'User TelescopeLoaded',
+
+    opts = {},
+
+    config = function(_, opts)
+      local telescope = require 'telescope'
+      telescope.setup(opts)
+
+      pcall(telescope.load_extension, 'helpgrep')
+    end,
+  },
+
+  { -- Telescope Undo Nvim: View editing history with telescope
+    'debugloop/telescope-undo.nvim',
+
+    lazy = true,
+
+    event = { 'BufReadPre', 'BufNewFile' },
+    -- event = 'User TelescopeLoaded',
+
+    opts = {},
+
+    config = function(_, opts)
+      local telescope = require 'telescope'
+      telescope.setup(opts)
+
+      pcall(telescope.load_extension, 'undo')
     end,
   },
 }
