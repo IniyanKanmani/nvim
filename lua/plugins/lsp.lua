@@ -18,7 +18,7 @@ return { -- LSP
       local lspconfig = require 'lspconfig'
       local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
-      local on_attach = function(client, bufnr)
+      OnAttach = function(client, bufnr)
         local keymap = function(mode, keys, func, desc)
           mode = mode or 'n'
           vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
@@ -109,7 +109,7 @@ return { -- LSP
         end
       end
 
-      local capabilities = cmp_nvim_lsp.default_capabilities()
+      Capabilities = cmp_nvim_lsp.default_capabilities()
 
       local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
       for type, icon in pairs(signs) do
@@ -118,15 +118,15 @@ return { -- LSP
       end
 
       lspconfig['dartls'].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
+        capabilities = Capabilities,
+        on_attach = OnAttach,
         -- cmd = { 'dart', 'language-server', '--protocol=lsp' },
         filetypes = { 'dart' },
       }
 
       lspconfig['lua_ls'].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
+        capabilities = Capabilities,
+        on_attach = OnAttach,
         settings = {
           Lua = {
             diagnostics = {
@@ -140,18 +140,18 @@ return { -- LSP
       }
 
       lspconfig['marksman'].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
+        capabilities = Capabilities,
+        on_attach = OnAttach,
       }
 
       lspconfig['pyright'].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
+        capabilities = Capabilities,
+        on_attach = OnAttach,
       }
 
       lspconfig['ts_ls'].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
+        capabilities = Capabilities,
+        on_attach = OnAttach,
         init_options = {
           preferences = {
             disableSuggestions = true,
@@ -160,8 +160,8 @@ return { -- LSP
       }
 
       lspconfig['yamlls'].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
+        capabilities = Capabilities,
+        on_attach = OnAttach,
       }
     end,
   },

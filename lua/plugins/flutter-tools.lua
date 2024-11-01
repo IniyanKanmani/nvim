@@ -1,6 +1,6 @@
 return {
   { -- Flutter Tools: Provides with flutter essentials
-    'akinsho/flutter-tools.nvim',
+    'nvim-flutter/flutter-tools.nvim',
 
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -54,15 +54,15 @@ return {
         color = {
           enabled = false,
         },
-        -- capabilities = function(_)
-        --   local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-        --   return cmp_nvim_lsp.default_capabilities()
-        -- end,
+        capabilities = Capabilities,
+        on_attach = OnAttach,
+        -- capabilities = nil,
+        -- on_attach = nil,
         settings = {
           showTodos = true,
           completeFunctionCalls = true,
           -- analysisExcludedFolders = { '~/development/flutter/' },
-          renameFilesWithClasses = 'prompt', -- "always"
+          renameFilesWithClasses = 'always', -- "prompt"
           enableSnippets = true,
           updateImportsOnRename = true,
         },
@@ -89,19 +89,21 @@ return {
         opts.debugger.enabled = debugger_current_state
 
         flutter_tools.setup(opts)
-        vim.api.nvim_command('echo "Turned ' .. (debugger_current_state and 'on' or 'off') .. ' Flutter Debugger"')
+        vim.cmd(string.format('echo %s Flutter Debugger', debugger_current_state and 'on' or 'off'))
       end, { desc = '[F]lutter [T]oggle [D]ebugger' })
 
       vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDetach<CR>', { desc = '[F]lutter [D]e[T]ach' })
-      vim.keymap.set('n', '<leader>flr', '<CMD>FlutterLspRestart<CR>', { desc = '[F]lutter [L]sp [R]estart' })
+      -- vim.keymap.set('n', '<leader>flr', '<CMD>FlutterLspRestart<CR>', { desc = '[F]lutter [L]sp [R]estart' })
+      --
+      -- vim.keymap.set(
+      --   'n',
+      --   '<leader>fcu',
+      --   '<CMD>FlutterCopyProfilerUrl<CR><CMD>echo "Copied Flutter Profiler Url"<CR>',
+      --   { desc = '[F]lutter [C]opy Profiler [U]rl' }
+      -- )
+      vim.keymap.set('n', '<leader>sfc', '<CMD>Telescope flutter commands<CR>', { desc = '[S]earch [F]lutter [C]ommands' })
 
-      vim.keymap.set(
-        'n',
-        '<leader>fcu',
-        '<CMD>FlutterCopyProfilerUrl<CR><CMD>echo "Copied Flutter Profiler Url"<CR>',
-        { desc = '[F]lutter [C]opy Profiler [U]rl' }
-      )
-      vim.keymap.set('n', '<leader>scf', '<CMD>Telescope flutter commands<CR>', { desc = '[S]earch [C]ommands [F]lutter' })
+      pcall(require('telescope').load_extension, 'flutter')
     end,
   },
 }

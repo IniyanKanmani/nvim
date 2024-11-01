@@ -12,26 +12,18 @@ return {
     priority = 1000,
 
     opts = {
-      transparency_state_file = vim.fn.expand '~' .. '/.local/state/term/transparency.txt',
       term = {
         wezterm = {
           enabled = true,
-          transparency_toggle_file = vim.fn.expand '~' .. '/.config/wezterm/toggle_transparency.sh',
+          transparency_toggle_file = vim.fn.expand '~' .. '/.config/wezterm/toggle_wezterm_transparency.sh',
         },
       },
       notifications = {
         enabled = false,
       },
-      want_autocmd = false,
       on_transparency_change = function()
-        local term_transparency = require 'term_transparency'
-        term_transparency.sync_state()
-
-        local tokyonight = require 'tokyonight'
-        local lualine = require 'lualine'
-
-        tokyonight.setup(vim.g.is_transparent and TokyoNightTransparentThemeOpts or TokyoNightNormalThemeOpts)
-        lualine.setup(vim.g.is_transparent and LualineTransparentThemeOpts or LualineNormalThemeOpts)
+        require('tokyonight').setup(vim.g.is_transparent and TokyoNightTransparentThemeOpts or TokyoNightNormalThemeOpts)
+        require('lualine').setup(vim.g.is_transparent and LualineTransparentThemeOpts or LualineNormalThemeOpts)
 
         vim.cmd.colorscheme 'tokyonight-night'
       end,
@@ -41,13 +33,7 @@ return {
       local term_transparency = require 'term_transparency'
       term_transparency.setup(opts)
 
-      vim.keymap.set('n', '<leader>bc', function()
-        term_transparency.on_transparency_change()
-      end, { desc = 'Check Background Transparency' })
-
-      vim.keymap.set('n', '<leader>bt', function()
-        term_transparency.toggle_transparency()
-      end, { desc = 'Toggle Background Transparency' })
+      vim.keymap.set('n', '<leader>bt', '<CMD>ToggleTermTransparency<CR>', { desc = 'Toggle Terminal Transparency' })
     end,
   },
 }
