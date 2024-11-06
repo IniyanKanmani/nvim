@@ -41,7 +41,7 @@ return {
       },
       dev_tools = {
         autostart = true,
-        auto_open_browser = true,
+        auto_open_browser = false,
       },
       outline = {
         auto_open = false,
@@ -50,9 +50,7 @@ return {
         color = {
           enabled = false,
         },
-        capabilities = function(_)
-          return Capabilities
-        end,
+        capabilities = Capabilities,
         on_attach = function(client, bufnr)
           return OnAttach(client, bufnr)
         end,
@@ -94,12 +92,7 @@ return {
       end, { desc = '[F]lutter [T]oggle [D]ebugger' })
 
       vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDetach<CR>', { desc = '[F]lutter [D]e[T]ach' })
-      vim.keymap.set(
-        'n',
-        '<leader>fcu',
-        '<CMD>FlutterCopyProfilerUrl<CR><CMD>echo "Copied Flutter Profiler Url"<CR>',
-        { desc = '[F]lutter [C]opy Profiler [U]rl' }
-      )
+      vim.keymap.set('n', '<leader>fcu', '<CMD>FlutterCopyProfilerUrl<CR>', { desc = '[F]lutter [C]opy Profiler [U]rl' })
       vim.keymap.set('n', '<leader>sfc', '<CMD>Telescope flutter commands<CR>', { desc = '[S]earch [F]lutter [C]ommands' })
 
       pcall(require('telescope').load_extension, 'flutter')

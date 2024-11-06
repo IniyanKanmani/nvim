@@ -17,10 +17,10 @@ return {
       local colors = {
         transparent     = '#00000000',
         purple          = '#D183E8',
-        emerald         = '#3AE69C',
+        lavender        = '#7287FD';
         cyan            = '#00C9EB',
         red             = '#FF5189',
-        lavender        = '#7287FD';
+        emerald         = '#3AE69C',
         orange          = '#FF9E64',
         menu_grey       = '#3E4452',
         comment_grey    = '#697098',
@@ -35,8 +35,8 @@ return {
           c = { fg = colors.comment_grey, bg = colors.black },
         },
         insert = {
-          a = { fg = colors.dark_black, bg = colors.emerald, gui = 'bold' },
-          b = { fg = colors.emerald, bg = colors.menu_grey },
+          a = { fg = colors.dark_black, bg = colors.lavender, gui = 'bold' },
+          b = { fg = colors.lavender, bg = colors.menu_grey },
           c = { fg = colors.comment_grey, bg = colors.black },
         },
         visual = {
@@ -45,8 +45,8 @@ return {
           c = { fg = colors.comment_grey, bg = colors.black },
         },
         replace = {
-          a = { fg = colors.dark_black, bg = colors.lavender, gui = 'bold' },
-          b = { fg = colors.lavender, bg = colors.menu_grey },
+          a = { fg = colors.dark_black, bg = colors.emerald, gui = 'bold' },
+          b = { fg = colors.emerald, bg = colors.menu_grey },
           c = { fg = colors.comment_grey, bg = colors.black },
         },
         command = {
@@ -68,8 +68,8 @@ return {
           c = { fg = colors.comment_grey, bg = colors.transparent },
         },
         insert = {
-          a = { fg = colors.dark_black, bg = colors.emerald, gui = 'bold' },
-          b = { fg = colors.emerald, bg = colors.menu_grey },
+          a = { fg = colors.dark_black, bg = colors.lavender, gui = 'bold' },
+          b = { fg = colors.lavender, bg = colors.menu_grey },
           c = { fg = colors.comment_grey, bg = colors.transparent },
         },
         visual = {
@@ -78,8 +78,8 @@ return {
           c = { fg = colors.comment_grey, bg = colors.transparent },
         },
         replace = {
-          a = { fg = colors.dark_black, bg = colors.lavender, gui = 'bold' },
-          b = { fg = colors.lavender, bg = colors.menu_grey },
+          a = { fg = colors.dark_black, bg = colors.emerald, gui = 'bold' },
+          b = { fg = colors.emerald, bg = colors.menu_grey },
           c = { fg = colors.comment_grey, bg = colors.transparent },
         },
         command = {

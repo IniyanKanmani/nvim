@@ -20,7 +20,9 @@ return {
           floats = 'normal',
         },
         on_highlights = function(hl, _)
-          hl['@variable.parameter'] = { fg = '#FC6086' }
+          hl['@variable.parameter'] = { fg = '#E45A7C' }
+          -- hl['@variable.parameter'] = { fg = '#FC6086' }
+
           -- hl['@variable'] = { fg = '#FC6086' }
           -- hl['@variable.parameter'] = { fg = '#209FB5' }
         end,
@@ -42,7 +44,9 @@ return {
           floats = 'transparent',
         },
         on_highlights = function(hl, _)
-          hl['@variable.parameter'] = { fg = '#FC6086' }
+          hl['@variable.parameter'] = { fg = '#E45A7C' }
+          -- hl['@variable.parameter'] = { fg = '#FC6086' }
+
           -- hl['@variable'] = { fg = '#FC6086' }
           -- hl['@variable.parameter'] = { fg = '#209FB5' }
         end,
