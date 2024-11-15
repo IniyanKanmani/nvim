@@ -26,7 +26,7 @@ return {
         },
       },
       debugger = {
-        enabled = false,
+        enabled = true,
         evaluate_to_string_in_debug_views = true,
       },
       widget_guides = {
@@ -88,7 +88,8 @@ return {
         opts.debugger.enabled = debugger_current_state
 
         flutter_tools.setup(opts)
-        vim.cmd(string.format('echo %s Flutter Debugger', debugger_current_state and 'on' or 'off'))
+
+        vim.notify(string.format('Turned %s Flutter Debugger', debugger_current_state and 'on' or 'off'), vim.log.levels.INFO)
       end, { desc = '[F]lutter [T]oggle [D]ebugger' })
 
       vim.keymap.set('n', '<leader>fdt', '<CMD>FlutterDetach<CR>', { desc = '[F]lutter [D]e[T]ach' })

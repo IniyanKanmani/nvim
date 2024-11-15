@@ -16,7 +16,7 @@ return {
 
     lazy = true,
 
-    event = { 'InsertEnter', 'CmdlineEnter' },
+    event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
 
     opts = {},
 

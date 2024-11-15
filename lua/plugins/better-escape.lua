@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'InsertEnter' },
+    event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
 
     opts = {
       timeout = vim.o.timeoutlen,
@@ -20,7 +20,17 @@ return {
             j = '<Esc>',
           },
         },
+        x = {
+          k = {
+            j = '<Esc>',
+          },
+        },
         c = {
+          k = {
+            j = '<Esc>',
+          },
+        },
+        o = {
           k = {
             j = '<Esc>',
           },
@@ -30,6 +40,12 @@ return {
             j = '<Esc>',
           },
         },
+
+        -- t = {
+        --   k = {
+        --     j = '<C-\\><C-n>',
+        --   },
+        -- },
       },
     },
   },

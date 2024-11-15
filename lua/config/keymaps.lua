@@ -34,7 +34,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Custom keymaps
 -- vim.keymap.set({ 'i', 'v', 'x', 's', 'o', 'c' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
-vim.keymap.set({ 'o', 'x' }, 'kj', '<Esc>', { desc = 'Exit to normal mode' })
 
 vim.keymap.set('n', '<leader>kj', '<CMD>q<CR>', { desc = 'Send command :q' })
 vim.keymap.set('t', '<leader>kj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
