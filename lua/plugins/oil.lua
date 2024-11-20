@@ -2,10 +2,6 @@ return {
   { -- Oil: File Explorer
     'stevearc/oil.nvim',
 
-    -- url = 'https://github.com/stevearc/oil.nvim/pull/467/head',
-    -- This PR fixes the error when fast switching preview
-    commit = '60fe23050f5b93550262f5c96ab00b5c51b60830',
-
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
@@ -14,7 +10,7 @@ return {
 
     keys = {
       {
-        '<leader>o',
+        '<leader>.',
         function()
           vim.cmd 'Oil --float'
           vim.defer_fn(function()
@@ -27,12 +23,13 @@ return {
     },
 
     opts = {
-      delete_to_trash = true,
-      skip_confirm_for_simple_edits = true,
+      default_file_explorer = true,
       win_options = {
         wrap = true,
         signcolumn = 'yes:2',
       },
+      delete_to_trash = true,
+      skip_confirm_for_simple_edits = true,
       watch_for_changes = true,
       keymaps = {
         ['<C-h>'] = false,

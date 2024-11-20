@@ -24,7 +24,7 @@ return {
         javascript = { 'prettierd' },
         lua = { 'stylua' },
         markdown = { 'markdownlint-cli2', 'markdown-toc' },
-        python = { 'isort', 'black' },
+        python = { 'black' },
         typescript = { 'prettierd' },
         yaml = { 'prettierd' },
       },

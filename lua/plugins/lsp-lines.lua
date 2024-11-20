@@ -10,19 +10,50 @@ return {
       local lsp_lines = require 'lsp_lines'
       lsp_lines.setup()
 
-      vim.diagnostic.config {
-        virtual_text = false,
-        virtual_lines = { highlight_whole_line = false },
-      }
+      vim.api.nvim_create_augroup('CurrentLineLspLines', { clear = true })
 
-      -- vim.diagnostic.config {
-      --   virtual_text = true,
-      --   virtual_lines = { only_current_line = true, highlight_whole_line = false },
-      -- }
+      local function update_diagnostics()
+        local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
+        local diagnostics = vim.diagnostic.get(0, { lnum = current_line })
+
+        if #diagnostics > 0 then
+          vim.diagnostic.config {
+            virtual_text = false,
+            virtual_lines = { only_current_line = true, highlight_whole_line = false },
+          }
+        else
+          vim.diagnostic.config {
+            virtual_text = true,
+            virtual_lines = false,
+          }
+        end
+      end
+
+      local toggle_lsp_lines = function(state)
+        if state then
+          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            group = 'CurrentLineLspLines',
+            callback = update_diagnostics,
+          })
+        else
+          vim.api.nvim_clear_autocmds {
+            group = 'CurrentLineLspLines',
+          }
+
+          vim.diagnostic.config {
+            virtual_text = true,
+            virtual_lines = false,
+          }
+        end
+      end
+
+      local state = true
+      toggle_lsp_lines(state)
+      update_diagnostics()
 
       vim.keymap.set('n', '<leader>ll', function()
-        local state = lsp_lines.toggle()
-        vim.diagnostic.config { virtual_text = not state }
+        state = not state
+        toggle_lsp_lines(state)
       end, { desc = 'Toggle [L]sp [L]ines' })
     end,
   },

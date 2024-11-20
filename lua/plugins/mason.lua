@@ -64,7 +64,8 @@ return {
       ensure_installed = {
         'eslint_d',
         'markdownlint-cli2',
-        'pylint',
+        'mypy',
+        'ruff',
         'vale',
       },
       automatic_installation = true,
@@ -80,7 +81,6 @@ return {
     opts = {
       ensure_installed = {
         'black',
-        'isort',
         'markdown-toc',
         'prettierd',
         'stylua',

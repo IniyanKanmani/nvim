@@ -14,7 +14,7 @@ return {
       linters_by_ft = {
         javascript = { 'eslint_d' },
         markdown = { 'markdownlint-cli2' },
-        python = { 'pylint' },
+        python = { 'mypy', 'ruff' },
         typescript = { 'eslint_d' },
         text = { 'vale' },
       },
