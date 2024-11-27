@@ -48,7 +48,7 @@ return {
       },
       lsp = {
         color = {
-          enabled = false,
+          enabled = true,
         },
         capabilities = Capabilities,
         on_attach = function(client, bufnr)

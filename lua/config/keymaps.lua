@@ -38,8 +38,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<leader>kj', '<CMD>q<CR>', { desc = 'Send command :q' })
 vim.keymap.set('t', '<leader>kj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gh', '_', { desc = 'Goto start of current line' })
-vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gl', 'g_', { desc = 'Goto end of current line' })
+vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gh', '^', { desc = 'Goto start of current line' })
+vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gl', '$', { desc = 'Goto end of current line' })
 
 vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gn', '*', { desc = 'Goto next matching word' })
 vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gN', '#', { desc = 'Goto prev matching word' })
@@ -49,10 +49,10 @@ vim.keymap.set({ 'n', 'v' }, '<leader>c', '"_c', { desc = 'Change into void regi
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete into void register' })
 vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'Paste on selection without losing the copied text' })
 
-vim.keymap.set('n', 'vwp', 'viw"_d"0P', { desc = 'Replace word with last yank' })
+vim.keymap.set('n', 'vwp', '"_ciw<C-R>0<Esc>', { desc = 'Replace word with last yank' })
 
 vim.keymap.set('n', 'du', 'V"dyP', { desc = 'Duplicate current line' })
-vim.keymap.set('v', 'du', '"dyPgv', { desc = 'Duplicate selected text' })
+vim.keymap.set('v', 'du', '"dyPgvo', { desc = 'Duplicate selected text' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Copy selection into system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', { desc = 'Copy Line into system clipboard' })

@@ -7,12 +7,15 @@ return {
     event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
 
     opts = {
-      timeout = vim.o.timeoutlen,
+      timeout = 150,
       default_mappings = false,
       mappings = {
         i = {
           k = {
             j = '<Esc>',
+          },
+          j = {
+            k = '<Esc>',
           },
         },
         v = {
