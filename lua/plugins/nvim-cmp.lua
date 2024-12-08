@@ -3,9 +3,6 @@ return {
     'hrsh7th/nvim-cmp',
 
     dependencies = {
-      -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default. They are split
-      --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -16,12 +13,11 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
+    event = { 'BufReadPost', 'BufNewFile', 'CmdlineEnter' },
 
     opts = {},
 
     config = function()
-      -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       local lspkind = require 'lspkind'
@@ -128,6 +124,18 @@ return {
           },
           expandable_indicator = true,
         },
+        filetype = {
+          sql = {
+            sources = {
+              {
+                name = 'vim-dadbod-completion',
+              },
+              {
+                name = 'buffer',
+              },
+            },
+          },
+        },
       }
 
       -- `/`, `?` cmdline setup.
@@ -190,7 +198,7 @@ return {
 
     lazy = true,
 
-    event = 'InsertEnter',
+    event = { 'InsertEnter' },
 
     build = (function()
       -- Build Step is needed for regex support in snippets.
@@ -210,7 +218,7 @@ return {
 
     lazy = true,
 
-    event = 'InsertEnter',
+    event = { 'InsertEnter' },
 
     config = function()
       require('luasnip.loaders.from_vscode').lazy_load()

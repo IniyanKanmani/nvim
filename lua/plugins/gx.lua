@@ -12,7 +12,7 @@ return {
       vim.g.netrw_nogx = 1
     end,
 
-    cmd = 'Browse',
+    cmd = { 'Browse' },
 
     keys = {
       { 'gx', '<CMD>Browse<CR>', mode = { 'n', 'x' }, desc = 'Browse links' },

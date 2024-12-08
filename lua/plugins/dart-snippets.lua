@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    ft = { 'dart' },
 
     opts = {
       data_class = {

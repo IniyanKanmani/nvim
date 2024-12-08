@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    cmd = 'Outline',
+    cmd = { 'Outline' },
 
     keys = {
       {

@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
 
     opts = {
       '*',
@@ -18,7 +18,7 @@ return {
       colorizer.setup(opts)
 
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = { 'lazy', 'mason', 'noice', 'notify', 'TelescopePrompt', 'TelescopeResults' },
+        pattern = { 'lazy', 'mason', 'noice', 'oil', 'snacks_notif', 'TelescopePrompt', 'TelescopeResults' },
         callback = function()
           colorizer.detach_from_buffer()
         end,

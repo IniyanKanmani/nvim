@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
 
     keys = {
       { '<leader>u', vim.cmd.UndotreeToggle, mode = 'n', desc = 'Toggle undo tree' },

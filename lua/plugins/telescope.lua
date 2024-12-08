@@ -147,7 +147,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
     -- event = 'User TelescopeLoaded',
 
     opts = {
@@ -214,7 +214,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
     -- event = 'User TelescopeLoaded',
 
     opts = {},

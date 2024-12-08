@@ -11,7 +11,7 @@ return {
     lazy = true,
 
     event = {
-      'BufReadPre ' .. vim.fn.expand '~' .. '/vault/**/*.md',
+      'BufReadPost ' .. vim.fn.expand '~' .. '/vault/**/*.md',
       'BufNewFile ' .. vim.fn.expand '~' .. '/vault/**/*.md',
     },
 

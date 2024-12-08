@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
   },
 
   { -- Vim Repeat: Use . to repeat previous commands
@@ -12,7 +12,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
   },
 
   { -- Vim Sleuth: Detect and modify tabstop and shiftwidth automatically
@@ -20,7 +20,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
   },
 
   { -- Vim Speeddating: Fix increment and decrement on dates
@@ -28,7 +28,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
   },
 
   { -- Vim Surround: Intelligent surround over text-objects
@@ -36,7 +36,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
   },
 
   { -- Vim Unimpaired: Intelligent mapping pairs
@@ -44,6 +44,6 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
   },
 }

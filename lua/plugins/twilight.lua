@@ -4,6 +4,8 @@ return {
 
     lazy = true,
 
+    cmd = { 'Twilight' },
+
     keys = {
       { '<leader>tt', '<CMD>Twilight<CR>', mode = { 'n', 'v' }, desc = 'Toggle Twilight' },
     },

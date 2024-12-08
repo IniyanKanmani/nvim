@@ -10,7 +10,7 @@ return {
 
     lazy = true,
 
-    event = 'VeryLazy',
+    event = 'VeryLazy', -- Recommended
 
     opts = {
       open_fold_hl_timeout = 200,

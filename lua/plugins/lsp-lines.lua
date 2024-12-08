@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
 
     config = function()
       local lsp_lines = require 'lsp_lines'

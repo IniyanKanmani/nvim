@@ -8,7 +8,7 @@ return {
 
     lazy = true,
 
-    event = 'InsertEnter',
+    event = { 'InsertEnter' },
 
     opts = {
       check_ts = true,

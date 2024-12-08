@@ -6,7 +6,7 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
 
-    cmd = 'Oil',
+    cmd = { 'Oil' },
 
     keys = {
       {
@@ -15,7 +15,7 @@ return {
           vim.cmd 'Oil --float'
           vim.defer_fn(function()
             require('oil').open_preview()
-          end, 100)
+          end, 125)
         end,
         mode = 'n',
         desc = 'Open parent directory',
@@ -40,7 +40,7 @@ return {
       },
       view_options = {
         show_hidden = true,
-        natural_order = true,
+        natural_order = 'fast',
         case_insensitive = true,
         is_always_hidden = function(name, _)
           return name == '.'

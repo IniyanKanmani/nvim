@@ -12,7 +12,7 @@ return { -- LSP
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
 
     config = function()
       local lspconfig = require 'lspconfig'

@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
 
     opts = {
       signs = {
@@ -25,7 +25,7 @@ return {
         if vim.wo.diff then
           vim.cmd.normal { '[g', bang = true }
         else
-          gitsigns.prev_hunk()
+          gitsigns.nav_hunk 'prev'
         end
       end, { desc = 'Jump to previous [g]it change' })
 
@@ -33,7 +33,7 @@ return {
         if vim.wo.diff then
           vim.cmd.normal { ']g', bang = true }
         else
-          gitsigns.next_hunk()
+          gitsigns.nav_hunk 'next'
         end
       end, { desc = 'Jump to next [g]it change' })
 

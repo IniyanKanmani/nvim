@@ -13,6 +13,7 @@ return {
         { '<leader>h', group = '[H]arpoon', mode = 'n' },
         { '<leader>s', group = '[S]earch Telescope', mode = 'n' },
         { '<leader>t', group = '[T]oggle', mode = 'n' },
+        { '<leader>u', group = '[U] Snacks', mode = 'n' },
       },
     },
   },

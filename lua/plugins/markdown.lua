@@ -19,7 +19,7 @@ return { -- Markdown Plugins
 
     lazy = true,
 
-    ft = 'markdown',
+    ft = { 'markdown' },
 
     opts = {},
   },

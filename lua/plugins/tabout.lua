@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = 'InsertCharPre',
+    event = { 'InsertCharPre' },
 
     opts = {
       act_as_tab = true,

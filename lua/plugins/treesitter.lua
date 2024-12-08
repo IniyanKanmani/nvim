@@ -14,7 +14,7 @@ return {
 
     main = 'nvim-treesitter.configs',
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
 
     opts = {
       ensure_installed = {
@@ -28,6 +28,7 @@ return {
         'markdown',
         'markdown_inline',
         'query',
+        'sql',
         'vim',
         'vimdoc',
         'yaml',

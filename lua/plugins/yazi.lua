@@ -6,9 +6,9 @@ return {
       'nvim-lua/plenary.nvim',
     },
 
-    event = 'VimEnter',
+    event = { 'VeryLazy' },
 
-    cmd = 'Yazi',
+    cmd = { 'Yazi' },
 
     keys = {
       {

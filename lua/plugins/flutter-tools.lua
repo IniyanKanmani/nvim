@@ -12,7 +12,7 @@ return {
 
     lazy = true,
 
-    ft = 'dart',
+    ft = { 'dart' },
 
     opts = {
       ui = {

@@ -8,7 +8,7 @@ return {
 
     lazy = true,
 
-    ft = 'lua',
+    ft = { 'lua' },
 
     opts = {
       library = {
