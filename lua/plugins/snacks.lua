@@ -51,6 +51,14 @@ return {
         desc = 'Select Scratch Buffer',
       },
       {
+        '<leader>bd',
+        function()
+          require 'snacks.bufdelete'()
+        end,
+        mode = 'n',
+        desc = 'Delete Buffer',
+      },
+      {
         '<leader>gb',
         function()
           require('snacks.git').blame_line()
@@ -143,6 +151,10 @@ return {
     },
 
     opts = {
+      animate = {
+        enabled = false,
+      },
+
       bigfile = {
         enabled = true,
       },
@@ -153,9 +165,32 @@ return {
 
       dashboard = {
         enabled = false,
+        -- preset = {
+        --   keys = {
+        --     { icon = ' ', key = 'n', desc = 'New File', action = '<CMD>ene <BAR> startinsert <CR>' },
+        --     { icon = ' ', key = 'f', desc = 'Find File', action = '<leader>sf' },
+        --     { icon = ' ', key = 'g', desc = 'Find Text', action = '<leader>sg' },
+        --     { icon = ' ', key = 'r', desc = 'Recent Files', action = '<leader><leader>' },
+        --     { icon = ' ', key = 's', desc = 'Recent CWD Session', action = '<leader>ql' },
+        --     { icon = ' ', key = 's', desc = 'Recent Session', action = '<leader>qr' },
+        --     { icon = ' ', key = 'c', desc = 'Config', action = "<CMD>lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})<CR>" },
+        --     { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+        --   },
+        -- },
+        -- sections = {
+        --   { section = 'terminal', cmd = 'cowsay neovim btw', hl = 'header', padding = 1, indent = 10 },
+        --   { title = 'Recent Files', section = 'recent_files', cwd = true, padding = 1 },
+        --   { title = 'Sessions', section = 'projects', padding = 1 },
+        --   { title = 'Keys', section = 'keys', padding = 1 },
+        --   -- { section = 'startup' },
+        -- },
       },
 
       debug = {
+        enabled = false,
+      },
+
+      dim = {
         enabled = false,
       },
 
@@ -167,17 +202,25 @@ return {
         enabled = false,
       },
 
-      lazygit = {
-        enabled = true,
+      indent = {
+        enabled = false,
       },
 
-      notify = {
+      input = {
+        enabled = false,
+      },
+
+      lazygit = {
         enabled = true,
       },
 
       notifier = {
         enabled = true,
         timeout = 3000,
+      },
+
+      notify = {
+        enabled = true,
       },
 
       profiler = {
@@ -189,6 +232,10 @@ return {
       },
 
       rename = {
+        enabled = false,
+      },
+
+      scroll = {
         enabled = false,
       },
 
@@ -210,6 +257,10 @@ return {
 
       words = {
         enabled = true,
+      },
+
+      zen = {
+        enabled = false,
       },
 
       styles = {
