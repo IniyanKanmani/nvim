@@ -2,8 +2,6 @@ return {
   { -- Smear-Cursor: Neovide Cursor Animation
     'sphamba/smear-cursor.nvim',
 
-    commit = '99f73a53f488e5b5b7fd1975c22bbbf0d3a1272c',
-
     lazy = true,
 
     event = 'VimEnter',
@@ -11,14 +9,17 @@ return {
     opts = {
       smear_between_buffers = true,
       smear_between_neighbor_lines = true,
+      scroll_buffer_space = false,
       legacy_computing_symbols_support = true,
 
       transparent_bg_fallback_color = '#000000',
 
       time_interval = 17,
+      windows_zindex = 69,
       stiffness = 0.8,
       trailing_stiffness = 0.5,
       trailing_exponent = 1.7,
+      slowdown_exponent = 0,
       distance_stop_animating = 0.5,
       hide_target_hack = false,
     },
