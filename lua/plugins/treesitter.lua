@@ -18,6 +18,7 @@ return {
 
     opts = {
       ensure_installed = {
+        'bash',
         'c',
         'dart',
         'diff',
@@ -28,6 +29,7 @@ return {
         'markdown',
         'markdown_inline',
         'query',
+        'regex',
         'sql',
         'vim',
         'vimdoc',
