@@ -45,11 +45,7 @@ return { -- Mini Plugins
 
     event = { 'BufReadPost', 'BufNewFile' },
 
-    opts = {
-      exchange = {
-        prefix = 'ge',
-      },
-    },
+    opts = {},
   },
 
   { -- Mini SplitJoin: Brackets split and join
