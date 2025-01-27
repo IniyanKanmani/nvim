@@ -25,6 +25,7 @@ return {
         lua = { 'stylua' },
         markdown = { 'markdownlint-cli2', 'markdown-toc' },
         python = { 'black' },
+        sql = { 'sqlfmt' },
         typescript = { 'prettierd' },
         yaml = { 'prettierd' },
       },

@@ -143,6 +143,11 @@ return { -- LSP
         on_attach = OnAttach,
       }
 
+      lspconfig['sqls'].setup {
+        capabilities = Capabilities,
+        on_attach = OnAttach,
+      }
+
       lspconfig['ts_ls'].setup {
         capabilities = Capabilities,
         on_attach = OnAttach,
