@@ -34,6 +34,11 @@ return {
       term_transparency.setup(opts)
 
       vim.keymap.set('n', '<leader>bt', '<CMD>ToggleTermTransparency<CR>', { desc = 'Toggle Terminal Transparency' })
+
+      vim.api.nvim_set_hl(0, 'SpellBad', { underline = true, sp = 'red' }) -- Underline with red color
+      vim.api.nvim_set_hl(0, 'SpellCap', { underline = true, sp = 'blue' }) -- Underline with blue color
+      vim.api.nvim_set_hl(0, 'SpellRare', { underline = true, sp = 'purple' }) -- Underline with purple color
+      vim.api.nvim_set_hl(0, 'SpellLocal', { underline = true, sp = 'yellow' }) -- Underline with yellow color
     end,
   },
 }

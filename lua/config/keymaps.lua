@@ -47,7 +47,7 @@ vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'go', '%', { desc = 'Goto 
 
 vim.keymap.set({ 'n', 'v' }, '<leader>c', '"_c', { desc = 'Change into void register' })
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete into void register' })
-vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'Paste on selection without losing the copied text' })
+vim.keymap.set('v', '<leader>P', '"_dP', { desc = 'Paste on selection without losing the copied text' })
 
 vim.keymap.set('n', 'vwp', '"_ciw<C-R>0<Esc>', { desc = 'Replace word with last yank' })
 
@@ -56,6 +56,7 @@ vim.keymap.set('v', 'du', '"dyPgvo', { desc = 'Duplicate selected text' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Copy selection into system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', { desc = 'Copy Line into system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
 
 vim.keymap.set('n', '<leader>sar', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Search and replace current word' })
 
@@ -68,9 +69,26 @@ vim.keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'Center cursor when <C-f>' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Center cursor when showing prev search result' })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Center cursor when showing next search result' })
 
-vim.keymap.set('n', '<leader>tw', '<CMD>set wrap!<CR>', { desc = 'Toggle line wrap' })
+vim.keymap.set('n', '\\c', '<CMD>set cursorline!<CR>', { desc = 'Toggle cursorline' })
+vim.keymap.set('n', '\\C', '<CMD>set cursorcolumn!<CR>', { desc = 'Toggle cursorcolumn' })
+
+vim.keymap.set('n', '\\n', '<CMD>set number!<CR>', { desc = 'Toggle line number' })
+vim.keymap.set('n', '\\r', '<CMD>set relativenumber!<CR>', { desc = 'Toggle line relativenumber' })
+
+vim.keymap.set('n', '\\s', '<CMD>set spell!<CR>', { desc = 'Toggle spell' })
+vim.keymap.set('n', '\\w', '<CMD>set wrap!<CR>', { desc = 'Toggle line wrap' })
 
 vim.keymap.set('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Vertically split Neovim' })
 vim.keymap.set('n', '<leader>-', '<CMD>split<CR>', { desc = 'Horizontally split Neovim' })
+
+vim.keymap.set({ 'i', 't', 'c' }, '<M-h>', '<Left>', { desc = 'Move cursor left' })
+vim.keymap.set({ 'i', 't' }, '<M-j>', '<Down>', { desc = 'Move cursor down' })
+vim.keymap.set({ 'i', 't' }, '<M-k>', '<Up>', { desc = 'Move cursor up' })
+vim.keymap.set({ 'i', 't', 'c' }, '<M-l>', '<Right>', { desc = 'Move cursor right' })
+
+vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -2<CR>', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<C-Down>', '<Cmd>resize -2<CR>', { desc = 'Decrease window height' })
+vim.keymap.set('n', '<C-Up>', '<Cmd>resize +2<CR>', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>', { desc = 'Increase window width' })
 
 vim.keymap.set('n', '<leader>ln', '<CMD>Lazy<CR>', { desc = 'Toggle Lazynvim' })

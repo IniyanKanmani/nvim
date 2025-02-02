@@ -30,20 +30,4 @@ return {
 
     event = { 'BufReadPost', 'BufNewFile' },
   },
-
-  { -- Vim Surround: Intelligent surround over text-objects
-    'tpope/vim-surround',
-
-    lazy = true,
-
-    event = { 'BufReadPost', 'BufNewFile' },
-  },
-
-  { -- Vim Unimpaired: Intelligent mapping pairs
-    'tpope/vim-unimpaired',
-
-    lazy = true,
-
-    event = { 'BufReadPost', 'BufNewFile' },
-  },
 }
