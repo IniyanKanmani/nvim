@@ -7,7 +7,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
 
     opts = {
-      timeout = 150,
+      timeout = 300,
       default_mappings = false,
       mappings = {
         i = {

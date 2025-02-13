@@ -51,9 +51,6 @@ vim.keymap.set('v', '<leader>P', '"_dP', { desc = 'Paste on selection without lo
 
 vim.keymap.set('n', 'vwp', '"_ciw<C-R>0<Esc>', { desc = 'Replace word with last yank' })
 
-vim.keymap.set('n', 'du', 'V"dyP', { desc = 'Duplicate current line' })
-vim.keymap.set('v', 'du', '"dyPgvo', { desc = 'Duplicate selected text' })
-
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Copy selection into system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', { desc = 'Copy Line into system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
@@ -68,6 +65,9 @@ vim.keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'Center cursor when <C-f>' })
 
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Center cursor when showing prev search result' })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Center cursor when showing next search result' })
+
+vim.keymap.set('n', 'gt', '<CMD>tabnext<CR>', { desc = 'Switch to next tab' })
+vim.keymap.set('n', 'gT', '<CMD>tabprev<CR>', { desc = 'Switch to prev tab' })
 
 vim.keymap.set('n', '\\c', '<CMD>set cursorline!<CR>', { desc = 'Toggle cursorline' })
 vim.keymap.set('n', '\\C', '<CMD>set cursorcolumn!<CR>', { desc = 'Toggle cursorcolumn' })

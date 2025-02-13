@@ -8,6 +8,11 @@ return { -- Mini Plugins
 
     opts = {
       mappings = {
+        around_next = 'an',
+        inside_next = 'in',
+        around_last = 'al',
+        inside_last = 'il',
+
         goto_left = '[e',
         goto_right = ']e',
       },
@@ -41,6 +46,10 @@ return { -- Mini Plugins
       undo = { suffix = '', options = {} },
       window = { suffix = '', options = {} },
     },
+  },
+
+  { -- Mini Comment: Comment in Neovim
+    'echasnovski/mini.comment',
   },
 
   { -- Mini Move: Move Selection
@@ -100,34 +109,9 @@ return { -- Mini Plugins
 
     opts = {
       mappings = {
-        toggle = 'gT',
+        toggle = '',
         split = 'gS',
         join = 'gJ',
-      },
-    },
-  },
-
-  { -- Mini Surround: Surround text objects
-    'echasnovski/mini.surround',
-
-    lazy = true,
-
-    event = { 'BufReadPost', 'BufNewFile' },
-
-    opts = {
-      respect_selection_type = true,
-
-      mappings = {
-        add = 'sa', -- Add surrounding in Normal and Visual modes
-        delete = 'sd', -- Delete surrounding
-        replace = 'sr', -- Replace surrounding
-        find = 'sf', -- Find surrounding (to the right)
-        find_left = 'sF', -- Find surrounding (to the left)
-        highlight = 'sh', -- Highlight surrounding
-        update_n_lines = 'sn', -- Update `n_lines`
-
-        suffix_last = 'N', -- Suffix to search with "prev" method
-        suffix_next = 'n', -- Suffix to search with "next" method
       },
     },
   },

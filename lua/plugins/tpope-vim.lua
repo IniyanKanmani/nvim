@@ -30,4 +30,12 @@ return {
 
     event = { 'BufReadPost', 'BufNewFile' },
   },
+
+  { -- Vim Surround: Surround text objects
+    'tpope/vim-surround',
+
+    lazy = true,
+
+    event = { 'BufReadPost', 'BufNewFile' },
+  },
 }
