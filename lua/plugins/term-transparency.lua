@@ -13,13 +13,16 @@ return {
 
     opts = {
       term = {
+        kitty = {
+          enabled = true,
+          socket = '/tmp/kitty.sock', -- socket that kitty listens to
+        },
         wezterm = {
           enabled = true,
-          transparency_toggle_file = vim.fn.expand '~' .. '/.config/wezterm/toggle_wezterm_transparency.sh',
         },
       },
       notifications = {
-        enabled = false,
+        enabled = true,
       },
       on_transparency_change = function()
         require('tokyonight').setup(vim.g.is_transparent and TokyoNightTransparentThemeOpts or TokyoNightNormalThemeOpts)
