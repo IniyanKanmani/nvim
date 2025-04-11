@@ -38,22 +38,21 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<leader>kj', '<CMD>q<CR>', { desc = 'Send command :q' })
 vim.keymap.set('t', '<leader>kj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gh', '^', { desc = 'Goto start of current line' })
-vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gl', '$', { desc = 'Goto end of current line' })
-
-vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gn', '*', { desc = 'Goto next matching word' })
-vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gN', '#', { desc = 'Goto prev matching word' })
-vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'go', '%', { desc = 'Goto other end of the braket' })
+-- vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gh', '^', { desc = 'Goto start of current line' })
+-- vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gl', '$', { desc = 'Goto end of current line' })
+--
+-- vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gn', '*', { desc = 'Goto next matching word' })
+-- vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'gN', '#', { desc = 'Goto prev matching word' })
+-- vim.keymap.set({ 'n', 'v', 'x', 's', 'o', 'c', 't' }, 'go', '%', { desc = 'Goto other end of the braket' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>c', '"_c', { desc = 'Change into void register' })
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete into void register' })
-vim.keymap.set('v', '<leader>P', '"_dP', { desc = 'Paste on selection without losing the copied text' })
+vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'Paste on selection without losing the copied text' })
 
 vim.keymap.set('n', 'vwp', '"_ciw<C-R>0<Esc>', { desc = 'Replace word with last yank' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Copy selection into system clipboard' })
-vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', { desc = 'Copy Line into system clipboard' })
-vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+p', { desc = 'Paste from system clipboard' })
 
 vim.keymap.set('n', '<leader>sar', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Search and replace current word' })
 
@@ -92,3 +91,5 @@ vim.keymap.set('n', '<C-Up>', '<Cmd>resize +2<CR>', { desc = 'Increase window he
 vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>', { desc = 'Increase window width' })
 
 vim.keymap.set('n', '<leader>ln', '<CMD>Lazy<CR>', { desc = 'Toggle Lazynvim' })
+
+vim.keymap.set('n', 'date', '<CMD>read !datetime<CR>', { desc = 'Output current date and time' })
