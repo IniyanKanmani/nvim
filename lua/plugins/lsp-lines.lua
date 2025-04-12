@@ -47,7 +47,7 @@ return {
         end
       end
 
-      local state = true
+      local state = false
       toggle_lsp_lines(state)
       update_diagnostics()
 

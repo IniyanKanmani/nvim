@@ -15,17 +15,17 @@ return {
 
       -- stylua: ignore
       local colors = {
-        transparent     = '#00000000',
-        purple          = '#D183E8',
-        lavender        = '#7287FD';
-        cyan            = '#00C9EB',
-        red             = '#FF5189',
-        emerald         = '#3AE69C',
-        orange          = '#FF9E64',
-        menu_grey       = '#3E4452',
-        comment_grey    = '#697098',
-        black           = '#292D3E',
-        dark_black      = '#080808',
+        transparent    = '#00000000',
+        purple         = '#D183E8',
+        lavender       = '#7287FD',
+        cyan           = '#00C9EB',
+        red            = '#FF5189',
+        emerald        = '#3AE69C',
+        orange         = '#FF9E64',
+        menu_grey      = '#3E4452',
+        comment_grey   = '#697098',
+        black          = '#292D3E',
+        dark_black     = '#080808',
       }
 
       local bubbles_normal_theme = {
