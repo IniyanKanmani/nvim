@@ -10,7 +10,7 @@ return {
 
     cmd = 'ConformInfo',
 
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
 
     opts = {
       notify_on_error = false,

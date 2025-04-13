@@ -40,8 +40,8 @@ return { -- Debug Adapter Protocol Plugins
       vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
 
       vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: Toggle Dap UI' })
-      vim.keymap.set('n', '<F11>', dap.disconnect, { desc = 'Debug: Disconnect' })
-      vim.keymap.set('n', '<F12>', dap.restart, { desc = 'Debug: Restart' })
+      vim.keymap.set('n', '<F8>', dap.disconnect, { desc = 'Debug: Disconnect' })
+      vim.keymap.set('n', '<F9>', dap.restart, { desc = 'Debug: Restart' })
 
       vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
       vim.keymap.set('n', '<leader>B', function()

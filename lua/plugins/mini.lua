@@ -50,6 +50,10 @@ return { -- Mini Plugins
 
   { -- Mini Comment: Comment in Neovim
     'echasnovski/mini.comment',
+
+    lazy = true,
+
+    event = { 'BufReadPost', 'BufNewFile' },
   },
 
   { -- Mini Move: Move Selection

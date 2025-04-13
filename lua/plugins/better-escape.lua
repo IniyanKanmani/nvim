@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
+    event = { 'BufReadPost', 'BufNewFile', 'CmdlineEnter' },
 
     opts = {
       timeout = 300,
