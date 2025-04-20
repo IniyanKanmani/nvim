@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    ft = { 'dart' },
+    cmd = 'GenerateDartDataClass',
 
     opts = {
       data_class = {

@@ -33,7 +33,6 @@ return {
       ui = {
         enable = false, -- using render-markdown.nvim instead
       },
-      -- see below for full list of options 👇
     },
   },
 }

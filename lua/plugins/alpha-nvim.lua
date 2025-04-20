@@ -2,7 +2,7 @@ return {
   { -- Alpha Nvim: Dashboard Theme
     'goolord/alpha-nvim',
 
-    event = 'VimEnter',
+    lazy = false,
 
     config = function()
       -- close Lazy and re-open when the dashboard is ready

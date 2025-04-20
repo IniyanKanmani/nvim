@@ -10,7 +10,7 @@ return {
 
     lazy = true,
 
-    event = 'VeryLazy', -- Recommended
+    event = 'VimEnter', -- Recommended
 
     opts = {
       open_fold_hl_timeout = 200,

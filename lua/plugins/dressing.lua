@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = 'VimEnter',
 
     opts = {},
   },

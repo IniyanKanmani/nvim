@@ -2,15 +2,15 @@ return {
   { -- LazyGit: Git wrapper
     'kdheepak/lazygit.nvim',
 
+    enabled = false,
+
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
 
-    enabled = false,
-
     lazy = true,
 
-    cmd = { 'LazyGit' },
+    cmd = 'LazyGit',
 
     keys = {
       { '<leader>lg', '<CMD>LazyGit<CR>', mode = 'n', desc = 'LazyGit' },

@@ -2,7 +2,9 @@ return {
   { -- Persistence: Automated session management
     'folke/persistence.nvim',
 
-    event = 'VimEnter',
+    lazy = true,
+
+    event = 'VeryLazy',
 
     opts = {
       dir = vim.fn.stdpath 'state' .. '/sessions/', -- directory where session files are saved

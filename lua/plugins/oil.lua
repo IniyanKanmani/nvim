@@ -6,7 +6,11 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
 
-    cmd = { 'Oil' },
+    lazy = true,
+
+    event = 'VimEnter',
+
+    cmd = 'Oil',
 
     keys = {
       {
@@ -64,7 +68,7 @@ return {
 
     lazy = true,
 
-    ft = 'oil',
+    ft = { 'oil' },
 
     opts = {
       show_ignored = true,

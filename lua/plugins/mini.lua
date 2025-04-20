@@ -17,7 +17,7 @@ return { -- Mini Plugins
         goto_right = ']e',
       },
 
-      n_lines = 500,
+      n_lines = 100,
     },
   },
 

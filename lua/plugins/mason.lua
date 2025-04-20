@@ -2,7 +2,9 @@ return {
   { -- Mason: Package manager for LSP, DAP, Formatters and Linters
     'williamboman/mason.nvim',
 
-    event = 'VimEnter',
+    lazy = true,
+
+    event = 'VeryLazy',
 
     keys = {
       {

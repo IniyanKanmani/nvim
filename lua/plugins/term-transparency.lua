@@ -7,7 +7,7 @@ return {
       'nvim-lualine/lualine.nvim',
     },
 
-    event = 'VimEnter',
+    lazy = false,
 
     priority = 1000,
 

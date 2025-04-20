@@ -13,7 +13,7 @@ return {
 
     opts = {
       border = 'rounded',
-      save_path = '~/Pictures',
+      save_path = '~/Pictures/neovim',
       has_breadcrumbs = true,
       bg_theme = 'grape',
       watermark = '',

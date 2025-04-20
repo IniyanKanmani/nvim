@@ -7,9 +7,7 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
 
-    lazy = true,
-
-    event = 'VimEnter',
+    lazy = false,
 
     opts = {
       defaults = {
@@ -137,8 +135,6 @@ return {
     config = function(_, opts)
       local telescope = require 'telescope'
       telescope.setup(opts)
-
-      pcall(require('telescope').load_extension, 'fzf')
     end,
   },
 
@@ -147,8 +143,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPost', 'BufNewFile' },
-    -- event = 'User TelescopeLoaded',
+    event = 'User TelescopeLoaded',
 
     opts = {
       extensions = {
