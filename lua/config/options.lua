@@ -39,7 +39,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = 'auto'
 
 -- Decrease update time
 vim.opt.updatetime = 300
@@ -62,15 +62,15 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 5
 
 -- Sets <tab> behaviour
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.autoindent = true
 vim.opt.expandtab = true
 
@@ -87,5 +87,3 @@ vim.opt.guicursor = 'n-v-c:block,i:ver25,r-cr:hor20,o:hor50'
 
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
-
-vim.opt.cursorline = false

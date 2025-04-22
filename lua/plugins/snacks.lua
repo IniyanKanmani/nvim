@@ -20,36 +20,46 @@ return {
           end
           vim.print = _G.dd -- Override print to use snacks for `:=` command
 
+          vim.api.nvim_create_autocmd('User', {
+            pattern = 'OilActionsPost',
+            callback = function(event)
+              if event.data.actions.type == 'move' then
+                Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+              end
+            end,
+          })
+
           -- Create some toggle mappings
-          snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
+          snacks.toggle.option('cursorline', { name = 'Cursor Line' }):map '<leader>uc'
+          snacks.toggle.option('cursorcolumn', { name = 'Cursor Column' }):map '<leader>uC'
+
           snacks.toggle.diagnostics():map '<leader>ud'
-          snacks.toggle.treesitter():map '<leader>ut'
+          snacks.toggle.indent():map '<leader>ui'
           snacks.toggle.inlay_hints():map '<leader>uh'
+
           snacks.toggle.line_number():map '<leader>ul'
-          snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
           snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
-          snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map '<leader>uc'
+
+          snacks.toggle.scroll():map '<leader>us'
+          snacks.toggle.treesitter():map '<leader>ut'
+
+          snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>uS'
+          snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
+
+          vim.keymap.set('n', '<leader>um', function()
+            if vim.o.mouse ~= '' then
+              vim.cmd 'set mouse='
+              vim.notify('Disabled Mouse', vim.log.levels.INFO)
+            else
+              vim.cmd 'set mouse=a'
+              vim.notify('Enabled Mouse', vim.log.levels.INFO)
+            end
+          end, { desc = 'Toggle Mouse' })
         end,
       })
     end,
 
     keys = {
-      {
-        '<leader>;',
-        function()
-          require('snacks').scratch()
-        end,
-        mode = 'n',
-        desc = 'Toggle Scratch Buffer',
-      },
-      {
-        '<leader>s;',
-        function()
-          require('snacks.scratch').select()
-        end,
-        mode = 'n',
-        desc = 'Select Scratch Buffer',
-      },
       {
         '<leader>bd',
         function()
@@ -57,6 +67,30 @@ return {
         end,
         mode = 'n',
         desc = 'Delete Buffer',
+      },
+      {
+        '<leader>bda',
+        function()
+          require('snacks.bufdelete').all()
+        end,
+        mode = 'n',
+        desc = 'Delete all Buffers',
+      },
+      {
+        '<leader>bdo',
+        function()
+          require('snacks.bufdelete').other()
+        end,
+        mode = 'n',
+        desc = 'Delete other than current Buffer',
+      },
+      {
+        '<leader>e',
+        function()
+          require 'snacks.explorer'()
+        end,
+        mode = 'n',
+        desc = 'Open File Explorer',
       },
       {
         '<leader>gb',
@@ -69,7 +103,7 @@ return {
       {
         '<leader>lg',
         function()
-          require('snacks').lazygit()
+          require 'snacks.lazygit'()
         end,
         mode = 'n',
         desc = 'Lazygit',
@@ -81,14 +115,6 @@ return {
         end,
         mode = 'n',
         desc = 'Lazygit Current File History',
-      },
-      {
-        '<leader>lgl',
-        function()
-          require('snacks.lazygit').log()
-        end,
-        mode = 'n',
-        desc = 'Lazygit Log (cwd)',
       },
       {
         '<leader>sn',
@@ -107,28 +133,20 @@ return {
         desc = 'Dismiss All Notifications',
       },
       {
-        '<c-/>',
+        '<leader>;',
         function()
-          require('snacks').terminal()
+          require 'snacks.scratch'()
         end,
         mode = 'n',
-        desc = 'Toggle Terminal',
+        desc = 'Toggle Scratch Buffer',
       },
       {
-        ']]',
+        '<leader>s;',
         function()
-          require('snacks.words').jump(vim.v.count1)
+          require('snacks.scratch').select()
         end,
-        mode = { 'n', 't' },
-        desc = 'Next Reference',
-      },
-      {
-        '[[',
-        function()
-          require('snacks.words').jump(-vim.v.count1)
-        end,
-        mode = { 'n', 't' },
-        desc = 'Prev Reference',
+        mode = 'n',
+        desc = 'Select Scratch Buffer',
       },
       {
         '<leader>N',
@@ -187,11 +205,16 @@ return {
       },
 
       debug = {
-        enabled = false,
+        enabled = true,
       },
 
       dim = {
         enabled = false,
+      },
+
+      explorer = {
+        enabled = true,
+        replace_netrw = false,
       },
 
       git = {
@@ -202,11 +225,19 @@ return {
         enabled = false,
       },
 
+      image = {
+        enabled = false,
+      },
+
       indent = {
         enabled = false,
       },
 
       input = {
+        enabled = false,
+      },
+
+      layout = {
         enabled = false,
       },
 
@@ -223,6 +254,10 @@ return {
         enabled = true,
       },
 
+      picker = {
+        enabled = false,
+      },
+
       profiler = {
         enabled = false,
       },
@@ -232,7 +267,15 @@ return {
       },
 
       rename = {
+        enabled = true,
+      },
+
+      scope = {
         enabled = false,
+      },
+
+      scratch = {
+        enabled = true,
       },
 
       scroll = {
@@ -241,6 +284,16 @@ return {
 
       statuscolumn = {
         enabled = true,
+        left = { 'mark', 'sign' },
+        right = { 'fold', 'git' },
+        folds = {
+          open = true, -- show open fold icons
+          git_hl = false, -- use Git Signs hl for fold icons
+        },
+        git = {
+          patterns = { 'GitSign', 'MiniDiffSign' },
+        },
+        refresh = 100, -- refresh at most every 50ms
       },
 
       terminal = {
@@ -251,12 +304,16 @@ return {
         enabled = true,
       },
 
+      util = {
+        enabled = false,
+      },
+
       win = {
-        enabled = true,
+        enabled = false,
       },
 
       words = {
-        enabled = true,
+        enabled = false,
       },
 
       zen = {

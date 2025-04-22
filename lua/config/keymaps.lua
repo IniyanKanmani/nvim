@@ -68,15 +68,6 @@ vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Center cursor when showing next sear
 vim.keymap.set('n', 'gt', '<CMD>tabnext<CR>', { desc = 'Switch to next tab' })
 vim.keymap.set('n', 'gT', '<CMD>tabprev<CR>', { desc = 'Switch to prev tab' })
 
-vim.keymap.set('n', '\\c', '<CMD>set cursorline!<CR>', { desc = 'Toggle cursorline' })
-vim.keymap.set('n', '\\C', '<CMD>set cursorcolumn!<CR>', { desc = 'Toggle cursorcolumn' })
-
-vim.keymap.set('n', '\\n', '<CMD>set number!<CR>', { desc = 'Toggle line number' })
-vim.keymap.set('n', '\\r', '<CMD>set relativenumber!<CR>', { desc = 'Toggle line relativenumber' })
-
-vim.keymap.set('n', '\\s', '<CMD>set spell!<CR>', { desc = 'Toggle spell' })
-vim.keymap.set('n', '\\w', '<CMD>set wrap!<CR>', { desc = 'Toggle line wrap' })
-
 vim.keymap.set('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Vertically split Neovim' })
 vim.keymap.set('n', '<leader>-', '<CMD>split<CR>', { desc = 'Horizontally split Neovim' })
 
