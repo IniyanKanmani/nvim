@@ -2,7 +2,7 @@ return {
   { -- Harpoon: Faster way to switch between files
     'ThePrimeagen/harpoon',
 
-    -- branch = 'harpoon2',
+    branch = 'harpoon2',
 
     dependencies = {
       'nvim-telescope/telescope.nvim',
@@ -12,41 +12,29 @@ return {
 
     event = { 'BufReadPost', 'BufNewFile' },
 
-    keys = {
-      {
-        '<leader>h',
-        function()
-          require('harpoon.ui').toggle_quick_menu()
-        end,
-        mode = 'n',
-        desc = 'Harpoon toggle menu',
-      },
-      {
-        '<leader>ht',
-        function()
-          require('harpoon.mark').toggle_file()
-        end,
-        mode = 'n',
-        desc = 'Harpoon toggle file',
-      },
-      {
-        '<leader>hc',
-        function()
-          require('harpoon.mark').clear_all()
-        end,
-        mode = 'n',
-        desc = 'Harpoon clear all',
-      },
-    },
-
     opts = {},
 
-    config = function()
-      local ui = require 'harpoon.ui'
+    config = function(_, opts)
+      local harpoon = require 'harpoon'
+      harpoon:setup(opts)
+
+      vim.keymap.set('n', '<leader>h', function()
+        harpoon:list():add()
+      end)
+      vim.keymap.set('n', '<leader>H', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end)
+
+      vim.keymap.set('n', '<C-S-H>', function()
+        harpoon:list():prev()
+      end)
+      vim.keymap.set('n', '<C-S-L>', function()
+        harpoon:list():next()
+      end)
 
       for i = 1, 9, 1 do
         vim.keymap.set('n', '<leader>' .. tostring(i), function()
-          ui.nav_file(i)
+          harpoon:list():select(i)
         end, { desc = 'Harpoon to file ' .. tostring(i) })
       end
 
