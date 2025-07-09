@@ -15,7 +15,6 @@ return {
         javascript = { 'eslint_d' },
         markdown = { 'markdownlint-cli2' },
         python = { 'mypy', 'ruff' },
-        sql = { 'sqlfluff' },
         typescript = { 'eslint_d' },
         text = { 'vale' },
       },

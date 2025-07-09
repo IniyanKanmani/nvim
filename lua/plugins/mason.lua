@@ -37,7 +37,6 @@ return {
         'lua_ls',
         'marksman',
         'pyright',
-        'sqls',
         'ts_ls',
         'yamlls',
       },
@@ -69,7 +68,6 @@ return {
         'markdownlint-cli2',
         'mypy',
         'ruff',
-        'sqlfluff',
         'vale',
       },
       automatic_installation = true,
@@ -85,9 +83,8 @@ return {
     opts = {
       ensure_installed = {
         'black',
-        'markdown-toc',
+        'markdownlint-cli2',
         'prettierd',
-        'sqlfmt',
         'stylua',
       },
       automatic_installation = true,
