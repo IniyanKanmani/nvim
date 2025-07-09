@@ -231,16 +231,16 @@ return {
           group = 'Molten-Import',
           pattern = '*.ipynb',
           callback = function()
-            pcall(vim.cmd(), 'MoltenImportOutput')
+            pcall(vim.cmd, 'MoltenImportOutput')
           end,
         })
 
         vim.api.nvim_create_augroup('Molten-Export', { clear = true })
-        vim.api.nvim_create_autocmd('BufWritePost', {
+        vim.api.nvim_create_autocmd('User', {
           group = 'Molten-Export',
-          pattern = '*.ipynb',
+          pattern = 'JupytextBufWritePost',
           callback = function()
-            pcall(vim.cmd(), 'MoltenExportOutput!')
+            pcall(vim.cmd, 'MoltenExportOutput!')
           end,
         })
       end
@@ -273,7 +273,7 @@ return {
       -- 0: Molten
       -- 1: Neopyter
       -- 2: Molten + Neopyter
-      vim.g.current_jupyter_repl = 1
+      vim.g.current_jupyter_repl = 0
       cycle_jupyter_repl(true)
 
       vim.keymap.set('n', ',ck', function()
@@ -316,9 +316,10 @@ return {
       jupytext = 'jupytext',
       format = 'py:percent',
       update = true,
-      autosync = false,
+      autosync = true,
       sync_patterns = { '*.md', '*.py', '*.jl', '*.R', '*.Rmd', '*.qmd' },
       handle_url_schemes = false,
+      async_write = true,
     },
   },
 

@@ -106,18 +106,5 @@ return {
       -- Debug flag for MIME type output (for debugging)
       vim.g.molten_show_mimetype_debug = false -- (false) Show mime-type before non-iostream output (for debugging)
     end,
-
-    cmds = { 'MoltenInit' },
-
-    config = function()
-      vim.print 'Molten Config Loaded'
-      vim.keymap.set('n', ',mr', function()
-        vim.cmd 'MoltenDeinit'
-        vim.cmd 'MoltenInit'
-      end, { desc = 'Molten restart kernel' })
-
-      vim.keymap.set('n', ',mi', '<CMD>MoltenImportOutput<CR>', { desc = 'Molten Import Output' })
-      vim.keymap.set('n', ',me', '<CMD>MoltenExportOutput!<CR>', { desc = 'Molten Export Output' })
-    end,
   },
 }
