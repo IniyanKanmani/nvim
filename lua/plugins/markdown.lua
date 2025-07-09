@@ -19,9 +19,11 @@ return { -- Markdown Plugins
 
     lazy = true,
 
-    ft = { 'markdown' },
+    ft = { 'markdown', 'Avante' },
 
-    opts = {},
+    opts = {
+      file_types = { 'markdown', 'Avante' },
+    },
   },
 
   { -- Markdown Preview: Preview markdown in a browser

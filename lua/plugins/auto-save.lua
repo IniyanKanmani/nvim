@@ -6,10 +6,6 @@ return {
 
     cmd = 'ASToggle',
 
-    keys = {
-      { '<leader>as', '<CMD>ASToggle<CR>', mode = 'n', desc = 'Toggle auto save' },
-    },
-
     opts = {},
   },
 }
