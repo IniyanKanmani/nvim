@@ -18,6 +18,10 @@ return {
       { 'gx', '<CMD>Browse<CR>', mode = { 'n', 'x' }, desc = 'Browse links' },
     },
 
-    opts = {},
+    opts = {
+      handler_options = {
+        search_engine = 'https://search.brave.com/search?q=',
+      },
+    },
   },
 }

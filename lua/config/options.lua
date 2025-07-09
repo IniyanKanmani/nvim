@@ -3,6 +3,9 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- Use modeline to set vim options to buffer
+vim.opt.modeline = true
+
 -- Make line numbers default
 vim.opt.number = true
 
