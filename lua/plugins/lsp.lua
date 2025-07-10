@@ -138,6 +138,11 @@ return { -- LSP
         on_attach = OnAttach,
       }
 
+      lspconfig['zk'].setup {
+        capabilities = Capabilities,
+        on_attach = OnAttach,
+      }
+
       lspconfig['pyright'].setup {
         capabilities = Capabilities,
         on_attach = OnAttach,

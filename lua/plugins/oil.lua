@@ -19,10 +19,10 @@ return {
           vim.cmd 'Oil --float'
           vim.defer_fn(function()
             require('oil').open_preview()
-          end, 125)
+          end, 200)
         end,
         mode = 'n',
-        desc = 'Open parent directory',
+        desc = 'Open parent directory floating preview',
       },
     },
 

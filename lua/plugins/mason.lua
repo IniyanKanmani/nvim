@@ -39,6 +39,7 @@ return {
         'pyright',
         'ts_ls',
         'yamlls',
+        'zk',
       },
       automatic_installation = true,
     },
@@ -65,7 +66,7 @@ return {
     opts = {
       ensure_installed = {
         'eslint_d',
-        'markdownlint-cli2',
+        -- 'markdownlint-cli2', -- Leave it commented
         'mypy',
         'ruff',
         'vale',
@@ -83,6 +84,7 @@ return {
     opts = {
       ensure_installed = {
         'black',
+        'markdown-toc',
         'markdownlint-cli2',
         'prettierd',
         'stylua',

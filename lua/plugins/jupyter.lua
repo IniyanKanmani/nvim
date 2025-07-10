@@ -329,7 +329,6 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
-      -- 'hrsh7th/nvim-cmp',
       'AbaoFromCUG/websocket.nvim', -- for mode='direct'
     },
 
@@ -377,17 +376,6 @@ return {
       vim.keymap.set('n', ',nc', '<CMD>Neopyter sync current<CR>', { desc = 'Neopyter sync Nvim and Jupyter Lab' })
       vim.keymap.set('n', ',nr', '<CMD>Neopyter execute docmanager:reload<CR>', { desc = 'Neopyter reload file from disk' })
       vim.keymap.set('n', ',ns', '<CMD>Neopyter execute docmanager:save<CR>', { desc = 'Neopyter save jupyter file to disk' })
-
-      -- -- Nvim-Cmp
-      -- local cmp = require 'cmp'
-      -- local cmp_opts = require('lazy.core.config').plugins['cmp'].opts or {}
-      --
-      -- cmp_opts.sources = table.insert(cmp_opts.sources, 2, { name = 'neopyter' })
-      --
-      -- ---@diagnostic disable-next-line: param-type-mismatch
-      -- cmp.setup(cmp_opts)
-      --
-      -- vim.notify(vim.inspect(cmp_opts), vim.log.levels.INFO)
     end,
   },
 }
