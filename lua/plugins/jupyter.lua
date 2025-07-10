@@ -56,13 +56,13 @@ return {
           if neo then
             vim.cmd 'Neopyter run current'
           end
-        elseif vim.g.current_jupyter_repl == 2 then
-          nn.run_cell()
-
-          local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
-          if neo then
-            vim.cmd 'Neopyter run current'
-          end
+          -- elseif vim.g.current_jupyter_repl == 2 then
+          --   nn.run_cell()
+          --
+          --   local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
+          --   if neo then
+          --     vim.cmd 'Neopyter run current'
+          --   end
         end
       end, { desc = 'Run current cell' })
 
@@ -75,13 +75,13 @@ return {
             vim.cmd 'Neopyter run current'
             nn.move_cell 'd'
           end
-        elseif vim.g.current_jupyter_repl == 2 then
-          local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
-          if neo then
-            vim.cmd 'Neopyter run current'
-          end
-
-          nn.run_and_move()
+          -- elseif vim.g.current_jupyter_repl == 2 then
+          --   local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
+          --   if neo then
+          --     vim.cmd 'Neopyter run current'
+          --   end
+          --
+          --   nn.run_and_move()
         end
       end, { desc = 'Run and move to next cell' })
 
@@ -94,13 +94,13 @@ return {
             vim.cmd 'Neopyter run all'
             vim.cmd 'normal G'
           end
-        elseif vim.g.current_jupyter_repl == 2 then
-          nn.run_all_cells()
-
-          local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
-          if neo then
-            vim.cmd 'Neopyter run all'
-          end
+          -- elseif vim.g.current_jupyter_repl == 2 then
+          --   nn.run_all_cells()
+          --
+          --   local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
+          --   if neo then
+          --     vim.cmd 'Neopyter run all'
+          --   end
         end
       end, { desc = 'Run all cells' })
 
@@ -112,15 +112,15 @@ return {
           if neo then
             vim.cmd 'Neopyter run allAbove'
           end
-        elseif vim.g.current_jupyter_repl == 2 then
-          nn.run_cells_above()
-
-          local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
-          if neo then
-            vim.cmd 'Neopyter run allAbove'
-          end
+          -- elseif vim.g.current_jupyter_repl == 2 then
+          --   nn.run_cells_above()
+          --
+          --   local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
+          --   if neo then
+          --     vim.cmd 'Neopyter run allAbove'
+          --   end
         end
-      end, { desc = 'Run current and above cells' })
+      end, { desc = 'Run above cells' })
 
       vim.keymap.set('n', navigator_leader .. 'rb', function()
         if vim.g.current_jupyter_repl == 0 then
@@ -131,13 +131,13 @@ return {
             vim.cmd 'Neopyter run allBelow'
             vim.cmd 'normal G'
           end
-        elseif vim.g.current_jupyter_repl == 2 then
-          nn.run_cells_below()
-
-          local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
-          if neo then
-            vim.cmd 'Neopyter run allBelow'
-          end
+          -- elseif vim.g.current_jupyter_repl == 2 then
+          --   nn.run_cells_below()
+          --
+          --   local neo = check_neopyter_buffers(vim.api.nvim_get_current_buf())
+          --   if neo then
+          --     vim.cmd 'Neopyter run allBelow'
+          --   end
         end
       end, { desc = 'Run current and below cells' })
 
@@ -243,6 +243,30 @@ return {
             pcall(vim.cmd, 'MoltenExportOutput!')
           end,
         })
+
+        vim.api.nvim_create_augroup('Molten-Quit', { clear = true })
+        vim.api.nvim_create_autocmd('QuitPre', {
+          group = 'Molten-Quit',
+          pattern = '*.ipynb',
+          callback = function()
+            vim.cmd 'MoltenExportOutput!'
+          end,
+        })
+      end
+
+      local create_neopyter_autocmds = function()
+        vim.api.nvim_create_augroup('Neopyter-Save', { clear = true })
+        vim.api.nvim_create_autocmd('BufWriteCmd', {
+          group = 'Neopyter-Save',
+          pattern = '*.ipynb',
+          callback = function(bufargs)
+            if vim.g.current_jupyter_repl == 1 then
+              vim.cmd 'Neopyter execute docmanager:save'
+              vim.api.nvim_set_option_value('modified', false, { buf = bufargs.buf })
+              vim.notify('Saved ' .. bufargs.file .. ' with neopyter.nvim in jupyterlab', vim.log.levels.INFO)
+            end
+          end,
+        })
       end
 
       local cycle_jupyter_repl = function(is_initial)
@@ -251,33 +275,31 @@ return {
 
           create_molten_autocmds()
           if not is_initial then
-            vim.cmd 'MoltenImportOutput'
+            vim.api.nvim_del_augroup_by_name 'Neopyter-Save'
+            pcall(vim.cmd, 'MoltenImportOutput')
           end
         elseif vim.g.current_jupyter_repl == 1 then
           vim.notify('Using Neopyter as repl', vim.log.levels.INFO)
 
+          create_neopyter_autocmds()
+
           if not is_initial then
             vim.api.nvim_del_augroup_by_name 'Molten-Import'
             vim.api.nvim_del_augroup_by_name 'Molten-Export'
-          end
-        elseif vim.g.current_jupyter_repl == 2 then
-          vim.notify('Using Molten.nvim and Neopyter as repl', vim.log.levels.INFO)
-
-          create_molten_autocmds()
-          if not is_initial then
-            vim.cmd 'MoltenImportOutput'
+            vim.api.nvim_del_augroup_by_name 'Molten-Quit'
+            pcall(vim.cmd, 'Neopyter sync current')
+            pcall(vim.cmd, 'Neopyter execute docmanager:reload')
           end
         end
       end
 
       -- 0: Molten
       -- 1: Neopyter
-      -- 2: Molten + Neopyter
       vim.g.current_jupyter_repl = 0
       cycle_jupyter_repl(true)
 
-      vim.keymap.set('n', ',ck', function()
-        local current_jupyter_repl = (vim.g.current_jupyter_repl + 1) % 3
+      vim.keymap.set('n', ',cp', function()
+        local current_jupyter_repl = (vim.g.current_jupyter_repl + 1) % 2
         vim.g.current_jupyter_repl = current_jupyter_repl
 
         cycle_jupyter_repl(false)
@@ -373,7 +395,6 @@ return {
       local neopyter = require 'neopyter'
       neopyter.setup(opts)
 
-      vim.keymap.set('n', ',nc', '<CMD>Neopyter sync current<CR>', { desc = 'Neopyter sync Nvim and Jupyter Lab' })
       vim.keymap.set('n', ',nr', '<CMD>Neopyter execute docmanager:reload<CR>', { desc = 'Neopyter reload file from disk' })
       vim.keymap.set('n', ',ns', '<CMD>Neopyter execute docmanager:save<CR>', { desc = 'Neopyter save jupyter file to disk' })
     end,
