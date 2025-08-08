@@ -217,14 +217,6 @@ return {
         nn.delete_cell 'i'
       end, { desc = 'Delete contents inside cell' })
 
-      vim.keymap.set('n', navigator_leader .. 'ns', function()
-        vim.cmd 'Neopyter sync current'
-      end, { desc = 'Sync current buffer with Neopyter' })
-
-      vim.keymap.set('n', navigator_leader .. 'nr', function()
-        vim.cmd 'Neopyter kernel restart'
-      end, { desc = 'Restart Neopyter kernel' })
-
       local create_molten_autocmds = function()
         vim.api.nvim_create_augroup('Molten-Import', { clear = true })
         vim.api.nvim_create_autocmd('BufReadPost', {
@@ -261,9 +253,17 @@ return {
           pattern = '*.ipynb',
           callback = function(bufargs)
             if vim.g.current_jupyter_repl == 1 then
-              vim.cmd 'Neopyter execute docmanager:save'
               vim.api.nvim_set_option_value('modified', false, { buf = bufargs.buf })
-              vim.notify('Saved ' .. bufargs.file .. ' with neopyter.nvim in jupyterlab', vim.log.levels.INFO)
+
+              vim.cmd 'Neopyter sync current'
+              vim.defer_fn(function()
+                local ok, _ = pcall(vim.cmd, 'Neopyter execute docmanager:save')
+                if ok then
+                  vim.notify('Saved ' .. bufargs.file .. ' with neopyter.nvim in jupyterlab', vim.log.levels.INFO)
+                else
+                  vim.notify('Not Saved ' .. bufargs.file .. ' with neopyter.nvim in jupyterlab', vim.log.levels.ERROR)
+                end
+              end, 500)
             end
           end,
         })
@@ -295,7 +295,7 @@ return {
 
       -- 0: Molten
       -- 1: Neopyter
-      vim.g.current_jupyter_repl = 0
+      vim.g.current_jupyter_repl = 1
       cycle_jupyter_repl(true)
 
       vim.keymap.set('n', ',cp', function()
@@ -395,8 +395,21 @@ return {
       local neopyter = require 'neopyter'
       neopyter.setup(opts)
 
-      vim.keymap.set('n', ',nr', '<CMD>Neopyter execute docmanager:reload<CR>', { desc = 'Neopyter reload file from disk' })
-      vim.keymap.set('n', ',ns', '<CMD>Neopyter execute docmanager:save<CR>', { desc = 'Neopyter save jupyter file to disk' })
+      vim.keymap.set('n', ',nc', function()
+        vim.cmd 'Neopyter sync current'
+      end, { desc = 'Sync current buffer with Neopyter' })
+
+      vim.keymap.set('n', ',nk', function()
+        vim.cmd 'Neopyter kernel restart'
+      end, { desc = 'Restart Neopyter kernel' })
+
+      vim.keymap.set('n', ',ns', function()
+        vim.cmd 'Neopyter execute docmanager:save'
+      end, { desc = 'Save Neopyter notebook' })
+
+      vim.keymap.set('n', ',nr', function()
+        vim.cmd 'Neopyter execute docmanager:reload'
+      end, { desc = 'Reload Neopyter notebook from disk' })
     end,
   },
 }
