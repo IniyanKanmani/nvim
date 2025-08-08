@@ -6,7 +6,16 @@ return {
 
     event = 'VimEnter',
 
-    opts = {},
+    opts = {
+      modes = {
+        search = {
+          enabled = false,
+        },
+        char = {
+          enabled = false,
+        },
+      },
+    },
 
     config = function(_, opts)
       local flash = require 'flash'
