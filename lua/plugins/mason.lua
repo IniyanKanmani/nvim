@@ -27,69 +27,86 @@ return {
     },
   },
 
-  { -- Mason Lspconfig: Mason bridge for LSP
-    'williamboman/mason-lspconfig.nvim',
+  -- { -- Mason Lspconfig: Mason bridge for LSP
+  --   'williamboman/mason-lspconfig.nvim',
+  --
+  --   lazy = true,
+  --
+  --   opts = {
+  --     ensure_installed = {
+  --       'bashls',
+  --       'gopls',
+  --       'html',
+  --       'jsonls',
+  --       'lua_ls',
+  --       'marksman',
+  --       'postgres_lsp',
+  --       'pyright',
+  --       'ruff',
+  --       'tailwindcss',
+  --       'ts_ls',
+  --       'zk',
+  --     },
+  --     automatic_installation = true,
+  --   },
+  -- },
 
-    lazy = true,
+  -- { -- Mason Nvim Dap: Mason bridge for DAP
+  --   'jay-babu/mason-nvim-dap.nvim',
+  --
+  --   lazy = true,
+  --
+  --   opts = {
+  --     ensure_installed = {
+  --       'js',
+  --     },
+  --     automatic_installation = true,
+  --   },
+  -- },
 
-    opts = {
-      ensure_installed = {
-        'lua_ls',
-        'marksman',
-        'pyright',
-        'ts_ls',
-        'yamlls',
-        'zk',
-      },
-      automatic_installation = true,
-    },
-  },
+  -- { -- Mason Nvim Lint: Mason bridge for nvim-lint
+  --   'rshkarin/mason-nvim-lint',
+  --
+  --   lazy = true,
+  --
+  --   opts = {
+  --     ensure_installed = {
+  --       'eslint_d',
+  --       -- 'golangci-lint', -- Leave it commented
+  --       'htmlhint',
+  --       'jsonlint',
+  --       -- 'markdownlint-cli2', -- Leave it commented
+  --       'ruff',
+  --       'shellcheck',
+  --       -- 'sqlfluff',
+  --       'stylelint',
+  --     },
+  --     automatic_installation = true,
+  --     quiet_mode = true,
+  --   },
+  -- },
 
-  { -- Mason Nvim Dap: Mason bridge for DAP
-    'jay-babu/mason-nvim-dap.nvim',
-
-    lazy = true,
-
-    opts = {
-      ensure_installed = {
-        'js',
-      },
-      automatic_installation = true,
-    },
-  },
-
-  { -- Mason Nvim Lint: Mason bridge for nvim-lint
-    'rshkarin/mason-nvim-lint',
-
-    lazy = true,
-
-    opts = {
-      ensure_installed = {
-        'eslint_d',
-        -- 'markdownlint-cli2', -- Leave it commented
-        'mypy',
-        'ruff',
-        'vale',
-      },
-      automatic_installation = true,
-      quiet_mode = true,
-    },
-  },
-
-  { -- Mason Conform: Mason bridge for conform
-    'zapling/mason-conform.nvim',
-
-    lazy = true,
-
-    opts = {
-      ensure_installed = {
-        'black',
-        'markdown-toc',
-        'markdownlint-cli2',
-        'prettierd',
-        'stylua',
-      },
-      automatic_installation = true,
-    },
-  },
+  -- { -- Mason Conform: Mason bridge for conform
+  --   'zapling/mason-conform.nvim',
+  --
+  --   lazy = true,
+  --
+  --   opts = {
+  --     ensure_installed = {
+  --       'beautysh',
+  --       'black',
+  --       'gofumpt',
+  --       'goimports-reviser',
+  --       'isort',
+  --       'markdown-toc',
+  --       'markdownlint-cli2',
+  --       'prettierd',
+  --       'ruff',
+  --       'sleek',
+  --       -- 'sqlfmt',
+  --       'stylua',
+  --     },
+  --     automatic_installation = true,
+  --   },
+  -- },
 }

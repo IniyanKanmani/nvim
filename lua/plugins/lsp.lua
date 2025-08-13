@@ -3,23 +3,39 @@ return { -- LSP
     'neovim/nvim-lspconfig',
 
     dependencies = {
+      -- 'folke/lazydev.nvim', -- Only for neovim config, but cheap load time
       'saghen/blink.cmp',
-      -- 'hrsh7th/cmp-nvim-lsp',
-      'antosha417/nvim-lsp-file-operations',
-      'j-hui/fidget.nvim',
 
-      'williamboman/mason-lspconfig.nvim',
+      -- 'williamboman/mason-lspconfig.nvim',
     },
 
     lazy = true,
 
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufReadPre', 'BufNewFile' },
+
+    -- ft = {
+    --   'bash',
+    --   'css',
+    --   'go',
+    --   'html',
+    --   'javascript',
+    --   'json',
+    --   'lua',
+    --   'markdown',
+    --   'python',
+    --   'sh',
+    --   'sql',
+    --   'tailwindcss',
+    --   'text',
+    --   'typescript',
+    --   'zsh',
+    -- },
 
     config = function()
       local lspconfig = require 'lspconfig'
-      local blink = require 'blink.cmp'
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      OnAttach = function(client, bufnr)
+      local on_attach = function(client, bufnr)
         local keymap = function(mode, lhs, rhs, opts)
           vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
         end
@@ -120,11 +136,34 @@ return { -- LSP
         },
       }
 
-      Capabilities = blink.get_lsp_capabilities()
+      -- bash, sh, zsh
+      lspconfig['bashls'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
 
+      -- go
+      lspconfig['gopls'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
+      -- markdown, text
+      lspconfig['html'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
+      -- json
+      lspconfig['jsonls'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
+      -- lua
       lspconfig['lua_ls'].setup {
-        capabilities = Capabilities,
-        on_attach = OnAttach,
+        capabilities = capabilities,
+        on_attach = on_attach,
         settings = {
           Lua = {
             diagnostics = {
@@ -137,24 +176,34 @@ return { -- LSP
         },
       }
 
+      -- markdown
       lspconfig['marksman'].setup {
-        capabilities = Capabilities,
-        on_attach = OnAttach,
+        capabilities = capabilities,
+        on_attach = on_attach,
       }
 
-      lspconfig['zk'].setup {
-        capabilities = Capabilities,
-        on_attach = OnAttach,
+      -- postgresql
+      lspconfig['postgres_lsp'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
       }
 
+      -- python
       lspconfig['pyright'].setup {
-        capabilities = Capabilities,
-        on_attach = OnAttach,
+        capabilities = capabilities,
+        on_attach = on_attach,
       }
 
+      -- -- python
+      -- lspconfig['ruff'].setup {
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      -- }
+
+      -- typescript, javascript
       lspconfig['ts_ls'].setup {
-        capabilities = Capabilities,
-        on_attach = OnAttach,
+        capabilities = capabilities,
+        on_attach = on_attach,
         init_options = {
           preferences = {
             disableSuggestions = true,
@@ -162,22 +211,34 @@ return { -- LSP
         },
       }
 
-      lspconfig['yamlls'].setup {
-        capabilities = Capabilities,
-        on_attach = OnAttach,
+      -- css, tailwindcss
+      lspconfig['tailwindcss'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
+      -- markdown
+      lspconfig['zk'].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
       }
     end,
   },
 
-  { -- Fidget Nvim: LSP loading animation
-    'j-hui/fidget.nvim',
+  { -- Lazydev: configures Lua LSP for your Neovim config, runtime and plugins
+    'folke/lazydev.nvim',
 
     lazy = true,
 
+    ft = 'lua',
+
     opts = {
-      notification = {
-        window = {
-          winblend = 0,
+      library = {
+        {
+          path = 'luvit-meta/library',
+          words = {
+            'vim%.uv',
+          },
         },
       },
     },

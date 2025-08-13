@@ -4,7 +4,7 @@ return { -- Markdown Plugins
 
     lazy = true,
 
-    ft = { 'markdown' },
+    ft = 'markdown',
 
     -- opts = {},
 
@@ -113,10 +113,10 @@ return { -- Markdown Plugins
 
     lazy = true,
 
-    ft = { 'markdown', 'Avante' },
+    ft = 'markdown',
 
     opts = {
-      file_types = { 'markdown', 'Avante' },
+      file_types = { 'markdown' },
     },
   },
 
@@ -127,10 +127,7 @@ return { -- Markdown Plugins
 
     lazy = true,
 
-    cmd = {
-      'MarkdownPreview',
-      'MarkdownPreviewToggle',
-    },
+    cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' },
 
     build = function(plugin)
       if vim.fn.executable 'npx' then

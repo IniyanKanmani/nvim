@@ -4,7 +4,6 @@ return {
 
     dependencies = {
       'L3MON4D3/LuaSnip',
-      'onsails/lspkind.nvim',
     },
 
     lazy = true,
@@ -22,9 +21,6 @@ return {
           draw = {
             columns = { { 'kind_icon' }, { 'label', gap = 1 }, { 'kind' } },
           },
-        },
-        trigger = {
-          show_on_keyword = true,
         },
       },
 

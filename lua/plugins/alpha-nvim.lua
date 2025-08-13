@@ -2,6 +2,8 @@ return {
   { -- Alpha Nvim: Dashboard Theme
     'goolord/alpha-nvim',
 
+    priority = 1002,
+
     lazy = false,
 
     config = function()

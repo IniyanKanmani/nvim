@@ -2,9 +2,9 @@ return {
   { -- Nvim Lint: Linter
     'mfussenegger/nvim-lint',
 
-    dependencies = {
-      'rshkarin/mason-nvim-lint',
-    },
+    -- dependencies = {
+    --   'rshkarin/mason-nvim-lint',
+    -- },
 
     lazy = true,
 
@@ -12,11 +12,17 @@ return {
 
     opts = {
       linters_by_ft = {
+        bash = { 'shellcheck' },
+        css = { 'stylelint' },
+        go = { 'golangci-lint' },
+        html = { 'htmlhint' },
         javascript = { 'eslint_d' },
+        json = { 'jsonlint' },
         markdown = { 'markdownlint-cli2' },
-        python = { 'mypy', 'ruff' },
+        python = { 'ruff' },
+        sh = { 'shellcheck' },
+        -- sql = { 'sqlfluff' },
         typescript = { 'eslint_d' },
-        text = { 'vale' },
       },
     },
 

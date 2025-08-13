@@ -16,7 +16,6 @@ return {
             reverse_directories = true,
           },
         },
-        -- path_display = { 'smart' },
         mappings = {
           n = {
             ['d'] = require('telescope.actions').delete_buffer,
@@ -105,10 +104,6 @@ return {
       vim.keymap.set('n', '<leader>snv', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eo[V]im files' })
-
-      -- Create Autocmd to load other plugins that depend on telescope
-      -- vim.api.nvim_exec_autocmds('User', { pattern = 'TelescopeLoaded' })
-      vim.cmd 'doautocmd User TelescopeLoaded'
     end,
   },
 
@@ -117,7 +112,7 @@ return {
 
     lazy = true,
 
-    event = 'User TelescopeLoaded',
+    event = 'VeryLazy',
 
     --  If encountering errors, see telescope-fzf-native README for installation instructions
     -- `build` is used to run some command when the plugin is installed/updated.
@@ -143,7 +138,7 @@ return {
 
     lazy = true,
 
-    event = 'User TelescopeLoaded',
+    event = 'VeryLazy',
 
     opts = {
       extensions = {
@@ -161,38 +156,12 @@ return {
     end,
   },
 
-  { -- Telescope Frecency: Intelligent Prioritization when selecting files from your editing history
-    'nvim-telescope/telescope-frecency.nvim',
-
-    lazy = true,
-
-    event = 'User TelescopeLoaded',
-
-    opts = {
-      extensions = {
-        frecency = {
-          show_scores = true,
-          show_filter_column = false,
-          db_safe_mode = false,
-          auto_validate = true,
-        },
-      },
-    },
-
-    config = function(_, opts)
-      local telescope = require 'telescope'
-      telescope.setup(opts)
-
-      pcall(telescope.load_extension, 'frecency')
-    end,
-  },
-
   { -- Telescope Help Grep: Grep through Help files
     'catgoose/telescope-helpgrep.nvim',
 
     lazy = true,
 
-    event = 'User TelescopeLoaded',
+    event = 'VeryLazy',
 
     opts = {},
 
@@ -201,24 +170,6 @@ return {
       telescope.setup(opts)
 
       pcall(telescope.load_extension, 'helpgrep')
-    end,
-  },
-
-  { -- Telescope Undo Nvim: View editing history with telescope
-    'debugloop/telescope-undo.nvim',
-
-    lazy = true,
-
-    event = { 'BufReadPost', 'BufNewFile' },
-    -- event = 'User TelescopeLoaded',
-
-    opts = {},
-
-    config = function(_, opts)
-      local telescope = require 'telescope'
-      telescope.setup(opts)
-
-      pcall(telescope.load_extension, 'undo')
     end,
   },
 }

@@ -8,7 +8,7 @@ return {
 
     lazy = true,
 
-    event = 'VimEnter',
+    event = 'VeryLazy',
 
     cmd = 'Oil',
 
@@ -73,10 +73,5 @@ return {
     opts = {
       show_ignored = true,
     },
-
-    config = function(_, opts)
-      local oil_git_status = require 'oil-git-status'
-      oil_git_status.setup(opts)
-    end,
   },
 }

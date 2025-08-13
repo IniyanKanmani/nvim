@@ -38,19 +38,23 @@ return {
       end, { desc = 'Jump to next [g]it change' })
 
       -- Actions (Visual Mode)
-      vim.keymap.set('n', '<leader>gs', function()
+      vim.keymap.set('v', '<leader>gs', function()
         gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'Stage git hunk' })
 
-      vim.keymap.set('n', '<leader>gr', function()
+      vim.keymap.set('v', '<leader>gu', function()
+        gitsigns.undo_stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      end, { desc = 'Stage git hunk' })
+
+      vim.keymap.set('v', '<leader>gr', function()
         gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'Reset git hunk' })
 
       -- Actions (Normal Mode)
       vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { desc = 'Git [s]tage hunk' })
+      vim.keymap.set('n', '<leader>gu', gitsigns.undo_stage_hunk, { desc = 'Git [u]ndo stage hunk' })
       vim.keymap.set('n', '<leader>gr', gitsigns.reset_hunk, { desc = 'Git [r]eset hunk' })
       vim.keymap.set('n', '<leader>gS', gitsigns.stage_buffer, { desc = 'Git [S]tage buffer' })
-      vim.keymap.set('n', '<leader>gu', gitsigns.undo_stage_hunk, { desc = 'Git [u]ndo stage hunk' })
       vim.keymap.set('n', '<leader>gR', gitsigns.reset_buffer, { desc = 'Git [R]eset buffer' })
       vim.keymap.set('n', '<leader>gp', gitsigns.preview_hunk, { desc = 'Git [p]review hunk' })
       vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { desc = 'Git [b]lame line' })

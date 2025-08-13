@@ -2,15 +2,24 @@ return {
   { -- Conform: Formatter
     'stevearc/conform.nvim',
 
-    dependencies = {
-      'zapling/mason-conform.nvim',
-    },
+    -- dependencies = {
+    --   'zapling/mason-conform.nvim',
+    -- },
 
     lazy = true,
 
-    cmd = 'ConformInfo',
-
     event = { 'BufReadPost', 'BufNewFile' },
+
+    keys = {
+      {
+        '<leader>f',
+        function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end,
+        mode = 'n',
+        desc = '[F]ormat buffer',
+      },
+    },
 
     opts = {
       notify_on_error = false,
@@ -38,24 +47,23 @@ return {
         },
       },
       formatters_by_ft = {
-        dart = { 'dart' },
+        bash = { 'beautysh' },
+        css = { 'prettierd' },
+        go = { 'goimports-reviser', 'gofumpt' },
+        html = { 'prettierd' },
         javascript = { 'prettierd' },
+        json = { 'prettierd' },
         lua = { 'stylua' },
-        markdown = { 'prettierd', 'markdownlint-cli2' },
-        python = { 'black' },
+        -- markdown = { 'prettierd' },
+        markdown = { 'markdownlint-cli2', 'prettierd' },
+        python = { 'isort', 'black', 'ruff' },
+        sh = { 'beautysh' },
+        sql = { 'sleek' },
+        -- sql = { 'sqlfmt' },
         typescript = { 'prettierd' },
-        yaml = { 'prettierd' },
+        zsh = { 'beautysh' },
         ['_'] = { 'trim_whitespace' },
       },
     },
-
-    config = function(_, opts)
-      local conform = require 'conform'
-      conform.setup(opts)
-
-      vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
-        conform.format { async = true, lsp_fallback = true }
-      end, { desc = '[F]ormat buffer' })
-    end,
   },
 }
