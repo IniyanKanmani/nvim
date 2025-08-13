@@ -29,22 +29,21 @@ return { -- Mini Plugins
     event = { 'BufReadPost', 'BufNewFile' },
 
     opts = {
-      buffer = { suffix = 'b', options = {} },
       conflict = { suffix = 'x', options = {} },
-      indent = { suffix = 'n', options = {} },
-
       quickfix = { suffix = 'q', options = {} },
-      treesitter = { suffix = 's', options = {} },
-      yank = { suffix = 'y', options = {} },
 
+      buffer = { suffix = '', options = {} },
       comment = { suffix = '', options = {} },
       diagnostic = { suffix = '', options = {} },
       file = { suffix = '', options = {} },
+      indent = { suffix = '', options = {} },
       jump = { suffix = '', options = {} },
       location = { suffix = '', options = {} },
       oldfile = { suffix = '', options = {} },
+      treesitter = { suffix = '', options = {} },
       undo = { suffix = '', options = {} },
       window = { suffix = '', options = {} },
+      yank = { suffix = '', options = {} },
     },
   },
 
@@ -56,11 +55,11 @@ return { -- Mini Plugins
     event = { 'BufReadPost', 'BufNewFile' },
   },
 
-  { -- Mini Hipatterns: Set Highlight patterns in neovim
-    'echasnovski/mini.hipatterns',
-
-    lazy = true,
-  },
+  -- { -- Mini Hipatterns: Set Highlight patterns in neovim
+  --   'echasnovski/mini.hipatterns',
+  --
+  --   lazy = true,
+  -- },
 
   { -- Mini Move: Move Selection
     'echasnovski/mini.move',

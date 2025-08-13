@@ -8,8 +8,6 @@ return {
 
     lazy = true,
 
-    event = 'VimEnter',
-
     cmd = 'Yazi',
 
     keys = {

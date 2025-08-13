@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = { 'BufReadPost', 'BufNewFile', 'CmdlineEnter' },
+    event = 'VeryLazy',
 
     opts = {
       timeout = 300,
@@ -20,7 +20,10 @@ return {
         },
         v = {
           k = {
-            j = '<Esc>',
+            j = false,
+          },
+          j = {
+            k = false,
           },
         },
         x = {

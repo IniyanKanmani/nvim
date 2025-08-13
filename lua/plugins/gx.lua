@@ -15,7 +15,12 @@ return {
     cmd = 'Browse',
 
     keys = {
-      { 'gx', '<CMD>Browse<CR>', mode = { 'n', 'x' }, desc = 'Browse links' },
+      {
+        'gx',
+        '<CMD>Browse<CR>',
+        mode = { 'n', 'x' },
+        desc = 'Browse links',
+      },
     },
 
     opts = {

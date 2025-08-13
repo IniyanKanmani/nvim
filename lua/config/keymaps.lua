@@ -18,10 +18,10 @@ vim.keymap.set('n', '<Esc>', '<CMD>nohlsearch<CR>', { desc = 'Turn Search Highli
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- TIP: Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<CMD>echo "Use h to move!!"<CR>', { desc = 'Ignore left arror' })
-vim.keymap.set('n', '<right>', '<CMD>echo "Use l to move!!"<CR>', { desc = 'Ignore right arror' })
-vim.keymap.set('n', '<up>', '<CMD>echo "Use k to move!!"<CR>', { desc = 'Ignore up arror' })
-vim.keymap.set('n', '<down>', '<CMD>echo "Use j to move!!"<CR>', { desc = 'Ignore down arror' })
+vim.keymap.set('n', '<left>', '<CMD>echo "use h you braindead mf"<CR>', { desc = 'Ignore left arror' })
+vim.keymap.set('n', '<right>', '<CMD>echo "use l you braindead mf"<CR>', { desc = 'Ignore right arror' })
+vim.keymap.set('n', '<up>', '<CMD>echo "use k you braindead mf"<CR>', { desc = 'Ignore up arror' })
+vim.keymap.set('n', '<down>', '<CMD>echo "use j you braindead mf"<CR>', { desc = 'Ignore down arror' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -71,10 +71,10 @@ vim.keymap.set('n', 'gT', '<CMD>tabprev<CR>', { desc = 'Switch to prev tab' })
 vim.keymap.set('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Vertically split Neovim' })
 vim.keymap.set('n', '<leader>-', '<CMD>split<CR>', { desc = 'Horizontally split Neovim' })
 
-vim.keymap.set({ 'i', 't', 'c' }, '<M-h>', '<Left>', { desc = 'Move cursor left' })
-vim.keymap.set({ 'i', 't' }, '<M-j>', '<Down>', { desc = 'Move cursor down' })
-vim.keymap.set({ 'i', 't' }, '<M-k>', '<Up>', { desc = 'Move cursor up' })
-vim.keymap.set({ 'i', 't', 'c' }, '<M-l>', '<Right>', { desc = 'Move cursor right' })
+-- vim.keymap.set({ 'i', 't', 'c' }, '<M-h>', '<Left>', { desc = 'Move cursor left' })
+-- vim.keymap.set({ 'i', 't' }, '<M-j>', '<Down>', { desc = 'Move cursor down' })
+-- vim.keymap.set({ 'i', 't' }, '<M-k>', '<Up>', { desc = 'Move cursor up' })
+-- vim.keymap.set({ 'i', 't', 'c' }, '<M-l>', '<Right>', { desc = 'Move cursor right' })
 
 vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -2<CR>', { desc = 'Decrease window width' })
 vim.keymap.set('n', '<C-Down>', '<Cmd>resize -2<CR>', { desc = 'Decrease window height' })

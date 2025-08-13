@@ -2,9 +2,9 @@ return {
   { -- Snacks Nvim: Many QoL plugins
     'folke/snacks.nvim',
 
-    lazy = true,
+    lazy = false,
 
-    event = 'VimEnter',
+    priority = 1000,
 
     init = function()
       vim.api.nvim_create_autocmd('User', {
@@ -26,6 +26,49 @@ return {
               if event.data.actions.type == 'move' then
                 Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
               end
+            end,
+          })
+
+          ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+          local progress = vim.defaulttable()
+          vim.api.nvim_create_autocmd('LspProgress', {
+            ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+            callback = function(ev)
+              local client = vim.lsp.get_client_by_id(ev.data.client_id)
+              local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+              if not client or type(value) ~= 'table' then
+                return
+              end
+              local p = progress[client.id]
+
+              for i = 1, #p + 1 do
+                if i == #p + 1 or p[i].token == ev.data.params.token then
+                  p[i] = {
+                    token = ev.data.params.token,
+                    msg = ('[%3d%%] %s%s'):format(
+                      value.kind == 'end' and 100 or value.percentage or 100,
+                      value.title or '',
+                      value.message and (' **%s**'):format(value.message) or ''
+                    ),
+                    done = value.kind == 'end',
+                  }
+                  break
+                end
+              end
+
+              local msg = {} ---@type string[]
+              progress[client.id] = vim.tbl_filter(function(v)
+                return table.insert(msg, v.msg) or not v.done
+              end, p)
+
+              local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+              vim.notify(table.concat(msg, '\n'), 'info', {
+                id = 'lsp_progress',
+                title = client.name,
+                opts = function(notif)
+                  notif.icon = #progress[client.id] == 0 and ' ' or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+                end,
+              })
             end,
           })
 
@@ -93,14 +136,6 @@ return {
         desc = 'Open File Explorer',
       },
       {
-        '<leader>gb',
-        function()
-          require('snacks.git').blame_line()
-        end,
-        mode = 'n',
-        desc = 'Git Blame Line',
-      },
-      {
         '<leader>lg',
         function()
           require 'snacks.lazygit'()
@@ -117,7 +152,7 @@ return {
         desc = 'Lazygit Current File History',
       },
       {
-        '<leader>sn',
+        '<leader>nh',
         function()
           require('snacks.notifier').show_history()
         end,
@@ -183,25 +218,6 @@ return {
 
       dashboard = {
         enabled = false,
-        -- preset = {
-        --   keys = {
-        --     { icon = ' ', key = 'n', desc = 'New File', action = '<CMD>ene <BAR> startinsert <CR>' },
-        --     { icon = ' ', key = 'f', desc = 'Find File', action = '<leader>sf' },
-        --     { icon = ' ', key = 'g', desc = 'Find Text', action = '<leader>sg' },
-        --     { icon = ' ', key = 'r', desc = 'Recent Files', action = '<leader><leader>' },
-        --     { icon = ' ', key = 's', desc = 'Recent CWD Session', action = '<leader>ql' },
-        --     { icon = ' ', key = 's', desc = 'Recent Session', action = '<leader>qr' },
-        --     { icon = ' ', key = 'c', desc = 'Config', action = "<CMD>lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})<CR>" },
-        --     { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
-        --   },
-        -- },
-        -- sections = {
-        --   { section = 'terminal', cmd = 'cowsay neovim btw', hl = 'header', padding = 1, indent = 10 },
-        --   { title = 'Recent Files', section = 'recent_files', cwd = true, padding = 1 },
-        --   { title = 'Sessions', section = 'projects', padding = 1 },
-        --   { title = 'Keys', section = 'keys', padding = 1 },
-        --   -- { section = 'startup' },
-        -- },
       },
 
       debug = {
@@ -218,7 +234,7 @@ return {
       },
 
       git = {
-        enabled = true,
+        enabled = false,
       },
 
       gitbrowse = {
@@ -251,7 +267,7 @@ return {
       },
 
       notify = {
-        enabled = true,
+        enabled = false,
       },
 
       picker = {
@@ -293,7 +309,7 @@ return {
         git = {
           patterns = { 'GitSign', 'MiniDiffSign' },
         },
-        refresh = 100, -- refresh at most every 50ms
+        refresh = 100,
       },
 
       terminal = {

@@ -4,11 +4,10 @@ return {
 
     lazy = true,
 
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    event = 'VeryLazy',
 
     opts = {
       preset = 'modern',
-      -- Document existing key chains
       spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>g', group = '[G]it', mode = 'n' },

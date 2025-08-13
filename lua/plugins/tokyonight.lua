@@ -2,36 +2,16 @@ return {
   { -- Tokyonight: Colorscheme
     'folke/tokyonight.nvim',
 
-    lazy = true,
+    lazy = false,
+
+    priority = 1003,
 
     opts = {},
 
     config = function()
-      TokyoNightNormalThemeOpts = {
-        style = 'night',
-        transparent = false,
-        terminal = true,
-        styles = {
-          comments = { italic = true },
-          keywords = { italic = true },
-          functions = {},
-          variables = {},
-          sidebars = 'normal',
-          floats = 'normal',
-        },
-        on_highlights = function(hl, _)
-          hl['@variable.parameter'] = { fg = '#E45A7C' }
-          -- hl['@variable.parameter'] = { fg = '#FC6086' }
+      local tokyonight = require 'tokyonight'
 
-          -- hl['@variable'] = { fg = '#FC6086' }
-          -- hl['@variable.parameter'] = { fg = '#209FB5' }
-        end,
-        dim_inactive = false,
-        lualine_bold = true,
-        cache = true,
-      }
-
-      TokyoNightTransparentThemeOpts = {
+      local tokyoNightTransparentThemeOpts = {
         style = 'night',
         transparent = true,
         terminal = true,
@@ -45,17 +25,21 @@ return {
         },
         on_highlights = function(hl, _)
           hl['@variable.parameter'] = { fg = '#E45A7C' }
-          -- hl['@variable.parameter'] = { fg = '#FC6086' }
-
-          -- hl['@variable'] = { fg = '#FC6086' }
-          -- hl['@variable.parameter'] = { fg = '#209FB5' }
         end,
         dim_inactive = false,
         lualine_bold = true,
         cache = true,
       }
 
+      tokyonight.setup(tokyoNightTransparentThemeOpts)
+
+      vim.cmd.colorscheme 'tokyonight-night'
       vim.cmd.hi 'Comment gui=none'
+
+      vim.api.nvim_set_hl(0, 'SpellBad', { underline = true, sp = 'red' }) -- Underline with red color
+      vim.api.nvim_set_hl(0, 'SpellCap', { underline = true, sp = 'blue' }) -- Underline with blue color
+      vim.api.nvim_set_hl(0, 'SpellRare', { underline = true, sp = 'purple' }) -- Underline with purple color
+      vim.api.nvim_set_hl(0, 'SpellLocal', { underline = true, sp = 'yellow' }) -- Underline with yellow color
     end,
   },
 }

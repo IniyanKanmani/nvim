@@ -4,7 +4,7 @@ return {
 
     lazy = true,
 
-    event = 'VimEnter',
+    event = 'VeryLazy',
 
     opts = {},
   },

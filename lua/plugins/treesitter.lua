@@ -4,8 +4,7 @@ return {
 
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-context',
-      'windwp/nvim-ts-autotag',
+      -- 'windwp/nvim-ts-autotag',
     },
 
     lazy = true,
@@ -14,15 +13,18 @@ return {
 
     main = 'nvim-treesitter.configs',
 
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufReadPre', 'BufNewFile' },
 
     opts = {
       ensure_installed = {
         'bash',
         'c',
+        'css',
         'dart',
         'diff',
         'gitignore',
+        'go',
+        'html',
         'javascript',
         'lua',
         'luadoc',
@@ -44,7 +46,7 @@ return {
         enable = true,
       },
       autotag = {
-        enable = true,
+        enable = false,
       },
       incremental_selection = {
         enable = true,
@@ -63,8 +65,8 @@ return {
             -- Assignments
             ['i='] = { query = '@assignment.inner', desc = 'Select inner part of an assignment' },
             ['a='] = { query = '@assignment.outer', desc = 'Select outer part of an assignment' },
-            ['l='] = { query = '@assignment.lhs', desc = 'Select left hand side part of an assignment' },
-            ['r='] = { query = '@assignment.rhs', desc = 'Select right hand side part of an assignment' },
+            ['h='] = { query = '@assignment.lhs', desc = 'Select left hand side part of an assignment' },
+            ['l='] = { query = '@assignment.rhs', desc = 'Select right hand side part of an assignment' },
 
             -- Parameters
             ['ia'] = { query = '@parameter.inner', desc = 'Select inner part of a parameter/argument' },
@@ -151,58 +153,58 @@ return {
             ['tia'] = { query = '@parameter.inner', desc = 'Swap with next inner parameter/aurgument' },
             ['taa'] = { query = '@parameter.outer', desc = 'Swap with next outer parameter/aurgument' },
 
-            -- Conditionals
-            ['tii'] = { query = '@conditional.inner', desc = 'Swap with next inner conditional' },
-            ['tai'] = { query = '@conditional.outer', desc = 'Swap with next outer conditional' },
+            -- -- Conditionals
+            -- ['tai'] = { query = '@conditional.outer', desc = 'Swap with next outer conditional' },
+            -- ['tii'] = { query = '@conditional.inner', desc = 'Swap with next inner conditional' },
 
-            -- Loops
-            ['til'] = { query = '@loop.inner', desc = 'Swap with next inner loop' },
-            ['tal'] = { query = '@loop.outer', desc = 'Swap with next outer loop' },
+            -- -- Loops
+            -- ['til'] = { query = '@loop.inner', desc = 'Swap with next inner loop' },
+            -- ['tal'] = { query = '@loop.outer', desc = 'Swap with next outer loop' },
 
-            -- Function calls
-            ['tim'] = { query = '@call.inner', desc = 'Swap with next inner functional call' },
-            ['tam'] = { query = '@call.outer', desc = 'Swap with next outer functional call' },
+            -- -- Function calls
+            -- ['tim'] = { query = '@call.inner', desc = 'Swap with next inner functional call' },
+            -- ['tam'] = { query = '@call.outer', desc = 'Swap with next outer functional call' },
 
-            -- Functions
-            ['tif'] = { query = '@function.inner', desc = 'Swap with next inner function/method' },
-            ['taf'] = { query = '@function.outer', desc = 'Swap with next outer function/method' },
+            -- -- Functions
+            -- ['tif'] = { query = '@function.inner', desc = 'Swap with next inner function/method' },
+            -- ['taf'] = { query = '@function.outer', desc = 'Swap with next outer function/method' },
 
-            -- Classes
-            ['tic'] = { query = '@class.inner', desc = 'Swap with next inner class' },
-            ['tac'] = { query = '@class.outer', desc = 'Swap with next outer class' },
+            -- -- Classes
+            -- ['tic'] = { query = '@class.inner', desc = 'Swap with next inner class' },
+            -- ['tac'] = { query = '@class.outer', desc = 'Swap with next outer class' },
 
-            -- Comments
-            ['tit'] = { query = '@comment.inner', desc = 'Swap with next inner comment' },
-            ['tat'] = { query = '@comment.outer', desc = 'Swap with next outer comment' },
+            -- -- Comments
+            -- ['tit'] = { query = '@comment.inner', desc = 'Swap with next inner comment' },
+            -- ['tat'] = { query = '@comment.outer', desc = 'Swap with next outer comment' },
           },
           swap_previous = {
             -- Parameters
             ['Tia'] = { query = '@parameter.inner', desc = 'Swap with previous inner parameter/aurgument' },
             ['Taa'] = { query = '@parameter.outer', desc = 'Swap with previous outer parameter/aurgument' },
 
-            -- Conditionals
-            ['Tii'] = { query = '@conditional.inner', desc = 'Swap with previous inner conditional' },
-            ['Tai'] = { query = '@conditional.outer', desc = 'Swap with previous outer conditional' },
+            -- -- Conditionals
+            -- ['Tii'] = { query = '@conditional.inner', desc = 'Swap with previous inner conditional' },
+            -- ['Tai'] = { query = '@conditional.outer', desc = 'Swap with previous outer conditional' },
 
-            -- Loops
-            ['Til'] = { query = '@loop.inner', desc = 'Swap with previous inner loop' },
-            ['Tal'] = { query = '@loop.outer', desc = 'Swap with previous outer loop' },
+            -- -- Loops
+            -- ['Til'] = { query = '@loop.inner', desc = 'Swap with previous inner loop' },
+            -- ['Tal'] = { query = '@loop.outer', desc = 'Swap with previous outer loop' },
 
-            -- Function calls
-            ['Tim'] = { query = '@call.inner', desc = 'Swap with previous inner functional call' },
-            ['Tam'] = { query = '@call.outer', desc = 'Swap with previous outer functional call' },
+            -- -- Function calls
+            -- ['Tim'] = { query = '@call.inner', desc = 'Swap with previous inner functional call' },
+            -- ['Tam'] = { query = '@call.outer', desc = 'Swap with previous outer functional call' },
 
-            -- Functions
-            ['Tif'] = { query = '@function.inner', desc = 'Swap with previous inner function/method' },
-            ['Taf'] = { query = '@function.outer', desc = 'Swap with previous outer function/method' },
+            -- -- Functions
+            -- ['Tif'] = { query = '@function.inner', desc = 'Swap with previous inner function/method' },
+            -- ['Taf'] = { query = '@function.outer', desc = 'Swap with previous outer function/method' },
 
-            -- Classes
-            ['Tic'] = { query = '@class.inner', desc = 'Swap with previous inner class' },
-            ['Tac'] = { query = '@class.outer', desc = 'Swap with previous outer class' },
+            -- -- Classes
+            -- ['Tic'] = { query = '@class.inner', desc = 'Swap with previous inner class' },
+            -- ['Tac'] = { query = '@class.outer', desc = 'Swap with previous outer class' },
 
-            -- Comments
-            ['Tit'] = { query = '@comment.inner', desc = 'Swap with previous inner comment' },
-            ['Tat'] = { query = '@comment.outer', desc = 'Swap with previous outer comment' },
+            -- -- Comments
+            -- ['Tit'] = { query = '@comment.inner', desc = 'Swap with previous inner comment' },
+            -- ['Tat'] = { query = '@comment.outer', desc = 'Swap with previous outer comment' },
           },
         },
       },
@@ -213,7 +215,6 @@ return {
       ts.setup(opts)
 
       local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
-
       vim.keymap.set('n', '<leader>it', '<CMD>InspectTree<CR>', { desc = 'Inspect Treesitter Syntax Tree' })
 
       -- Key mappings for repeating last move
@@ -233,17 +234,21 @@ return {
 
     lazy = true,
 
+    event = { 'BufReadPost', 'BufNewFile' },
+
+    keys = {
+      {
+        '<leader>tc',
+        '<CMD>TSContextToggle<CR>',
+        mode = 'n',
+        desc = 'Toggle Treesitter Context',
+      },
+    },
+
     opts = {
       enable = true,
       multiline_threshold = 5,
       mode = 'cursor',
     },
-
-    config = function(_, opts)
-      local ts_context = require 'treesitter-context'
-      ts_context.setup(opts)
-
-      vim.keymap.set('n', '<leader>tc', '<CMD>TSContextToggle<CR>', { desc = 'Toggle treesitter context' })
-    end,
   },
 }
