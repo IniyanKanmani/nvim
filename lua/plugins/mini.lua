@@ -7,6 +7,13 @@ return { -- Mini Plugins
     event = { 'BufReadPost', 'BufNewFile' },
 
     opts = {
+      custom_textobjects = {
+        f = false,
+        s = function()
+          return require('mini.ai').gen_spec.function_call()
+        end,
+      },
+
       mappings = {
         around_next = 'an',
         inside_next = 'in',
@@ -30,7 +37,7 @@ return { -- Mini Plugins
 
     opts = {
       conflict = { suffix = 'x', options = {} },
-      quickfix = { suffix = 'q', options = {} },
+      oldfile = { suffix = 'b', options = {} },
 
       buffer = { suffix = '', options = {} },
       comment = { suffix = '', options = {} },
@@ -39,7 +46,7 @@ return { -- Mini Plugins
       indent = { suffix = '', options = {} },
       jump = { suffix = '', options = {} },
       location = { suffix = '', options = {} },
-      oldfile = { suffix = '', options = {} },
+      quickfix = { suffix = '', options = {} },
       treesitter = { suffix = '', options = {} },
       undo = { suffix = '', options = {} },
       window = { suffix = '', options = {} },

@@ -4,7 +4,6 @@ return {
 
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      -- 'windwp/nvim-ts-autotag',
     },
 
     lazy = true,
@@ -68,7 +67,7 @@ return {
             ['h='] = { query = '@assignment.lhs', desc = 'Select left hand side part of an assignment' },
             ['l='] = { query = '@assignment.rhs', desc = 'Select right hand side part of an assignment' },
 
-            -- Parameters
+            -- -- Parameters
             ['ia'] = { query = '@parameter.inner', desc = 'Select inner part of a parameter/argument' },
             ['aa'] = { query = '@parameter.outer', desc = 'Select outer part of a parameter/argument' },
 
@@ -227,28 +226,5 @@ return {
       vim.keymap.set({ 'n', 'x', 'o' }, 't', ts_repeat_move.builtin_t_expr, { expr = true })
       vim.keymap.set({ 'n', 'x', 'o' }, 'T', ts_repeat_move.builtin_T_expr, { expr = true })
     end,
-  },
-
-  { -- Nvim Treesitter Context: Show context
-    'nvim-treesitter/nvim-treesitter-context',
-
-    lazy = true,
-
-    event = { 'BufReadPost', 'BufNewFile' },
-
-    keys = {
-      {
-        '<leader>tc',
-        '<CMD>TSContextToggle<CR>',
-        mode = 'n',
-        desc = 'Toggle Treesitter Context',
-      },
-    },
-
-    opts = {
-      enable = true,
-      multiline_threshold = 5,
-      mode = 'cursor',
-    },
   },
 }

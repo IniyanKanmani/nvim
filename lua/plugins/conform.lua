@@ -2,10 +2,6 @@ return {
   { -- Conform: Formatter
     'stevearc/conform.nvim',
 
-    -- dependencies = {
-    --   'zapling/mason-conform.nvim',
-    -- },
-
     lazy = true,
 
     event = { 'BufReadPost', 'BufNewFile' },

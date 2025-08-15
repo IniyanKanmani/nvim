@@ -22,31 +22,15 @@ return {
         desc = 'Buffer Diagnostics (Trouble)',
       },
       {
-        '<leader>cs',
-        '<CMD>Trouble symbols toggle focus=false<CR>',
-        mode = 'n',
-        desc = 'Symbols (Trouble)',
-      },
-      {
         '<leader>cl',
-        '<CMD>Trouble lsp toggle focus=false win.position=right<CR>',
+        '<CMD>Trouble lsp toggle focus=true win.position=bottom<CR>',
         mode = 'n',
         desc = 'LSP Definitions / references / ... (Trouble)',
       },
-      {
-        '<leader>xL',
-        '<CMD>Trouble loclist toggle<CR>',
-        mode = 'n',
-        desc = 'Location List (Trouble)',
-      },
-      {
-        '<leader>xQ',
-        '<CMD>Trouble qflist toggle<CR>',
-        mode = 'n',
-        desc = 'Quickfix List (Trouble)',
-      },
     },
 
-    opts = {}, -- required
+    opts = {
+      auto_preview = false,
+    },
   },
 }
