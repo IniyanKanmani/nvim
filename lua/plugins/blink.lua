@@ -22,6 +22,9 @@ return {
             columns = { { 'kind_icon' }, { 'label', gap = 1 }, { 'kind' } },
           },
         },
+        trigger = {
+          show_on_keyword = true,
+        },
       },
 
       cmdline = {

@@ -2,10 +2,6 @@ return {
   { -- Nvim Lint: Linter
     'mfussenegger/nvim-lint',
 
-    -- dependencies = {
-    --   'rshkarin/mason-nvim-lint',
-    -- },
-
     lazy = true,
 
     event = { 'BufReadPost', 'BufNewFile' },
@@ -41,6 +37,21 @@ return {
           lint.try_lint()
         end,
       })
+
+      vim.diagnostic.config {
+        signs = {
+          [vim.diagnostic.severity.ERROR] = { text = '', texthl = 'DiagnosticSignError' },
+          [vim.diagnostic.severity.WARN] = { text = '', texthl = 'DiagnosticSignWarn' },
+          [vim.diagnostic.severity.HINT] = { text = '󰠠', texthl = 'DiagnosticSignHint' },
+          [vim.diagnostic.severity.INFO] = { text = '', texthl = 'DiagnosticSignInfo' },
+        },
+        virtual_text = {
+          current_line = true,
+        },
+        -- virtual_lines = {
+        --   current_line = true,
+        -- },
+      }
     end,
   },
 }

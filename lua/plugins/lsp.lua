@@ -3,33 +3,12 @@ return { -- LSP
     'neovim/nvim-lspconfig',
 
     dependencies = {
-      -- 'folke/lazydev.nvim', -- Only for neovim config, but cheap load time
       'saghen/blink.cmp',
-
-      -- 'williamboman/mason-lspconfig.nvim',
     },
 
     lazy = true,
 
     event = { 'BufReadPre', 'BufNewFile' },
-
-    -- ft = {
-    --   'bash',
-    --   'css',
-    --   'go',
-    --   'html',
-    --   'javascript',
-    --   'json',
-    --   'lua',
-    --   'markdown',
-    --   'python',
-    --   'sh',
-    --   'sql',
-    --   'tailwindcss',
-    --   'text',
-    --   'typescript',
-    --   'zsh',
-    -- },
 
     config = function()
       local lspconfig = require 'lspconfig'
@@ -53,11 +32,11 @@ return { -- LSP
         keymap('n', 'gD', '<CMD>lua vim.lsp.buf.declaration()<CR>', { desc = 'LSP [G]oto [D]eclaration' })
 
         -- Find references for the word under your cursor.
-        keymap('n', 'gr', '<CMD>Telescope lsp_references<CR>', { desc = 'LSP [G]oto [R]eferences' })
+        keymap('n', 'grr', '<CMD>Telescope lsp_references<CR>', { desc = 'LSP [G]oto [R]eferences' })
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        keymap('n', 'gi', '<CMD>Telescope lsp_implementations<CR>', { desc = 'LSP [G]oto [I]mplementation' })
+        keymap('n', 'gri', '<CMD>Telescope lsp_implementations<CR>', { desc = 'LSP [G]oto [I]mplementation' })
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
@@ -74,15 +53,15 @@ return { -- LSP
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        keymap('n', '<leader>rn', '<CMD>lua vim.lsp.buf.rename()<CR>', { desc = 'LSP [R]e[n]ame' })
+        keymap('n', 'grn', '<CMD>lua vim.lsp.buf.rename()<CR>', { desc = 'LSP [R]e[n]ame' })
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        keymap('n', '<leader>ca', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = 'LSP [C]ode [A]ction' })
-        keymap('x', '<leader>ca', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = 'LSP [C]ode [A]ction' })
+        keymap('n', 'gra', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = 'LSP [C]ode [A]ction' })
+        keymap('x', 'gra', '<CMD>lua vim.lsp.buf.code_action()<CR>', { desc = 'LSP [C]ode [A]ction' })
 
         -- Restart LSP
-        keymap('n', '<leader>rs', '<CMD>LspRestart<CR>', { desc = 'LSP [R]e[s]tart' })
+        keymap('n', 'grs', '<CMD>LspRestart<CR>', { desc = 'LSP [R]e[s]tart' })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
@@ -127,15 +106,6 @@ return { -- LSP
         end
       end
 
-      vim.diagnostic.config {
-        signs = {
-          [vim.diagnostic.severity.ERROR] = { text = '', texthl = 'DiagnosticSignError' },
-          [vim.diagnostic.severity.WARN] = { text = '', texthl = 'DiagnosticSignWarn' },
-          [vim.diagnostic.severity.HINT] = { text = '󰠠', texthl = 'DiagnosticSignHint' },
-          [vim.diagnostic.severity.INFO] = { text = '', texthl = 'DiagnosticSignInfo' },
-        },
-      }
-
       -- bash, sh, zsh
       lspconfig['bashls'].setup {
         capabilities = capabilities,
@@ -164,16 +134,19 @@ return { -- LSP
       lspconfig['lua_ls'].setup {
         capabilities = capabilities,
         on_attach = on_attach,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            completion = {
-              callSnippet = 'Replace',
-            },
-          },
-        },
+        -- settings = {
+        --   Lua = {
+        --     -- completion = {
+        --     --   callSnippet = 'Replace',
+        --     -- },
+        --     -- diagnostics = {
+        --     --   globals = { 'vim' },
+        --     -- },
+        --     -- workspace = {
+        --     --   library = vim.api.nvim_get_runtime_file('', true),
+        --     -- },
+        --   },
+        -- },
       }
 
       -- markdown
@@ -204,11 +177,11 @@ return { -- LSP
       lspconfig['ts_ls'].setup {
         capabilities = capabilities,
         on_attach = on_attach,
-        init_options = {
-          preferences = {
-            disableSuggestions = true,
-          },
-        },
+        -- init_options = {
+        --   preferences = {
+        --     disableSuggestions = true,
+        --   },
+        -- },
       }
 
       -- css, tailwindcss

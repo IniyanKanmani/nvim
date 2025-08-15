@@ -2,6 +2,8 @@ return {
   { -- Smear-Cursor: Neovide Cursor Animation
     'sphamba/smear-cursor.nvim',
 
+    enabled = false,
+
     lazy = true,
 
     event = 'VimEnter',
