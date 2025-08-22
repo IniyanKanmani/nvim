@@ -3,7 +3,8 @@ return { -- LSP
     'neovim/nvim-lspconfig',
 
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
+      'saghen/blink.cmp',
+      -- 'hrsh7th/cmp-nvim-lsp',
       'antosha417/nvim-lsp-file-operations',
       'j-hui/fidget.nvim',
 
@@ -16,7 +17,7 @@ return { -- LSP
 
     config = function()
       local lspconfig = require 'lspconfig'
-      local cmp_nvim_lsp = require 'cmp_nvim_lsp'
+      local blink = require 'blink.cmp'
 
       OnAttach = function(client, bufnr)
         local keymap = function(mode, lhs, rhs, opts)
@@ -119,7 +120,7 @@ return { -- LSP
         },
       }
 
-      Capabilities = cmp_nvim_lsp.default_capabilities()
+      Capabilities = blink.get_lsp_capabilities()
 
       lspconfig['lua_ls'].setup {
         capabilities = Capabilities,
