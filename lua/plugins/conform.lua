@@ -40,6 +40,8 @@ return {
             end, vim.diagnostic.get(ctx.buf))
             return #diag > 0
           end,
+        ['ruff'] = {
+          append_args = { '--extend-select', 'I' },
         },
       },
       formatters_by_ft = {
@@ -52,7 +54,7 @@ return {
         lua = { 'stylua' },
         -- markdown = { 'prettierd' },
         markdown = { 'markdownlint-cli2', 'prettierd' },
-        python = { 'isort', 'black', 'ruff' },
+        python = { 'ruff', 'black' },
         sh = { 'beautysh' },
         sql = { 'sleek' },
         -- sql = { 'sqlfmt' },
