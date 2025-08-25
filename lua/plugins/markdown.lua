@@ -1,14 +1,30 @@
 return { -- Markdown Plugins
-  { -- Nvim Markdown: Markdown specific features
-    'ixru/nvim-markdown',
+  { -- Render Markdown: Render inline markdown
+    'MeanderingProgrammer/render-markdown.nvim',
+
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-treesitter/nvim-web-devicons',
+    },
 
     lazy = true,
 
     ft = 'markdown',
 
-    -- opts = {},
+    opts = {
+      completions = {
+        blink = {
+          enabled = true,
+        },
+      },
+      file_types = { 'markdown' },
+    },
 
-    config = function()
+    config = function(_, opts)
+      local render_markdown = require 'render-markdown'
+      render_markdown.setup(opts)
+
+      -- Not related to Render Markdown but Markdown files
       -- Generate/update a Markdown TOC
       -- To generate the TOC I use the markdown-toc plugin
       -- https://github.com/jonschlinkert/markdown-toc
@@ -103,31 +119,10 @@ return { -- Markdown Plugins
     end,
   },
 
-  { -- Render Markdown: Render inline markdown
-    'MeanderingProgrammer/render-markdown.nvim',
-
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-treesitter/nvim-web-devicons',
-    },
-
-    lazy = true,
-
-    ft = 'markdown',
-
-    opts = {
-      file_types = { 'markdown' },
-    },
-  },
-
   { -- Markdown Preview: Preview markdown in a browser
     'iamcco/markdown-preview.nvim',
 
-    enabled = vim.fn.executable 'npm' == 1,
-
     lazy = true,
-
-    cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' },
 
     build = function(plugin)
       if vim.fn.executable 'npx' then
@@ -138,12 +133,24 @@ return { -- Markdown Plugins
       end
     end,
 
-    init = function()
+    cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' },
+
+    keys = {
+      {
+        '<leader>mp',
+        '<CMD>MarkdownPreviewToggle<CR>',
+        mode = 'n',
+        desc = 'Toggle Markdown Preview',
+      },
+    },
+
+    -- opts = {},
+
+    config = function()
       if vim.fn.executable 'npx' then
         vim.g.mkdp_filetypes = { 'markdown' }
       end
 
-      vim.g.mkdp_filetypes = { 'markdown' }
       vim.g.mkdp_auto_close = 0
       vim.g.mkdp_command_for_global = 1
       vim.g.mkdp_combine_preview = 1
@@ -157,15 +164,9 @@ return { -- Markdown Plugins
         end
       end
 
-      ---Fixes "No command :MarkdownPreview"
-      ---https://github.com/iamcco/markdown-preview.nvim/issues/585#issuecomment-1724859362
       for _, cmd in pairs { 'MarkdownPreview', 'MarkdownPreviewStop', 'MarkdownPreviewToggle' } do
         vim.api.nvim_create_user_command(cmd, load_then_exec(cmd), {})
       end
-
-      vim.keymap.set('n', '<leader>mp', '<CMD>MarkdownPreviewToggle<CR>', { desc = 'Toggle markdown preview' })
     end,
-
-    -- opts = {},
   },
 }
