@@ -22,7 +22,7 @@ return {
         desc = 'Buffer Diagnostics (Trouble)',
       },
       {
-        '<leader>cl',
+        '<leader>xl',
         '<CMD>Trouble lsp toggle focus=true win.position=bottom<CR>',
         mode = 'n',
         desc = 'LSP Definitions / references / ... (Trouble)',

@@ -4,10 +4,9 @@ return {
   --
   --   dependencies = {
   --     'IniyanKanmani/jupytext.nvim',
-  --     'SUSTech-data/neopyter',
   --     'benlubas/molten-nvim',
+  --     'SUSTech-data/neopyter',
   --     'echasnovski/mini.ai',
-  --     'echasnovski/mini.hipatterns',
   --   },
   --
   --   lazy = true,
@@ -241,7 +240,7 @@ return {
   --         group = 'Molten-Quit',
   --         pattern = '*.ipynb',
   --         callback = function()
-  --           vim.cmd 'MoltenExportOutput!'
+  --           pcall(vim.cmd, 'MoltenExportOutput!')
   --         end,
   --       })
   --     end
@@ -282,7 +281,6 @@ return {
   --         vim.notify('Using Neopyter as repl', vim.log.levels.INFO)
   --
   --         create_neopyter_autocmds()
-  --
   --         if not is_initial then
   --           vim.api.nvim_del_augroup_by_name 'Molten-Import'
   --           vim.api.nvim_del_augroup_by_name 'Molten-Export'
@@ -315,17 +313,6 @@ return {
   --
   --     ---@diagnostic disable-next-line: param-type-mismatch
   --     ai.setup(ai_opts)
-  --
-  --     -- Mini HiPatterns
-  --     local hipatterns = require 'mini.hipatterns'
-  --     local hipatterns_opts = require('lazy.core.config').plugins['mini.hipatterns'].opts or {}
-  --
-  --     hipatterns_opts.highlighters = vim.tbl_extend('force', hipatterns_opts.highlighters or {}, {
-  --       cells = nn.minihipatterns_spec,
-  --     })
-  --
-  --     ---@diagnostic disable-next-line: param-type-mismatch
-  --     hipatterns.setup(hipatterns_opts)
   --   end,
   -- },
   --
@@ -361,7 +348,7 @@ return {
   --     auto_connect = true,
   --     auto_attach = true,
   --     remote_address = '127.0.0.1:9001',
-  --     file_pattern = { '*.ju.*', '*.ipynb' },
+  --     file_pattern = { '*.ipynb' },
   --     on_attach = function(bufnr)
   --       local bufs = vim.g.neopyter_buffers or {}
   --       table.insert(bufs, bufnr)
@@ -372,25 +359,26 @@ return {
   --       partial_sync = false,
   --       scroll = {
   --         enable = true,
-  --         align = 'smart',
+  --         align = 'center',
   --       },
   --     },
   --     highlight = {
-  --       enable = false,
+  --       enable = true,
   --       mode = 'separator',
   --     },
   --     textobject = {
   --       enable = false,
   --       queries = { 'cellseparator', 'cellcontent', 'cell' },
   --     },
+  --     injection = {
+  --       enable = true,
+  --     },
   --     parser = {
   --       python = {},
   --       trim_whitespace = true,
   --     },
-  --     injection = {
-  --       enable = true,
-  --     },
   --   },
+  --
   --   config = function(_, opts)
   --     local neopyter = require 'neopyter'
   --     neopyter.setup(opts)

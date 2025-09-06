@@ -8,10 +8,6 @@ return {
 
     lazy = true,
 
-    init = function()
-      vim.g.netrw_nogx = 1
-    end,
-
     cmd = 'Browse',
 
     keys = {
@@ -28,5 +24,12 @@ return {
         search_engine = 'https://search.brave.com/search?q=',
       },
     },
+
+    config = function(_, opts)
+      local gx = require 'gx'
+      gx.setup(opts)
+
+      vim.g.netrw_nogx = 1
+    end,
   },
 }

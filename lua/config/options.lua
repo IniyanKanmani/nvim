@@ -3,6 +3,9 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
+
 -- Use modeline to set vim options to buffer
 vim.opt.modeline = true
 
@@ -23,14 +26,6 @@ vim.opt.showmode = false
 vim.opt.fixeol = true
 vim.opt.fixendofline = true
 
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
--- vim.schedule(function()
---   vim.opt.clipboard = 'unnamedplus'
--- end)
-
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -45,10 +40,9 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'auto'
 
 -- Decrease update time
-vim.opt.updatetime = 300
+vim.opt.updatetime = 200
 
 -- Decrease mapped sequence wait time
--- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
@@ -63,6 +57,9 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
+
+-- -- Disable the status line entirely
+-- vim.opt.laststatus = 2
 
 -- Show which line your cursor is on
 vim.opt.cursorline = false
@@ -92,3 +89,18 @@ vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
 
 vim.opt.winborder = 'rounded'
+
+vim.opt.fillchars:append { eob = '~' }
+
+-- vim.opt.fillchars = {
+-- stl = '─',
+-- stlnc = '─',
+-- wbr = '─',
+-- vert = '│',
+-- horiz = '─',
+-- horizup = '┴',
+-- horizdown = '┬',
+-- vertleft = '┤',
+-- vertright = '├',
+-- verthoriz = '┼',
+-- }

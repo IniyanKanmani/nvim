@@ -42,7 +42,7 @@ return {
     },
 
     opts = {
-      dir = vim.fn.stdpath 'state' .. '/sessions/', -- directory where session files are saved
+      dir = vim.fn.stdpath 'state' .. '/sessions/',
       need = 1,
       branch = true,
     },

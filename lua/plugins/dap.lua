@@ -1,0 +1,301 @@
+return { -- Debug Adapter Protocol Plugins
+  -- { -- Nvim Dap: Neovim Code Debugger
+  --   'mfussenegger/nvim-dap',
+  --
+  --   dependencies = {
+  --     'nvim-neotest/nvim-nio',
+  --     'rcarriga/nvim-dap-ui',
+  --   },
+  --
+  --   lazy = true,
+  --
+  --   keys = {
+  --     {
+  --       '<leader>b',
+  --       function()
+  --         require('dap').toggle_breakpoint()
+  --       end,
+  --       mode = 'n',
+  --       desc = 'Debug: Toggle Breakpoint',
+  --     },
+  --     {
+  --       '<leader>B',
+  --       function()
+  --         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+  --       end,
+  --       mode = 'n',
+  --       desc = 'Debug: Set Breakpoint with Condition',
+  --     },
+  --     {
+  --       '<F5>',
+  --       function()
+  --         require('dap').continue()
+  --       end,
+  --       mode = 'n',
+  --       desc = 'Debug: Start/Continue',
+  --     },
+  --   },
+  --
+  --   opts = {},
+  --
+  --   config = function()
+  --     local dap = require 'dap'
+  --
+  --     vim.fn.sign_define('DapBreakpoint', {
+  --       text = '',
+  --       texthl = 'Type',
+  --       linehl = '',
+  --       numhl = '',
+  --     })
+  --
+  --     vim.fn.sign_define('DapBreakpointRejected', {
+  --       text = '',
+  --       texthl = 'DiagnosticSignError',
+  --       linehl = '',
+  --       numhl = '',
+  --     })
+  --
+  --     vim.fn.sign_define('DapStopped', {
+  --       text = '',
+  --       texthl = 'DiagnosticSignWarn',
+  --       linehl = 'Visual',
+  --       numhl = 'DiagnosticSignWarn',
+  --     })
+  --
+  --     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
+  --     vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
+  --     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
+  --     vim.keymap.set('n', '<F4>', dap.step_back, { desc = 'Debug: Step Out' })
+  --     -- vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Continue' })
+  --     vim.keymap.set('n', '<F6>', '<CMD>DapNew<CR>', { desc = 'Debug: New Session' })
+  --     vim.keymap.set('n', '<F7>', dap.pause, { desc = 'Debug: Pause' })
+  --     vim.keymap.set('n', '<F8>', dap.restart, { desc = 'Debug: Restart' })
+  --     vim.keymap.set('n', '<F9>', dap.terminate, { desc = 'Debug: Terminate' })
+  --     vim.keymap.set('n', '<F10>', dap.disconnect, { desc = 'Debug: Disconnect' })
+  --
+  --     vim.keymap.set('n', '<leader>bc', dap.clear_breakpoints, { desc = 'Debug: Clear Breakpoints' })
+  --
+  --     -- Adapters
+  --     dap.adapters.bashdb = {
+  --       type = 'executable',
+  --       command = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
+  --     }
+  --
+  --     dap.adapters.debugpy = function(callback, config)
+  --       if config.request == 'attach' then
+  --         local host = (config.connect or config).host or '127.0.0.1'
+  --         local port = (config.connect or config).port
+  --
+  --         callback {
+  --           type = 'server',
+  --           host = host,
+  --           port = assert(port, '`connect.port` is required for a debugpy(python) `attach` configuration'),
+  --           options = {
+  --             source_filetype = 'python',
+  --           },
+  --         }
+  --       else
+  --         callback {
+  --           type = 'executable',
+  --           command = vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/bin/python',
+  --           args = { '-m', 'debugpy.adapter' },
+  --           options = {
+  --             source_filetype = 'python',
+  --           },
+  --         }
+  --       end
+  --     end
+  --
+  --     dap.adapters.delve = function(callback, config)
+  --       if config.mode == 'remote' and config.request == 'attach' then
+  --         local host = (config.connect or config).host or '127.0.0.1'
+  --         local port = (config.connect or config).port
+  --
+  --         callback {
+  --           type = 'server',
+  --           host = host,
+  --           port = assert(port, '`connect.port` is required for a delve(go) `attach` configuration'),
+  --         }
+  --       else
+  --         callback {
+  --           type = 'server',
+  --           port = '${port}',
+  --           executable = {
+  --             command = vim.fn.stdpath 'data' .. '/mason/packages/delve/dlv',
+  --             args = { 'dap', '-l', '127.0.0.1:${port}', '--log', '--log-output=dap' },
+  --             detached = vim.fn.has 'win32' == 0,
+  --           },
+  --         }
+  --       end
+  --     end
+  --
+  --     dap.adapters.debugjs = {
+  --       type = 'server',
+  --       host = 'localhost',
+  --       port = '${port}',
+  --       executable = {
+  --         command = 'node',
+  --         args = { vim.fn.stdpath 'data' .. '/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js', '${port}' },
+  --       },
+  --     }
+  --
+  --     -- Configuration
+  --     dap.configurations.sh = {
+  --       {
+  --         type = 'bashdb',
+  --         request = 'launch',
+  --         name = 'Launch file',
+  --         showDebugOutput = true,
+  --         pathBashdb = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
+  --         pathBashdbLib = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
+  --         trace = true,
+  --         file = '${file}',
+  --         program = '${file}',
+  --         cwd = '${workspaceFolder}',
+  --         pathCat = 'cat',
+  --         pathBash = '/bin/bash',
+  --         pathMkfifo = 'mkfifo',
+  --         pathPkill = 'pkill',
+  --         args = {},
+  --         argsString = '',
+  --         env = {},
+  --         terminalKind = 'integrated',
+  --       },
+  --     }
+  --
+  --     dap.configurations.python = {
+  --       {
+  --         type = 'debugpy',
+  --         request = 'launch',
+  --         name = 'Launch file',
+  --         program = '${file}',
+  --         pythonPath = function()
+  --           return string.gsub(vim.fn.system { 'which', 'python' }, '\n', '')
+  --         end,
+  --         console = 'integratedTerminal',
+  --         subProcess = true,
+  --         justMyCode = true,
+  --       },
+  --     }
+  --
+  --     dap.configurations.go = {
+  --       {
+  --         type = 'delve',
+  --         name = 'Debug',
+  --         request = 'launch',
+  --         program = '${file}',
+  --       },
+  --       {
+  --         type = 'delve',
+  --         name = 'Debug test',
+  --         request = 'launch',
+  --         mode = 'test',
+  --         program = '${file}',
+  --       },
+  --       {
+  --         type = 'delve',
+  --         name = 'Debug test (go.mod)',
+  --         request = 'launch',
+  --         mode = 'test',
+  --         program = './${relativeFileDirname}',
+  --       },
+  --     }
+  --
+  --     dap.configurations.javascript = {
+  --       {
+  --         type = 'debugjs',
+  --         request = 'launch',
+  --         name = 'Launch file',
+  --         program = '${file}',
+  --         cwd = '${workspaceFolder}',
+  --       },
+  --     }
+  --
+  --     dap.configurations.typescript = {
+  --       {
+  --         type = 'debugjs',
+  --         request = 'launch',
+  --         name = 'Launch file (ts-node)',
+  --         runtimeExecutable = 'node',
+  --         runtimeArgs = {
+  --           '--loader',
+  --           'ts-node/esm',
+  --         },
+  --         program = '${file}',
+  --         cwd = '${workspaceFolder}',
+  --         console = 'integratedTerminal',
+  --       },
+  --     }
+  --   end,
+  -- },
+  --
+  -- { -- Nvim Dap UI: UI for DAP
+  --   'rcarriga/nvim-dap-ui',
+  --
+  --   lazy = true,
+  --
+  --   keys = {
+  --     {
+  --       '<leader>du',
+  --       function()
+  --         require('dapui').toggle()
+  --       end,
+  --       mode = 'n',
+  --       desc = 'Debug: Toggle UI',
+  --     },
+  --   },
+  --
+  --   opts = {
+  --     controls = {
+  --       enabled = false,
+  --     },
+  --     floating = {
+  --       border = 'rounded',
+  --       mappings = {
+  --         close = { 'q', '<Esc>' },
+  --       },
+  --     },
+  --     layouts = {
+  --       {
+  --         elements = {
+  --           { id = 'scopes', size = 0.25 },
+  --           { id = 'breakpoints', size = 0.25 },
+  --           { id = 'stacks', size = 0.25 },
+  --           { id = 'watches', size = 0.25 },
+  --         },
+  --         size = 40,
+  --         position = 'left',
+  --       },
+  --       {
+  --         elements = {
+  --           { id = 'console', size = 0.5 },
+  --           { id = 'repl', size = 0.5 },
+  --         },
+  --         size = 10,
+  --         position = 'bottom',
+  --       },
+  --     },
+  --   },
+  --
+  --   config = function(_, opts)
+  --     local dapui = require 'dapui'
+  --     dapui.setup(opts)
+  --
+  --     vim.keymap.set('n', '<leader>?', function()
+  --       dapui.eval(nil, {
+  --         context = 'repl', -- or 'watch', 'hover'
+  --         width = 75,
+  --         height = 25,
+  --         enter = true,
+  --       })
+  --     end, { desc = 'Debug: Display current value of variable' })
+  --
+  --     vim.api.nvim_create_autocmd('User', {
+  --       pattern = 'PersistenceSavePre',
+  --       callback = function()
+  --         pcall(dapui.close)
+  --       end,
+  --     })
+  --   end,
+  -- },
+}

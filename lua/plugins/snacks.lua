@@ -6,102 +6,6 @@ return {
 
     priority = 1000,
 
-    init = function()
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'VeryLazy',
-        callback = function()
-          local snacks = require 'snacks'
-
-          _G.dd = function(...)
-            snacks.debug.inspect(...)
-          end
-          _G.bt = function()
-            snacks.debug.backtrace()
-          end
-          vim.print = _G.dd -- Override print to use snacks for `:=` command
-
-          vim.api.nvim_create_autocmd('User', {
-            pattern = 'OilActionsPost',
-            callback = function(event)
-              if event.data.actions.type == 'move' then
-                Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
-              end
-            end,
-          })
-
-          ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-          local progress = vim.defaulttable()
-          vim.api.nvim_create_autocmd('LspProgress', {
-            ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-            callback = function(ev)
-              local client = vim.lsp.get_client_by_id(ev.data.client_id)
-              local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-              if not client or type(value) ~= 'table' then
-                return
-              end
-              local p = progress[client.id]
-
-              for i = 1, #p + 1 do
-                if i == #p + 1 or p[i].token == ev.data.params.token then
-                  p[i] = {
-                    token = ev.data.params.token,
-                    msg = ('[%3d%%] %s%s'):format(
-                      value.kind == 'end' and 100 or value.percentage or 100,
-                      value.title or '',
-                      value.message and (' **%s**'):format(value.message) or ''
-                    ),
-                    done = value.kind == 'end',
-                  }
-                  break
-                end
-              end
-
-              local msg = {} ---@type string[]
-              progress[client.id] = vim.tbl_filter(function(v)
-                return table.insert(msg, v.msg) or not v.done
-              end, p)
-
-              local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
-              vim.notify(table.concat(msg, '\n'), 'info', {
-                id = 'lsp_progress',
-                title = client.name,
-                opts = function(notif)
-                  notif.icon = #progress[client.id] == 0 and ' ' or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-                end,
-              })
-            end,
-          })
-
-          -- Create some toggle mappings
-          snacks.toggle.option('cursorline', { name = 'Cursor Line' }):map '<leader>uc'
-          snacks.toggle.option('cursorcolumn', { name = 'Cursor Column' }):map '<leader>uC'
-
-          snacks.toggle.diagnostics():map '<leader>ud'
-          snacks.toggle.indent():map '<leader>ui'
-          snacks.toggle.inlay_hints():map '<leader>uh'
-
-          snacks.toggle.line_number():map '<leader>ul'
-          snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
-
-          snacks.toggle.scroll():map '<leader>us'
-          snacks.toggle.treesitter():map '<leader>ut'
-
-          snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>uS'
-          snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
-
-          vim.keymap.set('n', '<leader>um', function()
-            if vim.o.mouse ~= '' then
-              vim.cmd 'set mouse='
-              vim.notify('Disabled Mouse', vim.log.levels.INFO)
-            else
-              vim.cmd 'set mouse=a'
-              vim.notify('Enabled Mouse', vim.log.levels.INFO)
-            end
-          end, { desc = 'Toggle Mouse' })
-        end,
-      })
-    end,
-
     keys = {
       {
         '<leader>bd',
@@ -152,7 +56,7 @@ return {
         desc = 'Lazygit Current File History',
       },
       {
-        '<leader>nh',
+        '<leader>sn',
         function()
           require('snacks.notifier').show_history()
         end,
@@ -187,10 +91,11 @@ return {
         '<leader>N',
         desc = 'Neovim News',
         function()
-          require('snacks.win').win {
+          require 'snacks.win' {
             file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
-            width = 0.6,
-            height = 0.6,
+            width = 0.75,
+            height = 0.75,
+            border = 'rounded',
             wo = {
               spell = false,
               wrap = false,
@@ -325,7 +230,7 @@ return {
       },
 
       win = {
-        enabled = false,
+        enabled = true,
       },
 
       words = {
@@ -344,5 +249,89 @@ return {
         },
       },
     },
+
+    config = function(_, opts)
+      local snacks = require 'snacks'
+      snacks.setup(opts)
+
+      _G.dd = function(...)
+        snacks.debug.inspect(...)
+      end
+      _G.bt = function()
+        snacks.debug.backtrace()
+      end
+      vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+      ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+      local progress = vim.defaulttable()
+      vim.api.nvim_create_autocmd('LspProgress', {
+        ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+        callback = function(ev)
+          local client = vim.lsp.get_client_by_id(ev.data.client_id)
+          local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+          if not client or type(value) ~= 'table' then
+            return
+          end
+          local p = progress[client.id]
+
+          for i = 1, #p + 1 do
+            if i == #p + 1 or p[i].token == ev.data.params.token then
+              p[i] = {
+                token = ev.data.params.token,
+                msg = ('[%3d%%] %s%s'):format(
+                  value.kind == 'end' and 100 or value.percentage or 100,
+                  value.title or '',
+                  value.message and (' **%s**'):format(value.message) or ''
+                ),
+                done = value.kind == 'end',
+              }
+              break
+            end
+          end
+
+          local msg = {} ---@type string[]
+          progress[client.id] = vim.tbl_filter(function(v)
+            return table.insert(msg, v.msg) or not v.done
+          end, p)
+
+          local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+          vim.notify(table.concat(msg, '\n'), 'info', {
+            id = 'lsp_progress',
+            title = client.name,
+            opts = function(notif)
+              ---@diagnostic disable-next-line: undefined-field
+              notif.icon = #progress[client.id] == 0 and ' ' or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+            end,
+          })
+        end,
+      })
+
+      -- Create some toggle mappings
+      snacks.toggle.option('cursorline', { name = 'Cursor Line' }):map '<leader>uc'
+      snacks.toggle.option('cursorcolumn', { name = 'Cursor Column' }):map '<leader>uC'
+
+      snacks.toggle.diagnostics():map '<leader>ud'
+      snacks.toggle.indent():map '<leader>ui'
+      snacks.toggle.inlay_hints():map '<leader>uh'
+
+      snacks.toggle.line_number():map '<leader>ul'
+      snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>uL'
+
+      snacks.toggle.scroll():map '<leader>uS'
+      snacks.toggle.treesitter():map '<leader>ut'
+
+      snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>us'
+      snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>uw'
+
+      vim.keymap.set('n', '<leader>um', function()
+        if vim.o.mouse ~= '' then
+          vim.cmd 'set mouse='
+          vim.notify('Disabled Mouse', vim.log.levels.WARN)
+        else
+          vim.cmd 'set mouse=a'
+          vim.notify('Enabled Mouse', vim.log.levels.INFO)
+        end
+      end, { desc = 'Toggle Mouse' })
+    end,
   },
 }

@@ -6,6 +6,14 @@ return {
 
     event = 'VeryLazy',
 
-    opts = {},
+    opts = {
+      input = {
+        enabled = true,
+      },
+      select = {
+        enabled = true,
+        backend = 'telescope',
+      },
+    },
   },
 }

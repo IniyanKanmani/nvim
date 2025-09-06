@@ -2,10 +2,6 @@ return {
   { -- Blink Cmp: Autocompletion
     'saghen/blink.cmp',
 
-    dependencies = {
-      'L3MON4D3/LuaSnip',
-    },
-
     lazy = true,
 
     event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
@@ -113,6 +109,10 @@ return {
 
   { -- Friendly Snippets: VS code style snippets
     'rafamadriz/friendly-snippets',
+
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+    },
 
     lazy = true,
 

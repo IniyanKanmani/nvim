@@ -4,10 +4,12 @@ return {
 
     lazy = true,
 
+    cmd = 'UndotreeToggle',
+
     keys = {
       {
         '<leader>u',
-        vim.cmd.UndotreeToggle,
+        '<CMD>UndotreeToggle<CR>',
         mode = 'n',
         desc = 'Toggle undo tree',
       },

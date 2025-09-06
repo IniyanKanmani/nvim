@@ -11,7 +11,7 @@ return {
   --
   --   build = ':UpdateRemotePlugins',
   --
-  --   init = function()
+  --   config = function()
   --     -- Automatically open image outputs
   --     vim.g.molten_auto_image_popup = true -- (false) Disable auto-opening images with Image.show()
   --
@@ -66,9 +66,9 @@ return {
   --     -- Hide output window after leaving it
   --     vim.g.molten_output_win_hide_on_leave = false -- (false) Hide output window when switching away
   --
-  --     -- Max height and width of the output window
-  --     vim.g.molten_output_win_max_height = 999999 -- (999999) Max height for the output window
+  --     -- Max width and height of the output window
   --     vim.g.molten_output_win_max_width = 999999 -- (999999) Max width for the output window
+  --     vim.g.molten_output_win_max_height = 999999 -- (999999) Max height for the output window
   --
   --     -- Style for the output window, 'false' means default, 'minimal' for a minimal appearance
   --     vim.g.molten_output_win_style = 'false' -- (false) Default style for the output window
@@ -105,6 +105,13 @@ return {
   --
   --     -- Debug flag for MIME type output (for debugging)
   --     vim.g.molten_show_mimetype_debug = false -- (false) Show mime-type before non-iostream output (for debugging)
+  --
+  --     vim.keymap.set('n', ',mi', '<CMD>MoltenImportOutput<CR>', { desc = 'Molten Import Output' })
+  --     vim.keymap.set('n', ',me', '<CMD>MoltenExportOutput!<CR>', { desc = 'Molten Export Output' })
+  --     vim.keymap.set('n', ',mr', function()
+  --       vim.cmd 'MoltenDeinit'
+  --       vim.cmd 'MoltenInit'
+  --     end, { desc = 'Molten restart kernel' })
   --   end,
   -- },
 }

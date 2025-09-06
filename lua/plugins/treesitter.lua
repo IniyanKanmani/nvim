@@ -29,7 +29,10 @@ return {
         'luadoc',
         'markdown',
         'markdown_inline',
+        'php',
+        'python',
         'query',
+        'r',
         'regex',
         'sql',
         'vim',
@@ -214,9 +217,6 @@ return {
       ts.setup(opts)
 
       local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
-      vim.keymap.set('n', '<leader>it', '<CMD>InspectTree<CR>', { desc = 'Inspect Treesitter Syntax Tree' })
-
-      -- Key mappings for repeating last move
       vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat_move.repeat_last_move_next, { desc = 'Repeat last treesitter textobject move next' })
       vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_previous, { desc = 'Repeat last treesitter textobject move previous' })
 

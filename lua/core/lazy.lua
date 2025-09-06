@@ -73,3 +73,5 @@ lazy.setup('plugins', {
     notify = false,
   },
 })
+
+vim.keymap.set('n', '<leader>ln', '<CMD>Lazy<CR>', { desc = 'Toggle Lazynvim' })

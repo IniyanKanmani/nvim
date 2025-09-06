@@ -86,7 +86,6 @@ P.S. You can delete this when you're done too. It's your config now! :)
 
 require 'config.options'
 require 'config.keymaps'
-require 'config.commands'
 require 'config.autocmds'
 require 'core.lazy'
 require 'core.lsp'

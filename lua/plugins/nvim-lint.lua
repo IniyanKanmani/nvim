@@ -15,6 +15,7 @@ return {
         javascript = { 'eslint_d' },
         json = { 'jsonlint' },
         markdown = { 'markdownlint-cli2' },
+        php = { 'phpcs' },
         python = { 'ruff' },
         sh = { 'shellcheck' },
         -- sql = { 'sqlfluff' },

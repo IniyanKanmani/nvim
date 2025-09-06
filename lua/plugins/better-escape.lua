@@ -7,7 +7,7 @@ return {
     event = 'VeryLazy',
 
     opts = {
-      timeout = 300,
+      timeout = 250,
       default_mappings = false,
       mappings = {
         i = {
@@ -46,7 +46,6 @@ return {
             j = '<Esc>',
           },
         },
-
         -- t = {
         --   k = {
         --     j = '<C-\\><C-n>',

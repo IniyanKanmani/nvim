@@ -23,8 +23,6 @@ return { -- Mini Plugins
         goto_left = '[e',
         goto_right = ']e',
       },
-
-      n_lines = 100,
     },
   },
 
@@ -61,12 +59,6 @@ return { -- Mini Plugins
 
     event = { 'BufReadPost', 'BufNewFile' },
   },
-
-  -- { -- Mini Hipatterns: Set Highlight patterns in neovim
-  --   'echasnovski/mini.hipatterns',
-  --
-  --   lazy = true,
-  -- },
 
   { -- Mini Move: Move Selection
     'echasnovski/mini.move',

@@ -31,9 +31,9 @@ return {
       yazi_floating_window_blend = 0,
       keymaps = {
         show_help = 'g?',
-        open_file_in_vertical_split = '<leader>|',
-        open_file_in_horizontal_split = '<leader>-',
-        open_file_in_tab = false,
+        open_file_in_horizontal_split = '<C-x>',
+        open_file_in_vertical_split = '<C-v>',
+        open_file_in_tab = '<C-t>',
         grep_in_directory = '<leader>sg',
         replace_in_directory = '<leader>sar',
         cycle_open_buffers = '<tab>',
@@ -42,7 +42,7 @@ return {
         change_working_directory = false,
       },
       yazi_floating_window_border = 'rounded',
-      clipboard_register = '*', -- check with '+'
+      clipboard_register = '+',
       highlight_hovered_buffers_in_same_directory = true,
     },
   },

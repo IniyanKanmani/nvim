@@ -6,13 +6,28 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
 
-    priority = 1001,
+    priority = 999,
 
     lazy = false,
 
-    opts = {},
+    opts = {
+      options = {
+        disabled_filetypes = {
+          statusline = {
+            -- '',
+            'dapui_scopes',
+            'dapui_breakpoints',
+            'dapui_stacks',
+            'dapui_watches',
+            'dapui_console',
+            'dap-repl',
+          },
+          globalstatus = false,
+        },
+      },
+    },
 
-    config = function()
+    config = function(_, opts)
       local lualine = require 'lualine'
       local lazy_status = require 'lazy.status'
 
@@ -27,7 +42,7 @@ return {
         orange             = '#FF9E64',
         menu_grey          = '#3E4452',
         comment_grey       = '#697098',
-        background_grey    = '#1A1B23',
+        background_grey    = '#1B1C26',
         black              = '#292D3E',
         dark_black         = '#080808',
       }
@@ -102,11 +117,10 @@ return {
             { 'location', separator = { left = '', right = '' }, left_padding = 2 },
           },
         },
-        tabline = {},
-        extensions = {},
       }
 
-      lualine.setup(lualineTransparentThemeOpts)
+      local lualine_opts = vim.tbl_deep_extend('keep', opts, lualineTransparentThemeOpts)
+      lualine.setup(lualine_opts)
     end,
   },
 }
