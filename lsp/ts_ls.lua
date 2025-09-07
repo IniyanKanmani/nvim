@@ -83,7 +83,7 @@ return {
         },
       }, client.offset_encoding)
 
-      vim.cmd('botright copen')
+      vim.cmd 'botright copen'
     end,
   },
   on_attach = function(client, bufnr)
@@ -94,11 +94,11 @@ return {
         return vim.startswith(action, 'source.')
       end, client.server_capabilities.codeActionProvider.codeActionKinds)
 
-      vim.lsp.buf.code_action({
+      vim.lsp.buf.code_action {
         context = {
           only = source_actions,
         },
-      })
+      }
     end, {})
   end,
 }
